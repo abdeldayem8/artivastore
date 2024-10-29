@@ -4,23 +4,30 @@ import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Authbuttons from './Authbuttons'
 
-const Responsivemenu = ({openmenu,setOpenmenu}) => {
+const Responsivemenu = ({openmenu,setOpenmenu,menuButtonRef}) => {
 
-    const menuRef = useRef();
+    const menuRef = useRef(null);
      // Effect to close the menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setOpenmenu(false);
+     useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (
+          menuRef.current &&
+          !menuRef.current.contains(event.target) &&
+          menuButtonRef.current &&
+          !menuButtonRef.current.contains(event.target)
+        ) {
+          setOpenmenu(false);
+        }
+      };
+  
+      if (openmenu) {
+        document.addEventListener("mousedown", handleClickOutside);
+      } else {
+        document.removeEventListener("mousedown", handleClickOutside);
       }
-    };
-       // Add event listener for clicks
-       document.addEventListener('mousedown', handleClickOutside);
-       return () => {
-         // Clean up the event listener on component unmount
-         document.removeEventListener('mousedown', handleClickOutside);
-       };
-     }, [setOpenmenu]);
+  
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [openmenu, setOpenmenu, menuButtonRef]);
 
   return <>
    <AnimatePresence mode='wait'>
@@ -38,8 +45,8 @@ const Responsivemenu = ({openmenu,setOpenmenu}) => {
               ))}
               </ul>
                {/* Login and Register as links in the mobile menu */}
-            <div className="mt-8 flex flex-col items-center gap-4">
-              <Authbuttons additionalClasses="flex-col items-center gap-6" variant="link" />
+            <div className="mt-5 flex flex-col items-center">
+              <Authbuttons additionalClasses="flex-col items-center gap-4" variant="link" />
             </div>
             </div>
             </motion.div>

@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { FaArtstation } from "react-icons/fa";
 import { PiShoppingCart } from "react-icons/pi";
 import {Navbarmenu} from './Navbarmenuitems'
 import { Link } from 'react-router-dom';
-import { MdMenu } from 'react-icons/md';
+import { MdClose, MdMenu } from 'react-icons/md';
 import Responsivemenu from './Responsivemenu';
 import Authbuttons from './Authbuttons';
 
 const Navbar = () => {
  const [openmenu,setOpenmenu] =useState(false);
+ const menuButtonRef = useRef(null);
 
  const toggleMenu = ()=>{
-  setOpenmenu(!openmenu);
+  setOpenmenu(prevState => !prevState);
  }
   return <>
      <nav>
@@ -44,13 +45,13 @@ const Navbar = () => {
             </div>
         </div>
         {/* mobile hamburger menu section */}
-        <div className='md:hidden cursor-pointer'onClick={toggleMenu} >
-          <MdMenu className='text-4xl' />
+        <div className='md:hidden cursor-pointer'onClick={toggleMenu} ref={menuButtonRef} >
+        {openmenu ? <MdClose className='text-4xl' /> : <MdMenu className='text-4xl' />} 
         </div>
       </div>
      </nav>
      {/* mobile sidebar section */}
-     <Responsivemenu openmenu={openmenu} setOpenmenu={setOpenmenu}/>
+     <Responsivemenu openmenu={openmenu} setOpenmenu={setOpenmenu} menuButtonRef={menuButtonRef}/>
     </>
 }
 
