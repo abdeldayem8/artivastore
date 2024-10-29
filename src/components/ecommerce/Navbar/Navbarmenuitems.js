@@ -17,7 +17,7 @@ export const Navbarmenu = [
     },
     {
         id:4,
-        title:"Custom Your T-shirt",
+        title:"Make Your T-shirt",
         link:'/customyour-tshirt'
     },
 
