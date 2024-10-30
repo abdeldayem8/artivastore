@@ -4,7 +4,7 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
-import Products from './pages/products.jsx'
+import Products from './pages/Products.jsx'
 import Makeyourtshirt from './pages/Makeyourtshirt.jsx'
 
 
