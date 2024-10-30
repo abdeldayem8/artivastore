@@ -24,7 +24,7 @@ const Navbar = () => {
           <p className='text-secondary'>Store</p>
         </div>
         {/* menu section */}
-        <div className='hidden md:block'> 
+        <div className='hidden lg:block'> 
           <ul className='flex items-center gap-4 text-gray-600'>
             {Navbarmenu.map((item)=>{
               return(
@@ -40,12 +40,12 @@ const Navbar = () => {
           <button className='text-2xl hover:bg-primary hover:text-white rounded-full p-2 duration-300'>
             <PiShoppingCart/>
           </button>
-          <div className="hidden md:flex">
+          <div className="hidden lg:flex">
               <Authbuttons />
             </div>
         </div>
         {/* mobile hamburger menu section */}
-        <div className='md:hidden cursor-pointer'onClick={toggleMenu} ref={menuButtonRef} >
+        <div className='lg:hidden cursor-pointer'onClick={toggleMenu} ref={menuButtonRef} >
         {openmenu ? <MdClose className='text-4xl' /> : <MdMenu className='text-4xl' />} 
         </div>
       </div>

@@ -3,22 +3,22 @@ export const Navbarmenu = [
     {
         id:1,
         title:"Home",
-        link:'/'
+        link:'/artivastore/'
     },
     {
         id:2,
         title:"About Us",
-        link:'/about'
+        link:'/artivastore/about'
     },
     {
         id:3,
         title:"Our Products",
-        link:'/products'
+        link:'/artivastore/products'
     },
     {
         id:4,
         title:"Make Your T-shirt",
-        link:'/customyour-tshirt'
+        link:'/artivastore/maketshirt'
     },
 
 ]
