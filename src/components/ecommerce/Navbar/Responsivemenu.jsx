@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Authbuttons from './Authbuttons'
 
-const Responsivemenu = ({openmenu,setOpenmenu,menuButtonRef}) => {
+const Responsivemenu = ({openmenu,setOpenmenu,menuButtonRef,closeMenu}) => {
 
     const menuRef = useRef(null);
      // Effect to close the menu when clicking outside
@@ -38,7 +38,7 @@ const Responsivemenu = ({openmenu,setOpenmenu,menuButtonRef}) => {
               <ul className='flex flex-col justify-center items-center gap-6'>
               {Navbarmenu.map((item) => (
                 <li key={item.id}>
-                  <Link to={item.link} className="hover:text-gray-300">
+                  <Link onClick={closeMenu} to={item.link} className="hover:text-gray-300">
                     {item.title}
                   </Link>
                 </li>

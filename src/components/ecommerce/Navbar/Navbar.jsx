@@ -14,9 +14,12 @@ const Navbar = () => {
  const toggleMenu = ()=>{
   setOpenmenu(prevState => !prevState);
  }
+ const closeMenu = () => {
+  setOpenmenu(false);
+};
   return <>
      <nav>
-      <div className='flex items-center justify-between'>
+      <div className='flex items-center justify-between border-b-2 border-slate-200 mb-4'>
         {/* logo section */}
         <div className='text-2xl flex items-center gap-2 font-bold py-6 uppercase'>
           <FaArtstation/>
@@ -24,12 +27,12 @@ const Navbar = () => {
           <p className='text-secondary'>Store</p>
         </div>
         {/* menu section */}
-        <div className='hidden lg:block'> 
+        <div className='hidden lg:block'  > 
           <ul className='flex items-center gap-4 text-gray-600'>
             {Navbarmenu.map((item)=>{
               return(
-                <li key={item.id}>
-                  <Link to={item.link} className='hover:text-primary font-semibold'>{item.title}</Link>
+                <li key={item.id} >
+                  <Link onClick={closeMenu} to={item.link} className='hover:text-primary font-semibold'>{item.title}</Link>
                   </li>
               )
             })}
@@ -45,13 +48,13 @@ const Navbar = () => {
             </div>
         </div>
         {/* mobile hamburger menu section */}
-        <div className='lg:hidden cursor-pointer'onClick={toggleMenu} ref={menuButtonRef} >
+        <div className='lg:hidden cursor-pointer' onClick={toggleMenu} ref={menuButtonRef} >
         {openmenu ? <MdClose className='text-4xl' /> : <MdMenu className='text-4xl' />} 
         </div>
       </div>
      </nav>
      {/* mobile sidebar section */}
-     <Responsivemenu openmenu={openmenu} setOpenmenu={setOpenmenu} menuButtonRef={menuButtonRef}/>
+     <Responsivemenu openmenu={openmenu} setOpenmenu={setOpenmenu} menuButtonRef={menuButtonRef} closeMenu={closeMenu}/>
     </>
 }
 
