@@ -24,7 +24,7 @@ const Navbar = () => {
         <div className='text-2xl flex items-center gap-2 font-bold py-6 uppercase'>
           <FaArtstation/>
           <p>Artiva</p>
-          <p className='text-secondary'>Store</p>
+          <p className='text-primary'>Store</p>
         </div>
         {/* menu section */}
         <div className='hidden lg:block'  > 
