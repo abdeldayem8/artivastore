@@ -3,6 +3,8 @@ import {Navbarmenu} from './Navbarmenuitems'
 import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Authbuttons from './Authbuttons'
+import Headerbasket from '../../common/HeaderBasket/Headerbasket'
+import Headerwishlist from '../../common/HeaderWishlist/Headerwishlist'
 
 const Responsivemenu = ({openmenu,setOpenmenu,menuButtonRef,closeMenu}) => {
 
@@ -46,9 +48,14 @@ const Responsivemenu = ({openmenu,setOpenmenu,menuButtonRef,closeMenu}) => {
               </ul>
                {/* Login and Register as links in the mobile menu */}
             <div className="mt-5 flex flex-col items-center">
-              <Authbuttons additionalClasses="flex-col items-center gap-4" variant="link" />
+              <Authbuttons additionalClasses="flex-col items-center gap-6" variant="link" />
+            </div>
+            <div className='flex justify-center my-2'>
+              <Headerbasket/>
+              <Headerwishlist/>
             </div>
             </div>
+            
             </motion.div>
         )
     }

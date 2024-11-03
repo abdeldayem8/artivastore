@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react'
 import { FaArtstation } from "react-icons/fa";
-import { PiShoppingCart } from "react-icons/pi";
 import {Navbarmenu} from './Navbarmenuitems'
 import { Link } from 'react-router-dom';
 import { MdClose, MdMenu } from 'react-icons/md';
 import Responsivemenu from './Responsivemenu';
 import Authbuttons from './Authbuttons';
+import Headerbasket from '../../common/HeaderBasket/Headerbasket';
+import Headerwishlist from '../../common/HeaderWishlist/Headerwishlist';
 
 const Navbar = () => {
  const [openmenu,setOpenmenu] =useState(false);
@@ -40,9 +41,11 @@ const Navbar = () => {
         </div>
         {/* icons section */}
         <div className='flex items-center gap-4'>
-          <button className='text-2xl hover:bg-primary hover:text-white rounded-full p-2 duration-300'>
-            <PiShoppingCart/>
-          </button>
+          <div className='hidden lg:flex'>
+          <Headerbasket/>
+          <Headerwishlist/>
+          </div>
+         
           <div className="hidden lg:flex">
               <Authbuttons />
             </div>
