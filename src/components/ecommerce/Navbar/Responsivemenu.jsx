@@ -5,10 +5,13 @@ import { Link } from 'react-router-dom'
 import Authbuttons from './Authbuttons'
 import Headerbasket from '../../common/HeaderBasket/Headerbasket'
 import Headerwishlist from '../../common/HeaderWishlist/Headerwishlist'
+import { useTranslation } from 'react-i18next'
 
 const Responsivemenu = ({openmenu,setOpenmenu,menuButtonRef,closeMenu}) => {
 
     const menuRef = useRef(null);
+    const {t} = useTranslation();
+    
      // Effect to close the menu when clicking outside
      useEffect(() => {
       const handleClickOutside = (event) => {
@@ -41,7 +44,7 @@ const Responsivemenu = ({openmenu,setOpenmenu,menuButtonRef,closeMenu}) => {
               {Navbarmenu.map((item) => (
                 <li key={item.id}>
                   <Link onClick={closeMenu} to={item.link} className="hover:text-gray-300">
-                    {item.title}
+                  {t(item.titleKey)}
                   </Link>
                 </li>
               ))}

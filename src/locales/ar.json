@@ -1,0 +1,13 @@
+{
+    "navbar": {
+     "newArrival": "وصل حديثًا",
+     "products": "المنتجات",
+      "makeTshirt": "صنع قميصك"
+    }, 
+    "products":"المنتجات",
+    "login":"تسجيل الدخول",
+    "register":"انشاء حساب",
+    "wear": "ارتداء",
+    "the": "ال",
+    "difference": "الفرق"
+}

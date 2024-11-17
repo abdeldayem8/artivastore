@@ -1,0 +1,13 @@
+{
+   "navbar": {
+    "newArrival": "New Arrival",
+    "products": "Products",
+    "makeTshirt": "Make Your T-shirt"
+  },
+   "products":"Products",
+   "login": "Login",
+   "register": "Register" ,
+   "wear": "Wear",
+   "the": "The",
+   "difference": "Difference"
+}

@@ -1,8 +1,10 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 
 const Authbuttons = ({ additionalClasses = '', variant = 'button' }) => {
-
+    const {t} = useTranslation();
     const isLinkStyle = variant === 'link';
+  
 
   return (
     <div className={`flex gap-4 ${additionalClasses}`}>
@@ -13,7 +15,7 @@ const Authbuttons = ({ additionalClasses = '', variant = 'button' }) => {
             : 'hover:bg-primary text-primary font-semibold hover:text-white rounded-md border-2 border-primary px-6 py-2 duration-200'
         }`}
       >
-        Login
+        {t('login')}
       </button>
       <button
         className={`${
@@ -22,7 +24,7 @@ const Authbuttons = ({ additionalClasses = '', variant = 'button' }) => {
             : 'hover:bg-white text-white bg-primary font-semibold hover:text-primary rounded-md border-2 border-primary px-6 py-2 duration-200'
         }`}
       >
-        Register
+        {t('register')}
       </button>
   </div>
   )

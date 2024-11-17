@@ -1,0 +1,13 @@
+{
+    "navbar": {
+    "newArrival": "Новинка",
+    "products": "Продукты",
+    "makeTshirt": "Создайте свою футболку"
+  },
+    "products":"продукты",
+    "login": "Вход",
+    "register": "Регистрация",
+    "wear": "Носить",
+    "the": "Этот",
+    "difference": "Разница"
+}

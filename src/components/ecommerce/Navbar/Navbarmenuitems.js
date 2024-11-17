@@ -2,17 +2,17 @@
 export const Navbarmenu = [
     {
         id:1,
-        title:"New Arrival",
+        titleKey: "navbar.newArrival",
         link:'/artivastore/newarrival'
     },
     {
         id:2,
-        title:"Products",
+        titleKey: "navbar.products",
         link:'/artivastore/'
     },
     {
         id:3,
-        title:"Make Your T-shirt",
+        titleKey: "navbar.makeTshirt",
         link:'/artivastore/maketshirt'
     },
 
