@@ -1,6 +1,7 @@
 import React from 'react';
 import useFetch from '../../../hooks/useFetch';
 import { useTranslation } from 'react-i18next';
+import Loading from '../../common/Loading/Loading';
 
 
 
@@ -9,7 +10,7 @@ const ProductList = () => {
 
     const {t} =useTranslation();
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <p><Loading/></p>;
     if (error) return <p>Error: {error.message}</p>;
   return (
      <div className="max-w-7xl mx-auto my-4 px-4 py-8">

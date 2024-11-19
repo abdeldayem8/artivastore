@@ -1,8 +1,12 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from '../App.jsx'
-import Products from '../pages/Products.jsx'
-import About from '../pages/About.jsx'
-import Makeyourtshirt from '../pages/Makeyourtshirt.jsx'
+import { lazy,Suspense } from 'react'
+import Loading from '../components/common/Loading/Loading.jsx'
+const Products = lazy(()=>import ('../pages/Products.jsx'))
+const Makeyourtshirt = lazy(()=>import ('../pages/Makeyourtshirt.jsx'))
+const Newarrival = lazy(()=>import ('../pages/Newarrival.jsx'))
+
+
 
 
 const router = createBrowserRouter([
@@ -10,15 +14,21 @@ const router = createBrowserRouter([
     children:[
     {
       path:"/artivastore/",
-      element:<Products/>
+      element: <Suspense fallback={<Loading/>}>
+        <Products/>
+      </Suspense>
     },
     {
-      path:"/artivastore/about",
-      element:<About/>
+      path:"/artivastore/newarrivals",
+      element: <Suspense fallback={<Loading/>}>
+        <Newarrival/>
+      </Suspense>
     },
     {
       path:"/artivastore/maketshirt",
-      element:<Makeyourtshirt/>
+      element:<Suspense fallback={<Loading/>}>
+        <Makeyourtshirt/>
+      </Suspense>
     },
     ]
   }

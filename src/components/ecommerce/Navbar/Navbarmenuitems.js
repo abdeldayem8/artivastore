@@ -3,7 +3,7 @@ export const Navbarmenu = [
     {
         id:1,
         titleKey: "navbar.newArrival",
-        link:'/artivastore/newarrival'
+        link:'/artivastore/newarrivals'
     },
     {
         id:2,

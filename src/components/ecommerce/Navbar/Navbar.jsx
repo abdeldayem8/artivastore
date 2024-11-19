@@ -47,7 +47,6 @@ const handleLanguageClick = (lng) => {
         <div className='hidden lg:block'  > 
           <ul className='flex items-center gap-4 text-gray-600'>
             {Navbarmenu.map((item)=>{
-              console.log(item.titleKey);
               return(
                 <li key={item.id} >
                   <Link onClick={closeMenu} to={item.link} className='hover:text-primary font-semibold'>{t(item.titleKey)}</Link>
@@ -69,7 +68,6 @@ const handleLanguageClick = (lng) => {
             {/* language */}
         <select defaultValue={selectedLanguage} onClick={(e)=>handleLanguageClick(e.target.value)} className="bg-gray-100 border-2 border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-200">
           <option value="en" className="text-gray-700">EN</option>
-          <option value="ar" className="text-gray-700">AR</option>
           <option value="ru"className="text-gray-700">RU</option>
         </select>
         </div>
