@@ -1,5 +1,5 @@
 import React from 'react'
-import cover from '../assets/cover.png'
+import cover from '../assets/cover.avif'
 import ProductList from '../components/ecommerce/ProductList/ProductList'
 import { useTranslation } from 'react-i18next'
 
