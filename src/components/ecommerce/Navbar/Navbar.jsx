@@ -15,9 +15,9 @@ const Navbar = () => {
 
  const [openmenu,setOpenmenu] =useState(false);
  const menuButtonRef = useRef(null);
- const selectedLanguage = localStorage.getItem('i18nextLng');
-//  const menuitems = getMenuForCurrentLanguage();
  const { t } = useTranslation();
+ const selectedLanguage = localStorage.getItem('i18nextLng');
+
 
  
 const toggleMenu = ()=>{
@@ -75,7 +75,6 @@ const handleLanguageClick = (lng) => {
         <div className='lg:hidden cursor-pointer' onClick={toggleMenu} ref={menuButtonRef} >
         {openmenu ? <MdClose className='text-4xl' /> : <MdMenu className='text-4xl' />} 
         </div>
-        
       </div>
      </nav>
      {/* mobile sidebar section */}
