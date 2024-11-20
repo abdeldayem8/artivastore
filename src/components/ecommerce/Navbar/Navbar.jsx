@@ -29,8 +29,10 @@ const toggleMenu = ()=>{
 };
 
 // Handle language change when an option is clicked
-const handleLanguageClick = (lng) => {
-    i18n.changeLanguage(lng); // Update the i18n language
+const handleLanguageChange = (event) => {
+  const selectedLanguage = event.target.value;
+  i18n.changeLanguage(selectedLanguage); // Update the language in i18n
+  localStorage.setItem('i18nextLng', selectedLanguage); // Persist language choice
 };
 
 
@@ -66,10 +68,14 @@ const handleLanguageClick = (lng) => {
               <Authbuttons />
             </div>
             {/* language */}
-        <select defaultValue={selectedLanguage} onClick={(e)=>handleLanguageClick(e.target.value)} className="bg-gray-100 border-2 border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-200">
-          <option value="en" className="text-gray-700">EN</option>
-          <option value="ru"className="text-gray-700">RU</option>
-        </select>
+            <select
+  value={selectedLanguage || 'en'} // Fallback to 'en' if no language is set
+  onChange={handleLanguageChange}
+  className="bg-gray-100 border-2 border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-200"
+>
+  <option value="en" className="text-gray-700">EN</option>
+  <option value="ru" className="text-gray-700">RU</option>
+</select>
         </div>
         {/* mobile hamburger menu section */}
         <div className='lg:hidden cursor-pointer' onClick={toggleMenu} ref={menuButtonRef} >
