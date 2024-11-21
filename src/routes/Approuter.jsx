@@ -3,7 +3,7 @@ import App from '../App.jsx'
 import { lazy,Suspense } from 'react'
 import Loading from '../components/common/Loading/Loading.jsx'
 const Products = lazy(()=>import ('../pages/Products.jsx'))
-const Makeyourtshirt = lazy(()=>import ('../pages/Makeyourtshirt.jsx'))
+const Makeyourtshirt = lazy(()=>import ('../pages/TshirtDesigner.jsx'))
 const Newarrival = lazy(()=>import ('../pages/Newarrival.jsx'))
 
 

@@ -7,7 +7,6 @@ import Authbuttons from './Authbuttons';
 import Headerbasket from '../../common/HeaderBasket/Headerbasket';
 import Headerwishlist from '../../common/HeaderWishlist/Headerwishlist';
 import i18n from '../../../i18n';
-// import getMenuForCurrentLanguage from '../../../utils/Menuutils/GetmenuforCurrentlanguage';
 import { useTranslation } from 'react-i18next';
 import { Navbarmenu } from './Navbarmenuitems';
 
