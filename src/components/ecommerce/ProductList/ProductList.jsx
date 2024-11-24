@@ -2,6 +2,7 @@ import React from 'react';
 import useFetch from '../../../hooks/useFetch';
 import { useTranslation } from 'react-i18next';
 import Loading from '../../common/Loading/Loading';
+import { CiHeart } from 'react-icons/ci';
 
 
 
@@ -21,14 +22,28 @@ const ProductList = () => {
                         <div key={product.id} className="bg-white rounded-lg shadow-xl overflow-hidden my-8">
                             <img
                                 src={product.image}
-                                alt={product.title}
+                                alt={product.title || 'Product Image'}
                                 className="h-48 w-full object-contain p-4"
                             />
                             <div className="p-4 text-center">
-                                <h3 className="text-lg font-semibold text-gray-800">{product.title}</h3>
-                                <p className="text-gray-600 text-sm mt-2">{product.description.split(' ').slice(0, 5).join(' ')}</p>
+                                <h3 className="text-lg font-semibold text-gray-800">{product.title?.split(' ').slice(0,2).join(' ')}</h3>
                                 <p className="text-blue-600 font-bold text-lg mt-4">{product.price} EGP</p>
                             </div>
+                            <div className="flex justify-center space-x-4 my-4">
+                {/* Add to Cart Button */}
+                <button
+                    className="uppercase hover:bg-white text-white bg-primary font-semibold hover:text-primary rounded-md border-2 border-primary px-6 py-2"
+                >
+                    Add To Cart
+                </button>
+
+                {/* Add to Favourites Button */}
+                <button
+                    className={'text-gray-500'}
+                >
+                    <CiHeart className="text-2xl" />
+                </button>
+            </div>
                         </div>
                     ))
                 ) : (

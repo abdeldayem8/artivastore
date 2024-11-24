@@ -9,6 +9,7 @@ const Authbuttons = ({ additionalClasses = '', variant = 'button' }) => {
   return (
     <div className={`flex gap-4 ${additionalClasses}`}>
     <button
+        aria-label={t('login')}
         className={`${
           isLinkStyle
             ? 'text-white hover:text-gray-300 uppercase'
@@ -18,6 +19,7 @@ const Authbuttons = ({ additionalClasses = '', variant = 'button' }) => {
         {t('login')}
       </button>
       <button
+        aria-label={t('register')}
         className={`${
           isLinkStyle
             ? 'text-white hover:text-gray-300 uppercase'

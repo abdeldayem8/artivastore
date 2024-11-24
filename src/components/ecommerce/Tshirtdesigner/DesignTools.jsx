@@ -1,17 +1,57 @@
-import React from 'react'
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Upload, Palette, Wand2, Type, Undo, Redo, RotateCcw } from 'lucide-react';
+import { useDropzone } from 'react-dropzone';
 
-function DesignTools({ activeTab, setActiveTab }) {
+function DesignTools({ activeTab, setActiveTab, onDesignUpload, onGenerateAI }) {
+  
+  const onDrop = useCallback(acceptedFiles => {
+    const file = acceptedFiles[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        onDesignUpload(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  }, [onDesignUpload]);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      'image/*': ['.png', '.jpg', '.jpeg', '.gif']
+    },
+    multiple: false
+  });
+
+  const handleAIGenerate = async (prompt) => {
+    if (prompt.trim()) {
+      try {
+        onGenerateAI(prompt);
+      } catch (error) {
+        console.error('Error generating AI design:', error);
+      }
+    }
+  };
+
   const renderTabContent = () => {
     switch (activeTab) {
       case 'upload':
         return (
           <div className="space-y-4">
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+            <div
+              {...getRootProps()}
+              className={`border-2 border-dashed ${
+                isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
+              } rounded-lg p-8 text-center cursor-pointer transition-colors`}
+            >
+              <input {...getInputProps()} />
               <Upload className="mx-auto h-12 w-12 text-gray-400" />
-              <p className="mt-2 text-sm text-gray-600">Drag and drop your design here, or click to upload</p>
-              <input type="file" className="hidden" accept="image/*" />
+              <p className="mt-2 text-sm text-gray-600">
+                {isDragActive
+                  ? "Drop your design here..."
+                  : "Drag and drop your design here, or click to upload"}
+              </p>
             </div>
           </div>
         );
@@ -44,8 +84,12 @@ function DesignTools({ activeTab, setActiveTab }) {
               className="w-full p-3 border border-gray-300 rounded-lg"
               placeholder="Describe your dream t-shirt design..."
               rows={4}
+              onChange={(e) => handleAIGenerate(e.target.value)}
             />
-            <button className="w-full bg-blue-500 text-white py-2 rounded-lg flex items-center justify-center gap-2">
+            <button 
+              onClick={() => handleAIGenerate(document.querySelector('textarea').value)}
+              className="w-full bg-blue-500 text-white py-2 rounded-lg flex items-center justify-center gap-2"
+            >
               <Wand2 size={20} />
               Generate Design
             </button>
@@ -58,7 +102,7 @@ function DesignTools({ activeTab, setActiveTab }) {
 
   return (
     <div>
-      <div className="flex flex-col sm:flex-row gap-4 mb-6">
+      <div className="flex gap-4 mb-6">
         <button
           onClick={() => setActiveTab('upload')}
           className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 ${
@@ -94,7 +138,9 @@ function DesignTools({ activeTab, setActiveTab }) {
 
 DesignTools.propTypes = {
   activeTab: PropTypes.string.isRequired,
-  setActiveTab: PropTypes.func.isRequired
+  setActiveTab: PropTypes.func.isRequired,
+  onDesignUpload: PropTypes.func.isRequired,
+  onGenerateAI: PropTypes.func.isRequired
 };
 
 export default DesignTools;

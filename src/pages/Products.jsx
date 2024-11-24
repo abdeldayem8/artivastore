@@ -1,5 +1,5 @@
 import React from 'react'
-import cover from '../assets/cover.avif'
+import Cover  from '../assets/cover.png';
 import ProductList from '../components/ecommerce/ProductList/ProductList'
 import { useTranslation } from 'react-i18next'
 
@@ -15,8 +15,8 @@ const Products = () => {
       <p className='uppercase py-3 text-xl font-medium tracking-widest'>{t('difference')}</p>
     </div>
     <div className='bg-primary rounded-lg px-3'>
-      <img src={cover} alt='Top Cover image for home page' className='mx-auto' />
-    </div>
+      <img src={Cover} alt='Top Cover image for home page' className='mx-auto' />
+        </div>
    </div>
    <ProductList/>
    </>

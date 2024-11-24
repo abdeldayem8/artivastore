@@ -1,14 +1,14 @@
-import React, {  useRef, useState } from 'react'
+import React, {  lazy, Suspense, useCallback, useRef, useState } from 'react'
 import { FaArtstation } from "react-icons/fa";
-import { Link } from 'react-router-dom';
 import { MdClose, MdMenu } from 'react-icons/md';
 import Responsivemenu from './Responsivemenu';
-import Authbuttons from './Authbuttons';
+const Authbuttons = lazy(() => import('./Authbuttons'));
 import Headerbasket from '../../common/HeaderBasket/Headerbasket';
 import Headerwishlist from '../../common/HeaderWishlist/Headerwishlist';
 import i18n from '../../../i18n';
 import { useTranslation } from 'react-i18next';
-import { Navbarmenu } from './Navbarmenuitems';
+import Loading from '../../common/Loading/Loading';
+import NavMenuItems from './NavMenuItems';
 
 const Navbar = () => {
 
@@ -19,13 +19,13 @@ const Navbar = () => {
 
 
  
-const toggleMenu = ()=>{
-  setOpenmenu(prevState => !prevState);
- }
+ const toggleMenu = useCallback(() => {
+  setOpenmenu((prevState) => !prevState);
+}, []);
 
- const closeMenu = () => {
+const closeMenu = useCallback(() => {
   setOpenmenu(false);
-};
+}, []);
 
 // Handle language change when an option is clicked
 const handleLanguageChange = (event) => {
@@ -46,15 +46,12 @@ const handleLanguageChange = (event) => {
         </div>
         {/* menu section */}
         <div className='hidden lg:block'  > 
-          <ul className='flex items-center gap-4 text-gray-600'>
-            {Navbarmenu.map((item)=>{
-              return(
-                <li key={item.id} >
-                  <Link onClick={closeMenu} to={item.link} className='hover:text-primary font-semibold'>{t(item.titleKey)}</Link>
-                </li>
-              )
-            })}
-          </ul>
+           <NavMenuItems
+        ulClassName="flex items-center gap-4 text-gray-600"
+        liClassName=""
+        linkClassName="hover:text-primary font-semibold"
+        closeMenu={closeMenu}
+      />
         </div>
         {/* icons section */}
         <div className='flex items-center gap-4'>
@@ -64,7 +61,9 @@ const handleLanguageChange = (event) => {
           </div>
          
           <div className="hidden lg:flex">
+            <Suspense fallback={<Loading/>}>
               <Authbuttons />
+              </Suspense>
             </div>
             {/* language */}
             <select

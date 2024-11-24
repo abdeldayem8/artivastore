@@ -1,13 +1,13 @@
 import { AnimatePresence,motion } from 'framer-motion'
-import {Navbarmenu} from './Navbarmenuitems'
-import React, { useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
-import Authbuttons from './Authbuttons'
+import React, { lazy, memo, Suspense,useEffect, useRef } from 'react'
+const Authbuttons = lazy(() => import('./Authbuttons'));
 import Headerbasket from '../../common/HeaderBasket/Headerbasket'
 import Headerwishlist from '../../common/HeaderWishlist/Headerwishlist'
 import { useTranslation } from 'react-i18next'
+import Loading from '../../common/Loading/Loading';
+import NavMenuItems from './NavMenuItems';
 
-const Responsivemenu = ({openmenu,setOpenmenu,menuButtonRef,closeMenu}) => {
+const Responsivemenu = memo(({openmenu,setOpenmenu,menuButtonRef,closeMenu}) => {
 
     const menuRef = useRef(null);
     const {t} = useTranslation();
@@ -41,17 +41,18 @@ const Responsivemenu = ({openmenu,setOpenmenu,menuButtonRef,closeMenu}) => {
             <motion.div   initial={{opacity:0,y:-100}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-100}} transition={{duration:0.3}} className='absolute top-20 left-0 w-full h-screen z-20'>
             <div ref={menuRef} className='text-xl font-semibold uppercase bg-secondary text-white py-8 m-6 rounded-3xl'>
               <ul className='flex flex-col justify-center items-center gap-6'>
-              {Navbarmenu.map((item) => (
-                <li key={item.id}>
-                  <Link onClick={closeMenu} to={item.link} className="hover:text-gray-300">
-                  {t(item.titleKey)}
-                  </Link>
-                </li>
-              ))}
+              <NavMenuItems
+              ulClassName="flex flex-col justify-center items-center gap-6"
+              liClassName=""
+              linkClassName="hover:text-gray-300"
+              closeMenu={closeMenu}
+            />
               </ul>
                {/* Login and Register as links in the mobile menu */}
             <div className="mt-5 flex flex-col items-center">
+              <Suspense fallback={<Loading/>}>
               <Authbuttons additionalClasses="flex-col items-center gap-6" variant="link" />
+              </Suspense>
             </div>
             <div className='flex justify-center my-2'>
               <Headerbasket/>
@@ -64,6 +65,6 @@ const Responsivemenu = ({openmenu,setOpenmenu,menuButtonRef,closeMenu}) => {
     }
    </AnimatePresence>
   </>
-}
+})
 
 export default Responsivemenu
