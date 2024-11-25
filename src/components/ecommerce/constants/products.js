@@ -1,3 +1,18 @@
+import whiteFront from '../../../assets/mockups/hoodie/front/white.jpg'
+import blackFront from'../../../assets/mockups/hoodie/front/white.jpg'
+import navyFront from'../../../assets/mockups/hoodie/front/white.jpg'
+import redFront from'../../../assets/mockups/hoodie/front/white.jpg'
+import grayFront from'../../../assets/mockups/hoodie/front/white.jpg'
+import greenFront from'../../../assets/mockups/hoodie/front/white.jpg'
+
+import whiteBack from '../../../assets/mockups/hoodie/back/back.jpg'
+import blackBack from'../../../assets/mockups/hoodie/back/back.jpg'
+import navyBack from'../../../assets/mockups/hoodie/back/back.jpg'
+import redBAck from'../../../assets/mockups/hoodie/back/back.jpg'
+import grayBAck from'../../../assets/mockups/hoodie/back/back.jpg'
+import greenBack from'../../../assets/mockups/hoodie/back/back.jpg'
+
+
 export const PRODUCTS = [
     {
       id: 'tshirt',
@@ -5,23 +20,23 @@ export const PRODUCTS = [
       basePrice: 19.99,
       mockups: {
         front: {
-          white: '/mockups/tshirt/front/white.png',
-          black: '/mockups/tshirt/front/black.png',
-          navy: '/mockups/tshirt/front/navy.png',
-          red: '/mockups/tshirt/front/red.png',
-          gray: '/mockups/tshirt/front/gray.png',
-          green: '/mockups/tshirt/front/green.png'
+          white: whiteFront,
+        black: blackFront,
+        navy: navyFront,
+        red: redFront,
+        gray: grayFront,
+        green: greenFront,
         },
         back: {
-          white: '/mockups/tshirt/back/white.png',
-          black: '/mockups/tshirt/back/black.png',
-          navy: '/mockups/tshirt/back/navy.png',
-          red: '/mockups/tshirt/back/red.png',
-          gray: '/mockups/tshirt/back/gray.png',
-          green: '/mockups/tshirt/back/green.png'
+          white: whiteBack,
+          black: blackBack,
+          navy: navyBack,
+          red: redBAck,
+          gray: grayBAck,
+          green: greenBack,
         }
       },
-      thumbnail: '/mockups/tshirt/front/white.png',
+      thumbnail: whiteFront,
       printAreas: {
         front: {
           x: 120,
@@ -47,23 +62,23 @@ export const PRODUCTS = [
       basePrice: 39.99,
       mockups: {
         front: {
-          white: '/mockups/hoodie/front/white.png',
-          black: '/mockups/hoodie/front/black.png',
-          navy: '/mockups/hoodie/front/navy.png',
-          red: '/mockups/hoodie/front/red.png',
-          gray: '/mockups/hoodie/front/gray.png',
-          green: '/mockups/hoodie/front/green.png'
+          white: whiteFront,
+        black: blackFront,
+        navy: navyFront,
+        red: redFront,
+        gray: grayFront,
+        green: greenFront,
         },
         back: {
-          white: '/mockups/hoodie/back/white.png',
-          black: '/mockups/hoodie/back/black.png',
-          navy: '/mockups/hoodie/back/navy.png',
-          red: '/mockups/hoodie/back/red.png',
-          gray: '/mockups/hoodie/back/gray.png',
-          green: '/mockups/hoodie/back/green.png'
+          white: whiteBack,
+          black: blackBack,
+          navy: navyBack,
+          red: redBAck,
+          gray: grayBAck,
+          green: greenBack,
         }
       },
-      thumbnail: '/mockups/hoodie/front/white.png',
+      thumbnail: whiteFront,
       printAreas: {
         front: {
           x: 120,

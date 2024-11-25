@@ -5,6 +5,7 @@ import { RotateCcw, RotateCw } from 'lucide-react';
 import { Rnd } from 'react-rnd';
 
 const DesignPreview = ({ selectedColor, selectedProduct, designImage, onDesignChange }) => {
+
   const [view, setView] = useState('front');
   const [designPosition, setDesignPosition] = useState({ x: 150, y: 150 });
   const [designSize, setDesignSize] = useState({ width: 120, height: 120 });
