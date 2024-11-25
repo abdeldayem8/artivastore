@@ -1,51 +1,52 @@
-import React, { useState , useRef } from 'react'
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RotateCcw, RotateCw } from 'lucide-react';
 import { Rnd } from 'react-rnd';
 
-const DesignPreview = ({ selectedColor, selectedProduct ,designImage, onDesignChange}) => {
+const DesignPreview = ({ selectedColor, selectedProduct, designImage, onDesignChange }) => {
+  const [view, setView] = useState('front');
+  const [designPosition, setDesignPosition] = useState({ x: 150, y: 150 });
+  const [designSize, setDesignSize] = useState({ width: 120, height: 120 });
 
-    const [view, setView] = useState('front');
-    const [designPosition, setDesignPosition] = useState({ x: 150, y: 150 });
-    const [designSize, setDesignSize] = useState({ width: 120, height: 120 });
-    const COLORS = ['white', 'black', 'navy', 'red', 'gray', 'green'];
+  const handleDragStop = (e, d) => {
+    setDesignPosition({ x: d.x, y: d.y });
+    if (onDesignChange) {
+      onDesignChange({ position: { x: d.x, y: d.y }, size: designSize });
+    }
+  };
 
-    const handleDragStop = (e, d) => {
-      setDesignPosition({ x: d.x, y: d.y });
-      if (onDesignChange) {
-        onDesignChange({ position: { x: d.x, y: d.y }, size: designSize });
-      }
-    };
+  const handleResize = (e, direction, ref, delta, position) => {
+    setDesignSize({
+      width: ref.offsetWidth,
+      height: ref.offsetHeight
+    });
+    setDesignPosition(position);
+    if (onDesignChange) {
+      onDesignChange({ position, size: { width: ref.offsetWidth, height: ref.offsetHeight } });
+    }
+  };
 
-    const handleResize = (e, direction, ref, delta, position) => {
-      setDesignSize({
-        width: ref.offsetWidth,
-        height: ref.offsetHeight
-      });
-      setDesignPosition(position);
-      if (onDesignChange) {
-        onDesignChange({ position, size: { width: ref.offsetWidth, height: ref.offsetHeight } });
-      }
-    };
+  const getMockupUrl = () => {
+    return selectedProduct.mockups[view][selectedColor];
+  };
 
   return (
-   <div className="relative">
-      <div className="aspect-square relative flex items-center justify-center bg-gray-100 rounded-lg overflow-hidden">
+    <div className="relative">
+      <div className="aspect-square relative flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
-            key={view}
-            initial={{ opacity: 0, rotateY: view === 'front' ? -180 : 180 }}
-            animate={{ opacity: 1, rotateY: 0 }}
-            exit={{ opacity: 0, rotateY: view === 'front' ? 180 : -180 }}
-            transition={{ duration: 0.5 }}
+            key={`${view}-${selectedColor}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
             className="w-full h-full flex items-center justify-center"
           >
             <img 
-              src={selectedProduct.image}
-              alt={`${selectedProduct.name} ${view} view`}
-              className="w-3/4 transition-all"
-              style={{ filter: selectedColor === 'white' ? 'none' : `brightness(0.8) hue-rotate(${COLORS.indexOf(selectedColor) * 60}deg)`}}
+              src={getMockupUrl()}
+              alt={`${selectedProduct.name} ${view} view in ${selectedColor}`}
+              className="w-full h-full object-contain"
             />
             
             {designImage && (
@@ -104,14 +105,14 @@ const DesignPreview = ({ selectedColor, selectedProduct ,designImage, onDesignCh
       </div>
     </div>
   );
-}
+};
 
 DesignPreview.propTypes = {
   selectedColor: PropTypes.string.isRequired,
   selectedProduct: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired
+    mockups: PropTypes.object.isRequired
   }).isRequired,
   designImage: PropTypes.string,
   onDesignChange: PropTypes.func

@@ -102,7 +102,7 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onGenerateAI }) 
 
   return (
     <div>
-      <div className="flex gap-4 mb-6">
+      <div className="flex flex-col sm:flex-row gap-4 mb-6">
         <button
           onClick={() => setActiveTab('upload')}
           className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 ${
