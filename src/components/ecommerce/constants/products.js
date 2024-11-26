@@ -1,16 +1,11 @@
-import whiteFront from '../../../assets/mockups/hoodie/front/white.jpg'
-import blackFront from'../../../assets/mockups/hoodie/front/white.jpg'
-import navyFront from'../../../assets/mockups/hoodie/front/white.jpg'
-import redFront from'../../../assets/mockups/hoodie/front/white.jpg'
-import grayFront from'../../../assets/mockups/hoodie/front/white.jpg'
-import greenFront from'../../../assets/mockups/hoodie/front/white.jpg'
+// hoodies
+import hoodiefront from '../../../assets/mockups/hoodie/front/hoodiefront.jpg'
+import hoodieback from '../../../assets/mockups/hoodie/back/hoodieback.jpg'
 
-import whiteBack from '../../../assets/mockups/hoodie/back/back.jpg'
-import blackBack from'../../../assets/mockups/hoodie/back/back.jpg'
-import navyBack from'../../../assets/mockups/hoodie/back/back.jpg'
-import redBAck from'../../../assets/mockups/hoodie/back/back.jpg'
-import grayBAck from'../../../assets/mockups/hoodie/back/back.jpg'
-import greenBack from'../../../assets/mockups/hoodie/back/back.jpg'
+// tshirts
+import tshirtfront from '../../../assets/mockups/tshirt/front/fronttshirt.jpg'
+import tshirtback from '../../../assets/mockups/tshirt/back/backtshirt.jpg'
+
 
 
 export const PRODUCTS = [
@@ -20,23 +15,13 @@ export const PRODUCTS = [
       basePrice: 19.99,
       mockups: {
         front: {
-          white: whiteFront,
-        black: blackFront,
-        navy: navyFront,
-        red: redFront,
-        gray: grayFront,
-        green: greenFront,
+        white: tshirtfront,
         },
         back: {
-          white: whiteBack,
-          black: blackBack,
-          navy: navyBack,
-          red: redBAck,
-          gray: grayBAck,
-          green: greenBack,
+          white: tshirtback,
         }
       },
-      thumbnail: whiteFront,
+      thumbnail: tshirtfront,
       printAreas: {
         front: {
           x: 120,
@@ -62,23 +47,13 @@ export const PRODUCTS = [
       basePrice: 39.99,
       mockups: {
         front: {
-          white: whiteFront,
-        black: blackFront,
-        navy: navyFront,
-        red: redFront,
-        gray: grayFront,
-        green: greenFront,
+          white: hoodiefront,
         },
         back: {
-          white: whiteBack,
-          black: blackBack,
-          navy: navyBack,
-          red: redBAck,
-          gray: grayBAck,
-          green: greenBack,
+          white: hoodieback,
         }
       },
-      thumbnail: whiteFront,
+      thumbnail: hoodiefront,
       printAreas: {
         front: {
           x: 120,

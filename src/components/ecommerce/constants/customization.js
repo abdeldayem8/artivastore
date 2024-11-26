@@ -10,6 +10,4 @@ export const SIZES = [
   export const PRINT_LOCATIONS = [
     { id: 'front', name: 'Front', price: 0 },
     { id: 'back', name: 'Back', price: 5 },
-    { id: 'left_sleeve', name: 'Left Sleeve', price: 3 },
-    { id: 'right_sleeve', name: 'Right Sleeve', price: 3 }
   ];
