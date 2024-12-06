@@ -15,103 +15,80 @@ function TshirtDesigner() {
   const [designImage, setDesignImage] = useState(null);
   const [designState, setDesignState] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(PRODUCTS[0]);
-  
-  // New state for customization
+  const [typedText, setTypedText] = useState(''); // النص المكتوب
+  const [textColor, setTextColor] = useState('#000000'); // لون النص
   const [selectedSize, setSelectedSize] = useState('M');
   const [quantity, setQuantity] = useState(1);
   const [selectedLocations, setSelectedLocations] = useState(['front']);
 
+  // تحديث النص الذي كتبه المستخدم
+  const handleTextChange = (text) => {
+    setTypedText(text);
+  };
+
+  // تحديث لون النص
+  const handleTextColorChange = (color) => {
+    console.log('Selected Color: ', color);
+    setTextColor(color);
+  };
+
+  // تحميل التصميم (في حالة وجود صورة)
   const handleDesignUpload = (imageData) => {
     setDesignImage(imageData);
   };
 
-  const handleGenerateAI = async (prompt) => {
-    console.log('Generating design with prompt:', prompt);
-    setDesignImage('https://via.placeholder.com/150');
-  };
-
-  const handleDesignChange = (newState) => {
-    setDesignState(newState);
-  };
-
-  const handleLocationChange = (location) => {
-    setSelectedLocations(prev => 
-      prev.includes(location)
-        ? prev.filter(loc => loc !== location)
-        : [...prev, location]
-    );
-  };
-
-  const handleSaveDesign = async () => {
-    try {
-      const previewElement = document.querySelector('.design-preview');
-      if (previewElement) {
-        const dataUrl = await toPng(previewElement, {
-          quality: 1.0,
-          backgroundColor: 'white'
-        });
-        
-        const link = document.createElement('a');
-        link.download = `${selectedProduct.name}-design.png`;
-        link.href = dataUrl;
-        link.click();
-      }
-    } catch (error) {
-      console.error('Error saving design:', error);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl font-bold text-gray-900 mb-8"
+          className="text-3xl font-bold text-secondary mb-8"
         >
           Design Your Custom {selectedProduct.name}
         </motion.h1>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Column - Preview */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="space-y-6"
           >
             <div className="bg-white p-8 rounded-xl shadow-lg">
-              <ProductSelector 
+              <ProductSelector
                 selectedProduct={selectedProduct}
                 onProductSelect={setSelectedProduct}
               />
               <div className="design-preview">
-                <DesignPreview 
-                  selectedColor={selectedColor}
+                <DesignPreview
+                 selectedColor={selectedColor}
                   selectedProduct={selectedProduct}
                   designImage={designImage}
-                  onDesignChange={handleDesignChange}
-                  selectedLocations={selectedLocations}
+                  typedText={typedText} //   النص هنا
+                  textColor={textColor} //   اللون هنا
                 />
               </div>
-              <ColorPicker 
-                selectedColor={selectedColor} 
-                onColorSelect={setSelectedColor} 
+              <ColorPicker
+                selectedColor={selectedColor}
+                onColorSelect={setSelectedColor}
               />
             </div>
           </motion.div>
 
           {/* Right Column - Tools & Customization */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             className="space-y-6"
           >
             <div className="bg-white p-8 rounded-xl shadow-lg">
-              <DesignTools 
-                activeTab={activeTab} 
+              <DesignTools
+                activeTab={activeTab}
                 setActiveTab={setActiveTab}
                 onDesignUpload={handleDesignUpload}
-                onGenerateAI={handleGenerateAI}
+                onTextChange={handleTextChange}
+                onTextColorChange={handleTextColorChange} // تم تمرير معالج التغيير
               />
             </div>
 
@@ -123,15 +100,38 @@ function TshirtDesigner() {
                 basePrice={selectedProduct.basePrice}
                 onSizeChange={setSelectedSize}
                 onQuantityChange={setQuantity}
-                onLocationChange={handleLocationChange}
+                onLocationChange={(location) =>
+                  setSelectedLocations((prev) =>
+                    prev.includes(location)
+                      ? prev.filter((loc) => loc !== location)
+                      : [...prev, location]
+                  )
+                }
               />
             </div>
 
-            <motion.button 
+            <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={handleSaveDesign}
-              className="w-full bg-green-500 text-white py-3 rounded-lg flex items-center justify-center gap-2"
+              onClick={async () => {
+                try {
+                  const previewElement = document.querySelector('.design-preview');
+                  if (previewElement) {
+                    const dataUrl = await toPng(previewElement, {
+                      quality: 1.0,
+                      backgroundColor: 'white',
+                    });
+
+                    const link = document.createElement('a');
+                    link.download = `${selectedProduct.name}-design.png`;
+                    link.href = dataUrl;
+                    link.click();
+                  }
+                } catch (error) {
+                  console.error('Error saving design:', error);
+                }
+              }}
+              className="w-full bg-primary text-white py-3 rounded-lg flex items-center justify-center gap-2"
             >
               <Download size={20} />
               Save Design

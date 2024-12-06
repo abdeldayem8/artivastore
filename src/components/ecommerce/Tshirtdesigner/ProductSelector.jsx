@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import {PRODUCTS} from '../constants/products.js'
+import { PRODUCTS } from '../constants/products.js';
 
 function ProductSelector({ selectedProduct, onProductSelect }) {
   return (
@@ -32,14 +31,5 @@ function ProductSelector({ selectedProduct, onProductSelect }) {
     </div>
   );
 }
-
-ProductSelector.propTypes = {
-  selectedProduct: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    thumbnail: PropTypes.string.isRequired
-  }).isRequired,
-  onProductSelect: PropTypes.func.isRequired
-};
 
 export default ProductSelector;

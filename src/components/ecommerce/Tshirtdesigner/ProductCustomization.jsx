@@ -1,9 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Plus, Minus } from 'lucide-react';
 import { SIZES, PRINT_LOCATIONS } from '../constants/customization';
 import { motion } from 'framer-motion';
-
 
 function ProductCustomization({ 
   selectedSize, 
@@ -117,15 +115,5 @@ function ProductCustomization({
     </div>
   );
 }
-
-ProductCustomization.propTypes = {
-  selectedSize: PropTypes.string.isRequired,
-  quantity: PropTypes.number.isRequired,
-  selectedLocations: PropTypes.arrayOf(PropTypes.string).isRequired,
-  basePrice: PropTypes.number.isRequired,
-  onSizeChange: PropTypes.func.isRequired,
-  onQuantityChange: PropTypes.func.isRequired,
-  onLocationChange: PropTypes.func.isRequired
-};
 
 export default ProductCustomization;
