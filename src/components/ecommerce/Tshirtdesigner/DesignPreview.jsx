@@ -9,7 +9,8 @@ const DesignPreview = ({
   onDesignChange, 
   typedText, 
   onTextChange,
-  textColor
+  onTextColorChange,
+  textColor,
 }) => {
 
   const [view, setView] = useState('front');
@@ -20,7 +21,7 @@ const DesignPreview = ({
   // When textColor changes, we notify the parent component
   useEffect(() => {
     if (onTextChange && textColor) {
-      onTextChange(textColor);  // Pass only the color
+      onTextColorChange(textColor);  // Pass only the color
     }
   }, [textColor, onTextChange]);
 
@@ -32,6 +33,7 @@ const DesignPreview = ({
     }
   };
 
+  
   // Handle resize event for design image
   const handleResize = (e, direction, ref, delta, position) => {
     setDesignSize({
@@ -97,7 +99,7 @@ const DesignPreview = ({
             >
               <div
                 className="text-xl font-bold"
-                style={{ color: textColor }}  // Apply the selected text color here
+                style={{ color: textColor }}
               >
                 {typedText}
               </div>

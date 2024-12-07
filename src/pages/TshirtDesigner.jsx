@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Download } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { toPng } from 'html-to-image';
 import ColorPicker from '../components/ecommerce/Tshirtdesigner/ColorPicker';
 import DesignPreview from '../components/ecommerce/Tshirtdesigner/DesignPreview';
 import DesignTools from '../components/ecommerce/Tshirtdesigner/DesignTools';
@@ -10,32 +8,27 @@ import ProductCustomization from '../components/ecommerce/Tshirtdesigner/Product
 import { PRODUCTS } from '../components/ecommerce/constants/products';
 
 function TshirtDesigner() {
+
   const [selectedColor, setSelectedColor] = useState('white');
   const [activeTab, setActiveTab] = useState('upload');
   const [designImage, setDesignImage] = useState(null);
-  const [designState, setDesignState] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(PRODUCTS[0]);
-  const [typedText, setTypedText] = useState(''); // النص المكتوب
-  const [textColor, setTextColor] = useState('#000000'); // لون النص
+  const [typedText, setTypedText] = useState(''); 
+  const [textColor, setTextColor] = useState('#000000'); 
   const [selectedSize, setSelectedSize] = useState('M');
   const [quantity, setQuantity] = useState(1);
   const [selectedLocations, setSelectedLocations] = useState(['front']);
 
-  // تحديث النص الذي كتبه المستخدم
-  const handleTextChange = (text) => {
+      
+  const handleTextChange = (text, color) => {
     setTypedText(text);
+    setTextColor(color); // Update the color as well
   };
-
-  // تحديث لون النص
-  const handleTextColorChange = (color) => {
-    console.log('Selected Color: ', color);
-    setTextColor(color);
-  };
-
-  // تحميل التصميم (في حالة وجود صورة)
+  
   const handleDesignUpload = (imageData) => {
     setDesignImage(imageData);
   };
+ 
 
   return (
     <div className="min-h-screen bg-white">
@@ -65,8 +58,8 @@ function TshirtDesigner() {
                  selectedColor={selectedColor}
                   selectedProduct={selectedProduct}
                   designImage={designImage}
-                  typedText={typedText} //   النص هنا
-                  textColor={textColor} //   اللون هنا
+                  typedText={typedText} 
+                  textColor={textColor}     
                 />
               </div>
               <ColorPicker
@@ -88,7 +81,6 @@ function TshirtDesigner() {
                 setActiveTab={setActiveTab}
                 onDesignUpload={handleDesignUpload}
                 onTextChange={handleTextChange}
-                onTextColorChange={handleTextColorChange} // تم تمرير معالج التغيير
               />
             </div>
 
@@ -113,28 +105,9 @@ function TshirtDesigner() {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={async () => {
-                try {
-                  const previewElement = document.querySelector('.design-preview');
-                  if (previewElement) {
-                    const dataUrl = await toPng(previewElement, {
-                      quality: 1.0,
-                      backgroundColor: 'white',
-                    });
-
-                    const link = document.createElement('a');
-                    link.download = `${selectedProduct.name}-design.png`;
-                    link.href = dataUrl;
-                    link.click();
-                  }
-                } catch (error) {
-                  console.error('Error saving design:', error);
-                }
-              }}
-              className="w-full bg-primary text-white py-3 rounded-lg flex items-center justify-center gap-2"
+              className="w-full bg-blue-500 text-white py-3 rounded-lg flex items-center justify-center gap-2"
             >
-              <Download size={20} />
-              Save Design
+              Add To Cart
             </motion.button>
           </motion.div>
         </div>

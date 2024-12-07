@@ -30,26 +30,22 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
     multiple: false,
   });
 
-  // Handle text input changes
-   // Handle text changes (when user types in the text box)
-   const handleTextChange = (e) => {
+  const handleTextChange = (e) => {
     const newText = e.target.value;
-    setText(newText);  // Update local state with the new text
-    // Pass text and color to parent component if onTextChange is provided
+    setText(newText);
     if (onTextChange) {
-      onTextChange(newText, textColor);
+      onTextChange(newText, textColor); // Send both text and color
     }
   };
-
-  // Handle color changes (when user selects a new color)
+  
   const handleColorChange = (e) => {
     const newColor = e.target.value;
-    setTextColor(newColor);  // Update local state with the new color
-    // Pass text and new color to parent component
+    setTextColor(newColor);
     if (onTextChange) {
-      onTextChange(text, newColor);
+      onTextChange(text, newColor); // Send both text and new color
     }
-  }
+  };
+  
   // Render content based on the active tab
   const renderTabContent = () => {
     if (activeTab === "upload") {
