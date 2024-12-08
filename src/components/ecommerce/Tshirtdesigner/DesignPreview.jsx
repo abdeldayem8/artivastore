@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { RotateCcw, RotateCw } from 'lucide-react';
+import { RotateCcw, RotateCw, X } from 'lucide-react';
 import { Rnd } from 'react-rnd';
 
 const DesignPreview = ({ 
-  selectedColor, 
-  selectedProduct, 
-  designImage, 
-  onDesignChange, 
-  typedText, 
+  selectedColor,
+  selectedProduct,
+  frontDesignImage,
+  backDesignImage,
+  view,
+  setView,
+  typedText,
+  textColor,
+  onRemoveDesign,
+  onDesignChange,
   onTextChange,
   onTextColorChange,
-  textColor,
 }) => {
 
-  const [view, setView] = useState('front');
   const [designPosition, setDesignPosition] = useState({ x: 150, y: 150 });
   const [designSize, setDesignSize] = useState({ width: 120, height: 120 });
   const [textPosition, setTextPosition] = useState({ x: 50, y: 50 });
+
+  const getCurrentDesignImage = () => {
+    return view === 'front' ? frontDesignImage : backDesignImage;
+  };
 
   // When textColor changes, we notify the parent component
   useEffect(() => {
@@ -71,7 +78,7 @@ const DesignPreview = ({
           />
 
           {/* Display design image if provided */}
-          {designImage && (
+          {getCurrentDesignImage() && (
             <Rnd
               position={designPosition}
               size={designSize}
@@ -80,12 +87,21 @@ const DesignPreview = ({
               bounds="parent"
               className="absolute"
             >
+              <div className='relative'>
               <img
-                src={designImage}
+                src={getCurrentDesignImage()}
                 alt="Custom design"
                 className="w-full h-full object-contain"
                 style={{ pointerEvents: 'none' }}
               />
+              {/* Close icon to remove the design */}
+              <button
+                onClick={() => onRemoveDesign()} // Call parent to remove the design
+                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
+              >
+                <X size={16} />
+              </button>
+              </div>
             </Rnd>
           )}
 
@@ -107,7 +123,7 @@ const DesignPreview = ({
           )}
 
           {/* If no design or text, display placeholder */}
-          {!designImage && !typedText && (
+          {!getCurrentDesignImage() && !typedText && (
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-32 h-32 border-2 border-dashed border-gray-400 rounded-lg flex items-center justify-center">
                 <p className="text-sm text-gray-500">Design Area</p>

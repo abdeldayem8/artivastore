@@ -11,13 +11,15 @@ function TshirtDesigner() {
 
   const [selectedColor, setSelectedColor] = useState('white');
   const [activeTab, setActiveTab] = useState('upload');
-  const [designImage, setDesignImage] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(PRODUCTS[0]);
   const [typedText, setTypedText] = useState(''); 
   const [textColor, setTextColor] = useState('#000000'); 
   const [selectedSize, setSelectedSize] = useState('M');
   const [quantity, setQuantity] = useState(1);
   const [selectedLocations, setSelectedLocations] = useState(['front']);
+  const [frontDesignImage, setFrontDesignImage] = useState(null); // For front
+const [backDesignImage, setBackDesignImage] = useState(null); // For back
+const [view, setView] = useState('front'); // Track current view (front/back)
 
       
   const handleTextChange = (text, color) => {
@@ -26,7 +28,19 @@ function TshirtDesigner() {
   };
   
   const handleDesignUpload = (imageData) => {
-    setDesignImage(imageData);
+    if (view === 'front') {
+      setFrontDesignImage(imageData);
+    } else {
+      setBackDesignImage(imageData);
+    }
+  };
+
+  const handleRemoveDesign = () => {
+    if (view === 'front') {
+      setFrontDesignImage(null);
+    } else {
+      setBackDesignImage(null);
+    }
   };
  
 
@@ -57,9 +71,13 @@ function TshirtDesigner() {
                 <DesignPreview
                  selectedColor={selectedColor}
                   selectedProduct={selectedProduct}
-                  designImage={designImage}
+                  frontDesignImage={frontDesignImage}
+                  backDesignImage={backDesignImage}
+                  view={view} 
+                  setView={setView}
                   typedText={typedText} 
-                  textColor={textColor}     
+                  textColor={textColor} 
+                  onRemoveDesign={handleRemoveDesign}    
                 />
               </div>
               <ColorPicker
