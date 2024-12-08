@@ -1,10 +1,10 @@
 {
    "navbar": {
-    "newArrival": "New Arrivals",
-    "products": "Products",
+    "home": "Home",
+    "collection": "Collections",
     "makeTshirt": "Make Your T-shirt"
   },
-   "products":"Products",
+   "products":"All Collections",
    "login": "Login",
    "register": "Register" ,
    "wear": "Wear",

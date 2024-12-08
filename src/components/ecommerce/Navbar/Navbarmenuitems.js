@@ -2,13 +2,13 @@
 export const Navbarmenu = [
     {
         id:1,
-        titleKey: "navbar.newArrival",
-        link:'/artivastore/newarrivals'
+        titleKey: "navbar.home",
+        link:'/artivastore/'
     },
     {
         id:2,
-        titleKey: "navbar.products",
-        link:'/artivastore/'
+        titleKey: "navbar.collection",
+        link:'/artivastore/collection'
     },
     {
         id:3,

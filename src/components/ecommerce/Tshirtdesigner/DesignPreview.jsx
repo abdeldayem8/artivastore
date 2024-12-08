@@ -97,7 +97,7 @@ const DesignPreview = ({
               {/* Close icon to remove the design */}
               <button
                 onClick={() => onRemoveDesign()} // Call parent to remove the design
-                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
+                className="absolute -top-5 -right-5 bg-red-500 text-white rounded-full p-1"
               >
                 <X size={16} />
               </button>

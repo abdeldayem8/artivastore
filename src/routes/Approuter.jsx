@@ -2,9 +2,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from '../App.jsx'
 import { lazy,Suspense } from 'react'
 import Loading from '../components/common/Loading/Loading.jsx'
-const Products = lazy(()=>import ('../pages/Products.jsx'))
+const Collection = lazy(()=>import ('../pages/Collection.jsx'))
 const Makeyourtshirt = lazy(()=>import ('../pages/TshirtDesigner.jsx'))
-const Newarrival = lazy(()=>import ('../pages/Newarrival.jsx'))
+const Home = lazy(()=>import ('../pages/Home.jsx'))
 
 
 
@@ -15,13 +15,13 @@ const router = createBrowserRouter([
     {
       path:"/artivastore/",
       element: <Suspense fallback={<Loading/>}>
-        <Products/>
+        <Home/>
       </Suspense>
     },
     {
-      path:"/artivastore/newarrivals",
+      path:"/artivastore/collection",
       element: <Suspense fallback={<Loading/>}>
-        <Newarrival/>
+        <Collection/>
       </Suspense>
     },
     {

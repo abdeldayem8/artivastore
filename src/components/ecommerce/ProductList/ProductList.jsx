@@ -4,11 +4,8 @@ import { useTranslation } from 'react-i18next';
 import Loading from '../../common/Loading/Loading';
 import { CiHeart } from 'react-icons/ci';
 
-
-
 const ProductList = () => {
     const {data,loading,error} = useFetch("https://fakestoreapi.com/products");
-
     const {t} =useTranslation();
 
     if (loading) return <p><Loading/></p>;

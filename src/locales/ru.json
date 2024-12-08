@@ -1,7 +1,7 @@
 {
     "navbar": {
-    "newArrival": "Новинка",
-    "products": "Продукты",
+    "home": "Новинка",
+    "collection": "Продукты",
     "makeTshirt": "Создайте свою футболку"
   },
     "products":"продукты",

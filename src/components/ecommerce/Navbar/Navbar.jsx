@@ -37,7 +37,7 @@ const handleLanguageChange = (event) => {
 
   return <>
      <nav>
-      <div className='flex items-center justify-between border-b-2 border-slate-200 mb-4'>
+      <div className='flex items-center justify-between  border-slate-200 mb-4'>
         {/* logo section */}
         <div className='text-2xl flex items-center gap-2 font-bold py-6 uppercase'>
           <FaArtstation/>
