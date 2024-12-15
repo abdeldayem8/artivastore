@@ -1,12 +1,20 @@
-import React from 'react';
-import useFetch from '../../../hooks/useFetch';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Loading from '../../common/Loading/Loading';
 import { CiHeart } from 'react-icons/ci';
+import API_ENDPOINTS from '../../../utils/API_ENDPOINTS';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchproducts } from '../../../store/thunks/productsThunks';
 
 const ProductList = () => {
-    const {data,loading,error} = useFetch("https://fakestoreapi.com/products");
+    
+   const dispatch = useDispatch()
+   const {products,loading,error} = useSelector((state)=>state.products)
     const {t} =useTranslation();
+
+    useEffect(()=>{
+      dispatch(fetchproducts())
+    },[dispatch])
 
     if (loading) return <p><Loading/></p>;
     if (error) return <p>Error: {error.message}</p>;
@@ -14,8 +22,8 @@ const ProductList = () => {
      <div className="max-w-7xl mx-auto my-4 px-4 py-8">
             <h2 className="text-2xl text-center font-semibold text-primary mb-6">{t('products')}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5">
-                {data && data.length > 0 ? (
-                    data.map((product) => (
+                {products && products.length > 0 ? (
+                    products.map((product) => (
                         <div key={product.id} className="bg-white rounded-lg shadow-xl overflow-hidden my-8">
                             <img
                                 src={product.image}

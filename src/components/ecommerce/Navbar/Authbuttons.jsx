@@ -2,6 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next';
 
 const Authbuttons = ({ additionalClasses = '', variant = 'button' }) => {
+  
     const {t} = useTranslation();
     const isLinkStyle = variant === 'link';
   
