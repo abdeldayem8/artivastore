@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 const Authbuttons = ({ additionalClasses = '', variant = 'button' }) => {
   
@@ -17,7 +18,9 @@ const Authbuttons = ({ additionalClasses = '', variant = 'button' }) => {
             : 'hover:bg-primary text-primary font-semibold hover:text-white rounded-md border-2 border-primary px-6 py-2 duration-200'
         }`}
       >
+        <Link to={'/artivastore/login'}>
         {t('login')}
+        </Link>
       </button>
       <button
         aria-label={t('register')}
@@ -27,7 +30,9 @@ const Authbuttons = ({ additionalClasses = '', variant = 'button' }) => {
             : 'hover:bg-white text-white bg-primary font-semibold hover:text-primary rounded-md border-2 border-primary px-6 py-2 duration-200'
         }`}
       >
-        {t('register')}
+        <Link to={'/artivastore/register'}>
+        {t('register')}        
+        </Link>
       </button>
   </div>
   )

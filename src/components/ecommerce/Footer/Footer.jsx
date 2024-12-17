@@ -3,21 +3,23 @@ import { FaFacebook } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaTiktok } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
     <footer className='bg-primary text-white p-8 text-center '>
       <div className='flex items-center justify-around flex-col sm:flex-row'>
+        {/* our store */}
         <div className='mb-4'>
             <div>
                 <p className='text-lg font-bold mb-4'>Artiva Store</p>
             </div>
             <div>
             <h2 class="text-xl font-semibold mb-2">Our Store</h2>
-            <div className='mb-4 space-y-1'>
-            <p class="cursor-pointer">Home</p>
-            <p class="cursor-pointer">Collections</p>
-            <p class="cursor-pointer">Make Your T-shirt</p>
+            <div className='mb-4 space-y-1 flex flex-col'>
+             <Link to={'/artivastore/'}>Home</Link>
+             <Link to={'/artivastore/collection'}>Collections</Link>
+             <Link to={'/artivastore/maketshirt'}>Make Your T-shirt</Link>
             </div>
             </div>
             <div>
@@ -26,6 +28,7 @@ const Footer = () => {
             <p>artiva@gmail.com</p>
             </div>
         </div>
+        {/* terms and conditions */}
         <div className='mb-4'>
             <div>
                 <h2 className='text-xl font-semibold mb-2'>Terms&amp;Conditions</h2>
@@ -46,6 +49,7 @@ const Footer = () => {
                 </div>
             </div>
         </div>
+        {/* subscribe */}
         <div className='mb-4'>
         <div className="p-8 rounded-lg  max-w-sm w-full">
         <h2 className="text-2xl font-bold  mb-4 text-center">Be Our Friend</h2>

@@ -2,6 +2,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from '../App.jsx'
 import { lazy,Suspense } from 'react'
 import Loading from '../components/common/Loading/Loading.jsx'
+import Login from '../pages/Login.jsx'
+import Register from '../pages/Register.jsx'
 const Collection = lazy(()=>import ('../pages/Collection.jsx'))
 const Makeyourtshirt = lazy(()=>import ('../pages/TshirtDesigner.jsx'))
 const Home = lazy(()=>import ('../pages/Home.jsx'))
@@ -28,6 +30,18 @@ const router = createBrowserRouter([
       path:"/artivastore/maketshirt",
       element:<Suspense fallback={<Loading/>}>
         <Makeyourtshirt/>
+      </Suspense>
+    },
+    {
+      path:"/artivastore/login",
+      element:<Suspense fallback={<Loading/>}>
+        <Login/>
+      </Suspense>
+    },
+    {
+      path:"/artivastore/register",
+      element:<Suspense fallback={<Loading/>}>
+        <Register/>
       </Suspense>
     },
     ]
