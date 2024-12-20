@@ -51,7 +51,7 @@ const Responsivemenu = memo(({openmenu,setOpenmenu,menuButtonRef,closeMenu}) => 
                {/* Login and Register as links in the mobile menu */}
             <div className="mt-5 flex flex-col items-center">
               <Suspense fallback={<Loading/>}>
-              <Authbuttons additionalClasses="flex-col items-center gap-6" variant="link" />
+              <Authbuttons  additionalClasses="flex-col items-center gap-6" variant="link" closemenu={closeMenu} />
               </Suspense>
             </div>
             <div className='flex justify-center my-2'>

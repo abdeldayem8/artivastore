@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className='bg-primary text-white p-8 text-center '>
+    <footer className='bg-primary  p-8 text-center '>
       <div className='flex items-center justify-around flex-col sm:flex-row'>
         {/* our store */}
         <div className='mb-4'>

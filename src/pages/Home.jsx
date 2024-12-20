@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Cover  from '../assets/homeimages/cover.png';
+import Cover  from '../assets/homeimages/cover.jpg';
 import exchange  from '../assets/homeimages/exchangepolicy.png';
 import returnpolicy  from '../assets/homeimages/returnpolicy.png';
 import customer  from '../assets/homeimages/customer.png';
@@ -25,31 +25,17 @@ const Home = () => {
     const homeProducts = Array.isArray(products) ? products.slice(0, 8) : [];
     console.log(homeProducts)
   return <>
-  <div className="flex flex-col sm:flex-row border border-gray-400">
-        <div className="pt-5 text-center w-full flex items-center justify-center flex-col">
-          <h1 className="uppercase text-7xl mx-auto text-primary">{t('wear')}</h1>
-          <h1
-            className="uppercase leading-none"
-            style={{
-              WebkitTextFillColor: 'white',
-              WebkitTextStroke: '1px rgb(72, 72, 72)',
-              fontSize: '120px',
-            }}
-          >
-            {t('the')}
-          </h1>
-          <p className="uppercase py-3 text-xl font-medium tracking-widest">{t('difference')}</p>
-        </div>
-        <div className="bg-primary px-3 w-full">
+  <div className="flex flex-col sm:flex-row border-t-2 border-gray-400">
+        <div className="w-full">
           <img src={Cover} alt="Top Cover image for home page" className="mx-auto" />
         </div>
       </div>
 
       <div className="text-center my-8">
-        <h2 className="text-2xl font-semibold text-primary">Our Featured Collection</h2>
+        <h2 className="text-2xl font-semibold">Our Featured Collection</h2>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5 border-b-2 border-gray-400">
         {homeProducts && homeProducts.length > 0 ? (
           homeProducts.map((product) => (
             <div key={product.id} className="bg-white rounded-lg shadow-xl overflow-hidden my-8">
@@ -83,7 +69,7 @@ const Home = () => {
         )}
       </div>
 
-      <div className="flex flex-col sm:flex-row items-center justify-around gap-12 sm:gap-2 py-20 text-xs sm:text-sm md:text-base text-gray-700 text-center">
+      <div className="flex flex-col sm:flex-row items-center justify-around gap-12 sm:gap-2 py-20 text-xs sm:text-sm md:text-base  border-b-2 border-gray-400 text-center">
         <div>
           <img src={exchange} className="w-12 m-auto mb-5" alt="Easy Exchange Policy" />
           <p className="font-semibold">{t('easyExchange')}</p>

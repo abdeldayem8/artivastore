@@ -37,39 +37,36 @@ const handleLanguageChange = (event) => {
 
   return <>
      <nav>
-      <div className='flex items-center justify-between  border-slate-200 mb-4'>
-        {/* logo section */}
-        <div className='text-2xl flex items-center gap-2 font-bold py-6 uppercase'>
-          <FaArtstation/>
-          <p>Artiva</p>
-          <p className='text-primary'>Store</p>
-        </div>
+      <div className='flex items-center justify-between  mb-4'>
         {/* menu section */}
-        <div className='hidden lg:block'  > 
+        <div className='hidden lg:block'>
            <NavMenuItems
-        ulClassName="flex items-center gap-4 text-gray-600"
+        ulClassName="flex items-center gap-4 text-secondary"
         liClassName=""
-        linkClassName="hover:text-primary font-semibold"
+        linkClassName="font-semibold"
         closeMenu={closeMenu}
       />
         </div>
         {/* icons section */}
+
+        <div className="hidden lg:flex text-primary">
+            <Suspense fallback={<Loading/>}>
+              <Authbuttons closeMenu={closeMenu} />
+              </Suspense>
+            </div>
+
         <div className='flex items-center gap-4'>
           <div className='hidden lg:flex'>
           <Headerbasket/>
           <Headerwishlist/>
           </div>
          
-          <div className="hidden lg:flex">
-            <Suspense fallback={<Loading/>}>
-              <Authbuttons />
-              </Suspense>
-            </div>
+          
             {/* language */}
             <select
   value={selectedLanguage || 'en'} // Fallback to 'en' if no language is set
   onChange={handleLanguageChange}
-  className="bg-gray-100 border-2 border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-200"
+  className="bg-gray-100 border-2 border-gray-300 bg-transparent rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:bg-gray-200"
 >
   <option value="en" className="text-gray-700">EN</option>
   <option value="ru" className="text-gray-700">RU</option>
