@@ -20,9 +20,10 @@ const Home = () => {
 
     if (loading) return <p><Loading/></p>;
     if (error) return <p>Error: {error.message}</p>;
+  
 
-    const homeProducts = products.slice(0,8);
-    console.log(homeProducts);
+    const homeProducts = Array.isArray(products) ? products.slice(0, 8) : [];
+    console.log(homeProducts)
   return <>
   <div className="flex flex-col sm:flex-row border border-gray-400">
         <div className="pt-5 text-center w-full flex items-center justify-center flex-col">
@@ -52,13 +53,17 @@ const Home = () => {
         {homeProducts && homeProducts.length > 0 ? (
           homeProducts.map((product) => (
             <div key={product.id} className="bg-white rounded-lg shadow-xl overflow-hidden my-8">
-              <img
-                src={product.image}
-                alt={product.title || 'Product Image'}
-                className="h-48 w-full object-contain p-4"
-              />
+             {product.images.length > 0 ? (
+                  <img
+                    src={product.images[0]} 
+                    alt={`${product.name} main image`}
+                    className='h-48 w-full object-contain'
+                  />
+                ) : (
+                  <p>No image available</p>
+                )}
               <div className="p-4 text-center">
-                <h3 className="text-lg font-semibold text-gray-800">{product.title?.split(' ').slice(0, 2).join(' ')}</h3>
+                <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
                 <p className="text-blue-600 font-bold text-lg mt-4">{product.price} EGP</p>
               </div>
               <div className="flex justify-center space-x-4 my-4">

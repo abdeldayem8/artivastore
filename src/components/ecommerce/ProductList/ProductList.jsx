@@ -25,13 +25,17 @@ const ProductList = () => {
                 {products && products.length > 0 ? (
                     products.map((product) => (
                         <div key={product.id} className="bg-white rounded-lg shadow-xl overflow-hidden my-8">
-                            <img
-                                src={product.image}
-                                alt={product.title || 'Product Image'}
-                                className="h-48 w-full object-contain p-4"
-                            />
+                            {product.images.length > 0 ? (
+                  <img
+                    src={product.images[0]} 
+                    alt={`${product.name} main image`}
+                    className='h-48 w-full object-contain'
+                  />
+                ) : (
+                  <p>No image available</p>
+                )}
                             <div className="p-4 text-center">
-                                <h3 className="text-lg font-semibold text-gray-800">{product.title?.split(' ').slice(0,2).join(' ')}</h3>
+                                <h3 className="text-lg font-semibold text-gray-800">{product.name?.split(' ').slice(0,2).join(' ')}</h3>
                                 <p className="text-blue-600 font-bold text-lg mt-4">{product.price} EGP</p>
                             </div>
                             <div className="flex justify-center space-x-4 my-4">
