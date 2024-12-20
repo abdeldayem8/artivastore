@@ -6,7 +6,6 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 // Static imports for preloaded translations
 import enTranslation from './locales/en.json';
 import ruTranslation from './locales/ru.json';
-import { SiTruenas } from 'react-icons/si';
 
 i18n
   // Load translations dynamically or use static resources

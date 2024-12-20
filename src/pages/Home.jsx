@@ -35,7 +35,7 @@ const Home = () => {
         <h2 className="text-2xl font-semibold">Our Featured Collection</h2>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5 border-b-2 border-gray-400">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5">
         {homeProducts && homeProducts.length > 0 ? (
           homeProducts.map((product) => (
             <div key={product.id} className="bg-white rounded-lg shadow-xl overflow-hidden my-8">
@@ -69,7 +69,7 @@ const Home = () => {
         )}
       </div>
 
-      <div className="flex flex-col sm:flex-row items-center justify-around gap-12 sm:gap-2 py-20 text-xs sm:text-sm md:text-base  border-b-2 border-gray-400 text-center">
+      <div className="flex flex-col sm:flex-row items-center justify-around gap-12 sm:gap-2 py-20 text-xs sm:text-sm md:text-base  text-center">
         <div>
           <img src={exchange} className="w-12 m-auto mb-5" alt="Easy Exchange Policy" />
           <p className="font-semibold">{t('easyExchange')}</p>

@@ -2,5 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-
+.mobile-screen-nav{
+    width: auto;
+}
+@media (max-width:1023px) {
+    .mobile-screen-nav{
+        width: 100%;
+    }
+    
+}
   

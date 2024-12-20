@@ -9,7 +9,7 @@ function App() {
    <>
    <Provider store={store}>
    <div className="flex flex-col min-h-screen bg-primary">
-    <div className="p-6 mx-auto mb-4">
+    <div className="p-6 lg:mx-auto mb-4">
     <Navbar />
     </div>
     <div className="container mx-auto px-6 flex-grow">
