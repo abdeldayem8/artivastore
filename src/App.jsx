@@ -8,11 +8,13 @@ function App() {
   return (
    <>
    <Provider store={store}>
-   <div className="container mx-auto px-6 ">
-   <Navbar/>
-   <Outlet/>
-   </div>
-   <Footer/>
+   <div className="flex flex-col min-h-screen">
+    <div className="container mx-auto px-6 flex-grow">
+      <Navbar />
+      <Outlet />
+    </div>
+    <Footer />
+  </div>
    </Provider>
    </>
   )
