@@ -57,9 +57,9 @@ const languages = [
         closeMenu={closeMenu}
       />
         </div>
-        {/* icons section */}
+        {/* auth and icons section */}
 
-        <div className="hidden lg:flex text-primary">
+        <div className="hidden px-4 lg:flex">
             <Suspense fallback={<Loading/>}>
               <Authbuttons closeMenu={closeMenu} />
               </Suspense>

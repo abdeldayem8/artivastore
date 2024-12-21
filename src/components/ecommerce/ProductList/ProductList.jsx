@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Loading from '../../common/Loading/Loading';
 import { CiHeart } from 'react-icons/ci';
-import API_ENDPOINTS from '../../../utils/API_ENDPOINTS';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchproducts } from '../../../store/thunks/productsThunks';
 
@@ -41,7 +40,7 @@ const ProductList = () => {
                             <div className="flex justify-center space-x-4 my-4">
                 {/* Add to Cart Button */}
                 <button
-                    className="uppercase bg-btn text-white font-semibold rounded-md border-2 border-primary px-6 py-2"
+                    className="uppercase bg-secondary text-white font-semibold rounded-md border-2 border-primary px-6 py-2"
                 >
                     Add To Cart
                 </button>

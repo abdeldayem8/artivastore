@@ -6,7 +6,6 @@ import customer  from '../assets/homeimages/customer.png';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchproducts } from '../store/thunks/productsThunks';
-import { CiHeart } from 'react-icons/ci';
 import Loading from '../components/common/Loading/Loading';
 import Moresold from '../components/ecommerce/moresold/Moresold';
 
@@ -23,7 +22,7 @@ const Home = () => {
     if (error) return <p>Error: {error.message}</p>;
   
 
-    const homeProducts = Array.isArray(products) ? products.slice(0, 8) : [];
+    const homeProducts = Array.isArray(products) ? products.slice(0, 4) : [];
   
   return <>
   <div className="flex flex-col sm:flex-row border-t-2 border-gray-400">
