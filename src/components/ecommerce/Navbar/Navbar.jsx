@@ -1,5 +1,4 @@
 import React, {  lazy, Suspense, useCallback, useRef, useState } from 'react'
-import { FaArtstation } from "react-icons/fa";
 import { MdClose, MdMenu } from 'react-icons/md';
 import Responsivemenu from './Responsivemenu';
 const Authbuttons = lazy(() => import('./Authbuttons'));
@@ -34,12 +33,7 @@ const closeMenu = useCallback(() => {
   setOpenmenu(false);
 }, []);
 
-// Handle language change when an option is clicked
-// const handleLanguageChange = (event) => {
-//   const selectedLanguage = event.target.value;
-//   i18n.changeLanguage(selectedLanguage); // Update the language in i18n
-//   localStorage.setItem('i18nextLng', selectedLanguage); // Persist language choice
-// };
+
 const handleLanguageChange = (language) => {
   i18n.changeLanguage(language); // Update the language in i18n
   localStorage.setItem('i18nextLng', language); // Persist language choice
@@ -82,7 +76,7 @@ const languages = [
             <div className='mobile-screen-nav flex justify-between items-center'>
             <div className="relative inline-block">
               <button
-                className="flex items-center space-x-2 bg-gray-100 border-2 border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex items-center space-x-2 bg-transparent border-2 border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 onClick={toggleDropdown} // Toggle dropdown on click
               >
                 <img
@@ -93,7 +87,7 @@ const languages = [
                 <span>{selectedLanguage.toUpperCase()}</span>
               </button>
               {dropdownOpen && ( // Conditionally render the dropdown
-                <div className="absolute mt-2 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+                <div className="absolute mt-2 bg-transparent border border-gray-300 rounded-lg shadow-lg z-10">
                   {languages.map((lang) => (
                     <div
                       key={lang.code}

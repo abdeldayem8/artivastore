@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL  || "https://artivecolthes.com";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const API_ENDPOINTS = {
     PRODUCTS: `${BASE_URL}/api/product/`,
