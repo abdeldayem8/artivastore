@@ -3,9 +3,10 @@ import useFetchmoresold from '../../../hooks/useFetchmoresold'
 import API_ENDPOINTS from '../../../utils/API_ENDPOINTS'
 import Loading from '../../common/Loading/Loading';
 import { Link } from 'react-router-dom';
+import Titlesection from '../../common/Titlesection/Titlesection';
 
 
-const Moresold = () => {
+const Moresold = ({title}) => {
     const {data,loading,error} = useFetchmoresold(API_ENDPOINTS.More_Sold_Product);
     if (loading) return <p><Loading/></p>;
     if (error) return <p>Error: {error.message}</p>;
@@ -15,7 +16,7 @@ const Moresold = () => {
    
   return (
     <div>
-               <h2 className="text-2xl text-center font-semibold  mb-6">Best Sellers</h2>
+                <Titlesection title={title} />
                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5">
                    {bestsellersdata && bestsellersdata.length > 0 ? (
                        bestsellersdata.map((product) => (

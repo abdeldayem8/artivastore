@@ -59,7 +59,7 @@ const Home = () => {
           <p className="text-center text-gray-500">No products available</p>
         )}
       </div>
-      <Moresold/>
+      <Moresold title="Best Sellers"/>
       <div className="flex flex-col sm:flex-row items-center justify-around gap-12 sm:gap-2 py-20 text-xs sm:text-sm md:text-base  text-center">
         <div>
           <img src={exchange} className="w-12 m-auto mb-5" alt="Easy Exchange Policy" />
