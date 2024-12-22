@@ -4,6 +4,7 @@ import { lazy,Suspense } from 'react'
 import Loading from '../components/common/Loading/Loading.jsx'
 import Login from '../pages/Login.jsx'
 import Register from '../pages/Register.jsx'
+import Productdetails from '../pages/Productdetails.jsx'
 const Collection = lazy(()=>import ('../pages/Collection.jsx'))
 const Makeyourtshirt = lazy(()=>import ('../pages/TshirtDesigner.jsx'))
 const Home = lazy(()=>import ('../pages/Home.jsx'))
@@ -24,6 +25,12 @@ const router = createBrowserRouter([
       path:"/artivastore/collection",
       element: <Suspense fallback={<Loading/>}>
         <Collection/>
+      </Suspense>
+    },
+    {
+      path:"/artivastore/collection/:id",
+      element: <Suspense fallback={<Loading/>}>
+        <Productdetails/>
       </Suspense>
     },
     {

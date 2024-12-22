@@ -4,6 +4,7 @@ import Loading from '../../common/Loading/Loading';
 import { CiHeart } from 'react-icons/ci';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchproducts } from '../../../store/thunks/productsThunks';
+import { Link } from 'react-router-dom';
 
 const ProductList = () => {
     
@@ -20,10 +21,10 @@ const ProductList = () => {
   return (
      <div className="max-w-7xl mx-auto my-4 px-4 py-8">
             <h2 className="text-2xl text-center font-semibold mb-6">{t('products')}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5">
                 {products && products.length > 0 ? (
                     products.map((product) => (
-                        <div key={product.id} className=" rounded-lg overflow-hidden my-8">
+                        <Link key={product.id} to={`/artivastore/collection/${product.id}`} className=" rounded-lg  overflow-hidden my-8">
                             {product.images.length > 0 ? (
                   <img
                     src={product.images[0]} 
@@ -40,7 +41,7 @@ const ProductList = () => {
                             <div className="flex justify-center space-x-4 my-4">
                 {/* Add to Cart Button */}
                 <button
-                    className="uppercase bg-secondary text-white font-semibold rounded-md border-2 border-primary px-6 py-2"
+                    className="uppercase bg-secondary cursor-pointer text-white font-semibold rounded-md border-2 border-primary px-6 py-2"
                 >
                     Add To Cart
                 </button>
@@ -49,10 +50,10 @@ const ProductList = () => {
                 <button
                     className={'text-gray-500'}
                 >
-                    <CiHeart className="text-2xl" />
+                    <CiHeart className="text-2xl cursor-pointer" />
                 </button>
             </div>
-                        </div>
+                        </Link>
                     ))
                 ) : (
                     <p className="text-center text-gray-500">No products available</p>

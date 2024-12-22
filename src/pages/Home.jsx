@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchproducts } from '../store/thunks/productsThunks';
 import Loading from '../components/common/Loading/Loading';
 import Moresold from '../components/ecommerce/moresold/Moresold';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
 
@@ -35,10 +36,10 @@ const Home = () => {
         <h2 className="text-2xl font-semibold">Our Featured Collection</h2>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5">
         {homeProducts && homeProducts.length > 0 ? (
           homeProducts.map((product) => (
-            <div key={product.id} className="rounded-lg  overflow-hidden my-8">
+            <Link key={product.id} to={`/artivastore/collection/${product.id}`} className="rounded-lg  overflow-hidden my-8">
              {product.images.length > 0 ? (
                   <img
                     src={product.images[0]} 
@@ -52,7 +53,7 @@ const Home = () => {
                                    <h3 className="text-sm pt-3 pb-1">{product.name}</h3>
                                    <p className="text-sm font-medium">{product.price} EGP</p>
                                </div>
-            </div>
+            </Link>
           ))
         ) : (
           <p className="text-center text-gray-500">No products available</p>

@@ -4,6 +4,6 @@ const API_ENDPOINTS = {
     PRODUCTS: `${BASE_URL}/api/product/`,
     New_Product:`${BASE_URL}/api/product/new_product`,
     More_Sold_Product:`${BASE_URL}/api/product/more_sold_products`,
-    View_Product:`${BASE_URL}/api/product/high_views_product`,
+    View_Product:(id)=>`${BASE_URL}/api/product/${id}`,
    };
 export default API_ENDPOINTS;
