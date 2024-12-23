@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Loading from '../../common/Loading/Loading';
-import { CiHeart } from 'react-icons/ci';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchproducts } from '../../../store/thunks/productsThunks';
-import { Link } from 'react-router-dom';
+import Productitem from '../Productitem/Productitem'
 
 const ProductList = () => {
     
@@ -24,36 +23,21 @@ const ProductList = () => {
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5">
                 {products && products.length > 0 ? (
                     products.map((product) => (
-                        <Link key={product.id} to={`/artivastore/collection/${product.id}`} className=" rounded-lg  overflow-hidden my-8">
-                            {product.images.length > 0 ? (
-                  <img
-                    src={product.images[0]} 
-                    alt={`${product.name} main image`}
-                    className='h-48 w-full'
-                  />
-                ) : (
-                  <p>No image available</p>
-                )}
-                            <div className="pt-1">
-                                   <h3 className="text-sm pt-3 pb-1">{product.name}</h3>
-                                   <p className="text-sm font-medium">{product.price} EGP</p>
-                               </div>
-                            <div className="flex justify-center space-x-4 my-4">
-                {/* Add to Cart Button */}
-                <button
-                    className="uppercase bg-secondary cursor-pointer text-white font-semibold rounded-md border-2 border-primary px-6 py-2"
-                >
-                    Add To Cart
-                </button>
-
-                {/* Add to Favourites Button */}
-                <button
-                    className={'text-gray-500'}
-                >
-                    <CiHeart className="text-2xl cursor-pointer" />
-                </button>
-            </div>
-                        </Link>
+                        <div key={product.id}>
+                        <Productitem 
+                          id={product.id} 
+                          image={product.images} 
+                          name={product.name} 
+                          price={product.price} 
+                        />
+                        <div className="flex justify-center my-4">
+                          <button
+                            className="uppercase bg-secondary cursor-pointer text-white font-semibold rounded-md border-2 border-primary px-6 py-2"
+                          >
+                            Add To Cart
+                          </button>
+                        </div>
+                      </div>
                     ))
                 ) : (
                     <p className="text-center text-gray-500">No products available</p>

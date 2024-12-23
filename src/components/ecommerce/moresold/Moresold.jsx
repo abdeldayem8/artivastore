@@ -4,6 +4,7 @@ import API_ENDPOINTS from '../../../utils/API_ENDPOINTS'
 import Loading from '../../common/Loading/Loading';
 import { Link } from 'react-router-dom';
 import Titlesection from '../../common/Titlesection/Titlesection';
+import Productitem from '../Productitem/Productitem';
 
 
 const Moresold = ({title}) => {
@@ -20,21 +21,7 @@ const Moresold = ({title}) => {
                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5">
                    {bestsellersdata && bestsellersdata.length > 0 ? (
                        bestsellersdata.map((product) => (
-                           <Link key={product.id} to={`/artivastore/collection/${product.id}`} className="rounded-lg overflow-hidden my-8">
-                               {product.images.length > 0 ? (
-                     <img
-                       src={product.images[0]} 
-                       alt={`${product.name} main image`}
-                       className='h-48 w-full'
-                     />
-                   ) : (
-                     <p>No image available</p>
-                   )}
-                               <div className="pt-1">
-                                   <h3 className="text-sm pt-3 pb-1">{product.name}</h3>
-                                   <p className="text-sm font-medium">{product.price} EGP</p>
-                               </div>
-                           </Link>
+                           <Productitem key={product.id} id={product.id} image={product.images} name={product.name} price={product.price} />
                        ))
                    ) : (
                        <p className="text-center text-gray-500">No products available</p>

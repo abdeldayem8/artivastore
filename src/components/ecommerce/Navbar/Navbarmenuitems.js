@@ -15,5 +15,15 @@ export const Navbarmenu = [
         titleKey: "navbar.makeTshirt",
         link:'/artivastore/maketshirt'
     },
+    {
+        id:4,
+        titleKey: "navbar.login",
+        link:'/artivastore/login'
+    },
+    {
+        id:5,
+        titleKey: "navbar.register",
+        link:'/artivastore/register'
+    }
 
 ]

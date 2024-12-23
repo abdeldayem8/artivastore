@@ -2,11 +2,11 @@
    "navbar": {
     "home": "Home",
     "collection": "Collections",
-    "makeTshirt": "Make Your T-shirt"
+    "makeTshirt": "Make Your T-shirt",
+    "login": "Login",
+    "register": "Register"
   },
    "products":"All Collections",
-   "login": "Login",
-   "register": "Register" ,
    "wear": "Wear",
    "the": "The",
    "difference": "Difference"

@@ -1,12 +1,9 @@
-import React, {  lazy, Suspense, useCallback, useRef, useState } from 'react'
+import React, {  useCallback, useRef, useState } from 'react'
 import { MdClose, MdMenu } from 'react-icons/md';
 import Responsivemenu from './Responsivemenu';
-const Authbuttons = lazy(() => import('./Authbuttons'));
 import Headerbasket from '../../common/HeaderBasket/Headerbasket';
-import Headerwishlist from '../../common/HeaderWishlist/Headerwishlist';
 import i18n from '../../../i18n';
 import { useTranslation } from 'react-i18next';
-import Loading from '../../common/Loading/Loading';
 import NavMenuItems from './NavMenuItems';
 
 const Navbar = () => {
@@ -57,18 +54,10 @@ const languages = [
         closeMenu={closeMenu}
       />
         </div>
-        {/* auth and icons section */}
-
-        <div className="hidden px-4 lg:flex">
-            <Suspense fallback={<Loading/>}>
-              <Authbuttons closeMenu={closeMenu} />
-              </Suspense>
-            </div>
-
+       
         <div className='flex items-center gap-4'>
           <div className='hidden lg:flex'>
           <Headerbasket/>
-          <Headerwishlist/>
           </div>
          
           </div>

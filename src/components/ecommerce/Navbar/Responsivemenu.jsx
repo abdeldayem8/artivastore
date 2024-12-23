@@ -1,10 +1,7 @@
 import { AnimatePresence,motion } from 'framer-motion'
-import React, { lazy, memo, Suspense,useEffect, useRef } from 'react'
-const Authbuttons = lazy(() => import('./Authbuttons'));
+import React, {  memo,useEffect, useRef } from 'react'
 import Headerbasket from '../../common/HeaderBasket/Headerbasket'
-import Headerwishlist from '../../common/HeaderWishlist/Headerwishlist'
 import { useTranslation } from 'react-i18next'
-import Loading from '../../common/Loading/Loading';
 import NavMenuItems from './NavMenuItems';
 
 const Responsivemenu = memo(({openmenu,setOpenmenu,menuButtonRef,closeMenu}) => {
@@ -48,15 +45,8 @@ const Responsivemenu = memo(({openmenu,setOpenmenu,menuButtonRef,closeMenu}) => 
               closeMenu={closeMenu}
             />
               </ul>
-               {/* Login and Register as links in the mobile menu */}
-            <div className="mt-5 flex flex-col items-center">
-              <Suspense fallback={<Loading/>}>
-              <Authbuttons  additionalClasses="flex-col items-center gap-6" variant="link" closemenu={closeMenu} />
-              </Suspense>
-            </div>
             <div className='flex justify-center my-2'>
               <Headerbasket/>
-              <Headerwishlist/>
             </div>
             </div>
             

@@ -9,21 +9,12 @@ import { fetchproducts } from '../store/thunks/productsThunks';
 import Loading from '../components/common/Loading/Loading';
 import Moresold from '../components/ecommerce/moresold/Moresold';
 import { Link } from 'react-router-dom';
+import Featuredcollection from '../components/ecommerce/somecollection/Featuredcollection';
 
 const Home = () => {
 
-  const dispatch = useDispatch()
-   const {products,loading,error} = useSelector((state)=>state.products)
-    const {t} =useTranslation();
-    useEffect(()=>{
-      dispatch(fetchproducts())
-    },[dispatch])
-
-    if (loading) return <p><Loading/></p>;
-    if (error) return <p>Error: {error.message}</p>;
-  
-
-    const homeProducts = Array.isArray(products) ? products.slice(0, 4) : [];
+         const {t} =useTranslation();
+ 
   
   return <>
   <div className="flex flex-col sm:flex-row border-t-2 border-gray-400">
@@ -36,30 +27,10 @@ const Home = () => {
         <h2 className="text-2xl font-semibold">Our Featured Collection</h2>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5">
-        {homeProducts && homeProducts.length > 0 ? (
-          homeProducts.map((product) => (
-            <Link key={product.id} to={`/artivastore/collection/${product.id}`} className="rounded-lg  overflow-hidden my-8">
-             {product.images.length > 0 ? (
-                  <img
-                    src={product.images[0]} 
-                    alt={`${product.name} main image`}
-                    className='h-48 w-full'
-                  />
-                ) : (
-                  <p>No image available</p>
-                )}
-              <div className="pt-1">
-                                   <h3 className="text-sm pt-3 pb-1">{product.name}</h3>
-                                   <p className="text-sm font-medium">{product.price} EGP</p>
-                               </div>
-            </Link>
-          ))
-        ) : (
-          <p className="text-center text-gray-500">No products available</p>
-        )}
-      </div>
+       <Featuredcollection/>
+      {/* best sellers */}
       <Moresold title="Best Sellers"/>
+      {/* policy */}
       <div className="flex flex-col sm:flex-row items-center justify-around gap-12 sm:gap-2 py-20 text-xs sm:text-sm md:text-base  text-center">
         <div>
           <img src={exchange} className="w-12 m-auto mb-5" alt="Easy Exchange Policy" />

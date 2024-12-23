@@ -17,14 +17,14 @@ const Login = () => {
         placeholder="Password"
         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
       />
-      <button className="w-full bg-primary text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">
+      <button className="w-full bg-secondary text-white py-2 rounded-md  transition duration-300">
         SIGN IN
       </button>
       <p className="text-center text-gray-600 mt-4">
         Don’t have an account?{" "}
         <Link
           to={'/artivastore/register'}
-          className="text-blue-500 hover:text-blue-600 transition duration-300"
+          className="text-secondary hover:text-gray-600 transition duration-300"
         >
           Create Account
         </Link>

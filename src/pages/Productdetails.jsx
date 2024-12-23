@@ -43,7 +43,7 @@ const Productdetails = () => {
                             {productdetails.images.map((item, index) => (
                                 <img
                                     src={item}
-                                    className="w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer"
+                                    className="w-[24%] sm:w-full sm:mb-3 flex-shrink-0 hover:scale-110 transition ease-in-out cursor-pointer"
                                     key={index}
                                     alt={productdetails.name}
                                     onClick={() => setImage(item)} 
@@ -52,7 +52,7 @@ const Productdetails = () => {
                         </div>
                         {/* main image */}
                     <div className='w-full sm:w-[80%]'>
-                     <img className='w-full h-auto' src={image} />
+                     <img className='w-full h-auto hover:scale-90 transition ease-in-out cursor-pointer' src={image} />
                     </div>
                 </div>
                 {/* product information */}

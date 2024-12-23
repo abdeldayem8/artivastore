@@ -29,9 +29,7 @@ const router = createBrowserRouter([
     },
     {
       path:"/artivastore/collection/:id",
-      element: <Suspense fallback={<Loading/>}>
-        <Productdetails/>
-      </Suspense>
+      element:  <Productdetails/>
     },
     {
       path:"/artivastore/maketshirt",
@@ -41,15 +39,11 @@ const router = createBrowserRouter([
     },
     {
       path:"/artivastore/login",
-      element:<Suspense fallback={<Loading/>}>
-        <Login/>
-      </Suspense>
+      element:<Login/>
     },
     {
       path:"/artivastore/register",
-      element:<Suspense fallback={<Loading/>}>
-        <Register/>
-      </Suspense>
+      element:<Register/>
     },
     ]
   }

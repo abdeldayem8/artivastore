@@ -4,6 +4,7 @@ import { Navbarmenu } from './Navbarmenuitems';
 import { Link, useLocation } from 'react-router-dom';
 
 const NavMenuItems = ({ ulClassName, liClassName, linkClassName, closeMenu }) => {
+  
     const { t } = useTranslation();
     const location = useLocation();
     const [activelink,setActivelink] = useState(location.pathname);

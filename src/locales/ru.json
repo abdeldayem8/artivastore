@@ -2,11 +2,11 @@
     "navbar": {
     "home": "Новинка",
     "collection": "Продукты",
-    "makeTshirt": "Создайте свою футболку"
+    "makeTshirt": "Создайте свою футболку",
+    "login": "Вход",
+    "register": "Регистрация"
   },
     "products":"продукты",
-    "login": "Вход",
-    "register": "Регистрация",
     "wear": "Носить",
     "the": "Этот",
     "difference": "Разница"
