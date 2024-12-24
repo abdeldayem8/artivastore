@@ -9,13 +9,15 @@ const Productitem = ({id,image,name ,price}) => {
   >
     {/* Product Image */}
     {image && image.length > 0 ? (
+      <div className='overflow-hidden'>
       <img 
         src={image[0]} 
         alt={`${name} main image`} 
-        className="h-96 w-full  hover:scale-110 transition-transform"
+        className="hover:scale-110 transition-transform "
       />
+      </div>
     ) : (
-      <div className="h-96 w-full flex items-center justify-center bg-gray-200 text-gray-500">
+      <div className="flex items-center justify-center bg-gray-200 text-gray-500">
         No image available
       </div>
     )}
