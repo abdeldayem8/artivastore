@@ -13,7 +13,7 @@ const Productitem = ({id,image,name ,price}) => {
       <img 
         src={image[0]} 
         alt={`${name} main image`} 
-        className="hover:scale-110 transition-transform "
+        className="hover:scale-90 transition-transform"
       />
       </div>
     ) : (

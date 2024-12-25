@@ -10,6 +10,7 @@ const Featuredcollection = () => {
        const {products,loading,error} = useSelector((state)=>state.products)
         const {t} =useTranslation();
         
+        
         useEffect(()=>{
           dispatch(fetchproducts())
         },[dispatch])

@@ -29,7 +29,7 @@ const Productdetails = () => {
     if (error) return <p>Error: {error.message}</p>;
     if (!productdetails) return <div>No product details found.</div>;
 
-  
+   
 
     return productdetails ? (
         <>

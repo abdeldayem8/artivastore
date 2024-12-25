@@ -3,7 +3,7 @@ import axios from "axios";
 import API_ENDPOINTS from "../../utils/API_ENDPOINTS";
 
 
-export const fetchproducts = createAsyncThunk("fetchproducts",async (_, { rejectWithValue })=>{
+export const fetchproducts = createAsyncThunk("products/fetchProducts",async (_, { rejectWithValue })=>{
     try {
         const response = await axios.get(API_ENDPOINTS.PRODUCTS, {
           headers: {
@@ -17,5 +17,14 @@ export const fetchproducts = createAsyncThunk("fetchproducts",async (_, { reject
     }
   );
 
+  // fetch filtered products
 
-  
+  export const fetchFilteredProducts = createAsyncThunk("products/fetchFilteredProducts",async(TbCategoryFilled,{rejectWithValue})=>{
+    try {
+      const response = await axios.post(API_ENDPOINTS.Filter, { category: categoryId });
+      return response.data.data; 
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
