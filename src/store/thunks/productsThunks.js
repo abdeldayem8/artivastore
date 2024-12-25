@@ -17,14 +17,4 @@ export const fetchproducts = createAsyncThunk("products/fetchProducts",async (_,
     }
   );
 
-  // fetch filtered products
 
-  export const fetchFilteredProducts = createAsyncThunk("products/fetchFilteredProducts",async(TbCategoryFilled,{rejectWithValue})=>{
-    try {
-      const response = await axios.post(API_ENDPOINTS.Filter, { category: categoryId });
-      return response.data.data; 
-    } catch (error) {
-      return rejectWithValue(error.response?.data || error.message);
-    }
-  }
-);

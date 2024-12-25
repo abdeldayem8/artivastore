@@ -39,6 +39,7 @@ const ProductList = () => {
          )
        : products;
 
+      //  handle category change
   const handleCategoryFilter = (categoryId) => {
     setSelectedCategories((prev) =>
       prev.includes(categoryId)
