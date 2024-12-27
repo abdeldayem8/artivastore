@@ -3,6 +3,8 @@ import Navbar from "./components/ecommerce/Navbar/Navbar"
 import { Provider } from "react-redux"
 import store from "./store/store"
 import Footer from "./components/ecommerce/Footer/Footer"
+import { Toaster } from "react-hot-toast"
+
 function App() {
   
   return (
@@ -17,6 +19,7 @@ function App() {
     </div>
     <Footer />
   </div>
+    <Toaster/>
    </Provider>
    </>
   )
