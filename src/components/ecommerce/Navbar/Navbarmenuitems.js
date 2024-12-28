@@ -1,29 +1,38 @@
-
 export const Navbarmenu = [
     {
-        id:1,
-        titleKey: "navbar.home",
-        link:'/artivastore/'
+      id: 1,
+      titleKey: 'navbar.home',
+      link: '/artivastore/',
     },
     {
-        id:2,
-        titleKey: "navbar.collection",
-        link:'/artivastore/collection'
+      id: 2,
+      titleKey: 'navbar.collection',
+      link: '/artivastore/collection',
     },
     {
-        id:3,
-        titleKey: "navbar.makeTshirt",
-        link:'/artivastore/maketshirt'
+      id: 3,
+      titleKey: 'navbar.makeTshirt',
+      link: '/artivastore/maketshirt',
     },
     {
-        id:4,
-        titleKey: "navbar.login",
-        link:'/artivastore/login'
+      id: 4,
+      titleKey: 'navbar.login',
+      link: '/artivastore/login',
     },
     {
-        id:5,
-        titleKey: "navbar.register",
-        link:'/artivastore/register'
-    }
-
-]
+      id: 5,
+      titleKey: 'navbar.register',
+      link: '/artivastore/register',
+    },
+    {
+      id: 6,
+      titleKey: 'navbar.profile',
+      link: '/artivastore/profile',
+    },
+    {
+      id: 7,
+      titleKey: 'navbar.logout',
+      link: '/artivastore/logout',
+    },
+  ];
+  

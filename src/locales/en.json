@@ -4,7 +4,9 @@
     "collection": "Collections",
     "makeTshirt": "Make Your T-shirt",
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "logout": "Logout",
+    "profile": "Profile"
   },
    "products":"All Collections",
    "wear": "Wear",

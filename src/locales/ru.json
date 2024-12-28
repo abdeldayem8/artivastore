@@ -4,7 +4,9 @@
     "collection": "Продукты",
     "makeTshirt": "Создайте свою футболку",
     "login": "Вход",
-    "register": "Регистрация"
+    "register": "Регистрация",
+     "logout": "Logout",
+    "profile": "Profile"
   },
     "products":"продукты",
     "wear": "Носить",

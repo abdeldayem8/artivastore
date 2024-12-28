@@ -5,6 +5,9 @@ import Loading from '../components/common/Loading/Loading.jsx'
 import Login from '../pages/Login.jsx'
 import Register from '../pages/Register.jsx'
 import Productdetails from '../pages/Productdetails.jsx'
+import Profile from '../pages/Profile.jsx'
+import Protectedroute from './Protectedroute.jsx'
+import Publicroute from './Publicroute.jsx'
 const Collection = lazy(()=>import ('../pages/Collection.jsx'))
 const Makeyourtshirt = lazy(()=>import ('../pages/TshirtDesigner.jsx'))
 const Home = lazy(()=>import ('../pages/Home.jsx'))
@@ -39,11 +42,15 @@ const router = createBrowserRouter([
     },
     {
       path:"/artivastore/login",
-      element:<Login/>
+      element:<Publicroute><Login/></Publicroute> 
     },
     {
       path:"/artivastore/register",
-      element:<Register/>
+      element: <Publicroute><Register/></Publicroute> 
+    },
+    {
+      path:"/artivastore/profile",
+      element: <Protectedroute><Profile/></Protectedroute> 
     },
     ]
   }
