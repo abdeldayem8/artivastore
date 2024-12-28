@@ -5,6 +5,8 @@ const API_ENDPOINTS = {
     More_Sold_Product:`${BASE_URL}/api/product/more_sold_products`,
     View_Product:(id)=>`${BASE_URL}/api/product/${id}`,
     Category:`${BASE_URL}/api/category/`,
-    Register:`${BASE_URL}/api/register`
+    Register:`${BASE_URL}/api/register`,
+    Login:`${BASE_URL}/api/login`,
+    Logout:`${BASE_URL}/api/logout`
    };
 export default API_ENDPOINTS;
