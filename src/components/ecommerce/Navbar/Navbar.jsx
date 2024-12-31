@@ -54,13 +54,6 @@ const languages = [
         closeMenu={closeMenu}
       />
         </div>
-       
-        <div className='flex items-center gap-4'>
-          <div className='hidden lg:flex'>
-          <Headerbasket/>
-          </div>
-         
-          </div>
             {/* language */}
             <div className='mobile-screen-nav flex justify-between items-center'>
             <div className="relative inline-block">
@@ -95,7 +88,7 @@ const languages = [
         {openmenu ? <MdClose className='text-4xl' /> : <MdMenu className='text-4xl' />} 
         </div>
         </div>
-       
+        <Headerbasket/>
       </div>
      </nav>
      {/* mobile sidebar section */}

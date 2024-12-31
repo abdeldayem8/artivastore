@@ -7,6 +7,7 @@ import Productitem from '../Productitem/Productitem'
 import axios from 'axios';
 import API_ENDPOINTS from '../../../utils/API_ENDPOINTS';
 import dropdown from '../../../assets/dropdown.png'
+import { addToCart } from '../../../store/slices/cartslice';
 const ProductList = () => {
     
    const dispatch = useDispatch()
@@ -112,6 +113,7 @@ useEffect(() => {
                         <div className="flex justify-center my-4">
                           <button
                             className="uppercase bg-secondary cursor-pointer text-white font-semibold rounded-md border-2 border-primary px-6 py-2"
+                            onClick={()=>dispatch(addToCart(product))}
                           >
                             Add To Cart
                           </button>

@@ -1,11 +1,11 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {z} from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from 'axios';
-import API_ENDPOINTS from '../utils/API_ENDPOINTS';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { fetchregister } from '../store/thunks/registerthunk';
 
 
 const registerSchema = z
@@ -43,28 +43,30 @@ const registerSchema = z
 const Register = () => {
 
   const { register, handleSubmit,formState: { errors },} = useForm({resolver:zodResolver(registerSchema)});
+  const dispatch =useDispatch();
+  const navigate = useNavigate();
 
-  const submitForm = async (data)=>{
+
+  const submitForm = async (data) => {
     try {
       const formData = new FormData();
       for (const key in data) {
         formData.append(key, data[key]);
       }
-    
-      const response = await axios.post(API_ENDPOINTS.Register,formData)
-      if(response.status === 200){
-        toast.success("Register Successfully",{
-          duration:1000,
-         }); 
-         setTimeout(()=>{
-          window.location.href = "/artivastore/login";
-         },1000)
-      }
+     
+      // Await the thunk and unwrap to handle success/failure
+     await dispatch(fetchregister(formData)).unwrap();
+      // On success
+      toast.success('Register Successfully', {
+        duration: 1000,
+      });
+     navigate('/artivastore/login');
     } catch (error) {
+      // On failure
       toast.error(error.response.data.message)
     }
-  }
-
+  };
+ 
   return (
     <>
       <div className="h-screen flex flex-col items-center">

@@ -6,7 +6,17 @@
 html {
     scroll-behavior: smooth;
 }
-
+.basketquantity{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    top: -18px;
+    right: -1px;
+}
 .mobile-screen-nav{
     width: auto;
 }

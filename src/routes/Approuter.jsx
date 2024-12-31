@@ -8,6 +8,7 @@ import Productdetails from '../pages/Productdetails.jsx'
 import Profile from '../pages/Profile.jsx'
 import Protectedroute from './Protectedroute.jsx'
 import Publicroute from './Publicroute.jsx'
+import Cart from '../pages/Cart.jsx'
 const Collection = lazy(()=>import ('../pages/Collection.jsx'))
 const Makeyourtshirt = lazy(()=>import ('../pages/TshirtDesigner.jsx'))
 const Home = lazy(()=>import ('../pages/Home.jsx'))
@@ -38,6 +39,12 @@ const router = createBrowserRouter([
       path:"/artivastore/maketshirt",
       element:<Suspense fallback={<Loading/>}>
         <Makeyourtshirt/>
+      </Suspense>
+    },
+    {
+      path:"/artivastore/cart",
+      element:<Suspense fallback={<Loading/>}>
+        <Cart/>
       </Suspense>
     },
     {

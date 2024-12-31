@@ -45,9 +45,6 @@ const Responsivemenu = memo(({openmenu,setOpenmenu,menuButtonRef,closeMenu}) => 
               closeMenu={closeMenu}
             />
               </ul>
-            <div className='flex justify-center my-2'>
-              <Headerbasket/>
-            </div>
             </div>
             
             </motion.div>

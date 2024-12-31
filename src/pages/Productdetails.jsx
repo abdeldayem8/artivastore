@@ -6,6 +6,7 @@ import Loading from '../components/common/Loading/Loading';
 import star from '../assets/star.png'
 import unstar from '../assets/unstar.png'
 import Moresold from '../components/ecommerce/moresold/Moresold'
+import { addToCart } from '../store/slices/cartslice';
 
 const Productdetails = () => {
     const { id } = useParams();
@@ -97,7 +98,7 @@ const Productdetails = () => {
                       </div>
                     </div>
                     <div className='flex items-center gap-2'>
-                    <button className='bg-transparent text-secondary border border-black px-8 py-3 text-sm'>ADD TO CART</button>
+                    <button className='bg-transparent text-secondary border border-black px-8 py-3 text-sm' onClick={()=>dispatch(addToCart(productdetails))}>ADD TO CART</button>
                     <button className='bg-secondary text-white px-8 py-3 text-sm active:bg-gray-700'>BUY IT NOW</button>
                     </div>
                     <hr className='mt-8 sm:w-4/5 w-full border-t border-black' />

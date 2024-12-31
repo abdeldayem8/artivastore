@@ -2,10 +2,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 import API_ENDPOINTS from '../utils/API_ENDPOINTS'
 import toast, { Toaster } from 'react-hot-toast'
+
+
 
 
 const loginSchema = z.object({
@@ -16,7 +18,9 @@ const loginSchema = z.object({
       .max(20, "Password must not exceed 20 characters"),
 })
 const Login = () => {
+
    const { register, handleSubmit,formState: { errors },} = useForm({resolver:zodResolver(loginSchema)});
+   const navigate = useNavigate();
 
    const submitform = async (data)=>{
     try {
@@ -29,11 +33,11 @@ const Login = () => {
         toast.success(response.data.message,{
           duration:1000,
          }); 
+         
          setTimeout(() => {
-          window.location.href = "/artivastore/";
+          navigate("/artivastore/profile")
          }, 1000);
       }
-      console.log(response.data.message);
       }catch (error) {  
        toast.error(error.response.data.message)
     }
