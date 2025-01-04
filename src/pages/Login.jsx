@@ -1,13 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import axios from 'axios'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { z } from 'zod'
-import API_ENDPOINTS from '../utils/API_ENDPOINTS'
-import toast, { Toaster } from 'react-hot-toast'
-
-
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchlogin } from '../store/thunks/loginthunk'
+import Loading from '../components/common/Loading/Loading'
 
 
 const loginSchema = z.object({
@@ -21,27 +19,12 @@ const Login = () => {
 
    const { register, handleSubmit,formState: { errors },} = useForm({resolver:zodResolver(loginSchema)});
    const navigate = useNavigate();
+   const dispatch = useDispatch()
+   const {loading,error} =useSelector((state)=>state.login)
 
-   const submitform = async (data)=>{
-    try {
-      const response = await axios.post(API_ENDPOINTS.Login ,{
-        email: data.email,
-        password: data.password,
-      });
-      if(response.status === 200){
-        localStorage.setItem("token",response.data.data.access_token);
-        toast.success(response.data.message,{
-          duration:1000,
-         }); 
-         
-         setTimeout(() => {
-          navigate("/artivastore/profile")
-         }, 1000);
-      }
-      }catch (error) {  
-       toast.error(error.response.data.message)
-    }
-   }
+   const submitform = (data) => {
+    dispatch(fetchlogin({ email: data.email, password: data.password, navigate }));
+  };
   return <>
     <div className="h-screen flex flex-col items-center">
   <div className="w-full max-w-md rounded-lg p-6">
@@ -67,9 +50,11 @@ const Login = () => {
       {errors.password && (
                 <p className="text-red-500 text-sm">{errors.password.message}</p>
               )}
-      <button className="w-full bg-secondary text-white py-2 rounded-md  transition duration-300">
-        SIGN IN
-      </button>
+     <button 
+  className="w-full bg-secondary text-white py-2 rounded-md transition duration-300" 
+  disabled={loading}>
+  {loading ? 'Logging in...' : 'Login'}
+</button>
       </form>
       <p className="text-center text-gray-600 mt-4">
         Don’t have an account?{" "}
@@ -90,7 +75,6 @@ const Login = () => {
     </div>
   </div>
 </div>
-<Toaster/>
   </>
 }
 

@@ -3,7 +3,6 @@ import { Upload, Palette, Type, Undo, Redo, RotateCcw } from "lucide-react";
 import { useDropzone } from "react-dropzone";
 
 function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) {
-
   const [text, setText] = useState("");
   const [textColor, setTextColor] = useState("#000000");
 
@@ -24,67 +23,48 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: {
-      "image/*": [".png", ".jpg", ".jpeg", ".gif"],
-    },
+    accept: { "image/*": [".png", ".jpg", ".jpeg", ".gif"] },
     multiple: false,
   });
 
+  // Handle text input and notify parent component
   const handleTextChange = (e) => {
     const newText = e.target.value;
     setText(newText);
-    if (onTextChange) {
-      onTextChange(newText, textColor); // Send both text and color
-    }
+    onTextChange(newText, textColor);
   };
-  
+
+  // Handle color input and notify parent component
   const handleColorChange = (e) => {
     const newColor = e.target.value;
     setTextColor(newColor);
-    if (onTextChange) {
-      onTextChange(text, newColor); // Send both text and new color
-    }
+    onTextChange(text, newColor);
   };
-  
+
   // Render content based on the active tab
   const renderTabContent = () => {
-    if (activeTab === "upload") {
-      return (
-        <div className="space-y-4">
-          <div
-            {...getRootProps()}
-            className={`border-2 border-dashed ${
-              isDragActive ? "border-blue-500 bg-blue-50" : "border-gray-300"
-            } rounded-lg p-8 text-center cursor-pointer transition-colors`}
-          >
-            <input {...getInputProps()} />
-            <Upload className="mx-auto h-12 w-12 text-gray-400" />
-            <p className="mt-2 text-sm text-gray-600">
-              {isDragActive
-                ? "Drop your design here..."
-                : "Drag and drop your design here, or click to upload"}
-            </p>
+    switch (activeTab) {
+      case "upload":
+        return (
+          <div className="space-y-4">
+            <div
+              {...getRootProps()}
+              className={`border-2 border-dashed ${
+                isDragActive ? "border-blue-500 bg-blue-50" : "border-gray-300"
+              } rounded-lg p-8 text-center cursor-pointer transition-colors`}
+            >
+              <input {...getInputProps()} />
+              <Upload className="mx-auto h-12 w-12 text-gray-400" />
+              <p className="mt-2 text-sm text-gray-600">
+                {isDragActive
+                  ? "Drop your design here..."
+                  : "Drag and drop your design here, or click to upload"}
+              </p>
+            </div>
           </div>
-        </div>
-      );
-    } else if (activeTab === "design") {
-      return (
-        <div className="space-y-4">
-          <div className="flex gap-2 mb-4">
-            <button className="p-2 hover:bg-gray-100 rounded">
-              <Type size={20} />
-            </button>
-            <button className="p-2 hover:bg-gray-100 rounded">
-              <Undo size={20} />
-            </button>
-            <button className="p-2 hover:bg-gray-100 rounded">
-              <Redo size={20} />
-            </button>
-            <button className="p-2 hover:bg-gray-100 rounded">
-              <RotateCcw size={20} />
-            </button>
-          </div>
-
+        );
+      case "design":
+        return (
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium mb-2">Enter Text:</label>
@@ -106,10 +86,10 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
               />
             </div>
           </div>
-        </div>
-      );
+        );
+      default:
+        return null;
     }
-    return null;
   };
 
   return (
@@ -132,10 +112,10 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
           <Palette size={20} /> Design
         </button>
       </div>
-
       <div className="border-t border-gray-200 pt-6">{renderTabContent()}</div>
     </div>
   );
 }
 
 export default DesignTools;
+

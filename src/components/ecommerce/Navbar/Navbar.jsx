@@ -54,8 +54,12 @@ const languages = [
         closeMenu={closeMenu}
       />
         </div>
+       
+
             {/* language */}
             <div className='mobile-screen-nav flex justify-between items-center'>
+        <Headerbasket/>
+
             <div className="relative inline-block">
               <button
                 className="flex items-center space-x-2 bg-transparent border-2 border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -83,12 +87,11 @@ const languages = [
                 </div>
               )}
             </div>
-        {/* mobile hamburger menu section */}
+        {/* mobile hamburger menu section  and cart */}
         <div className='lg:hidden cursor-pointer' onClick={toggleMenu} ref={menuButtonRef} >
         {openmenu ? <MdClose className='text-4xl' /> : <MdMenu className='text-4xl' />} 
         </div>
         </div>
-        <Headerbasket/>
       </div>
      </nav>
      {/* mobile sidebar section */}

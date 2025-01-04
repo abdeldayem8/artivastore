@@ -8,6 +8,7 @@ import axios from 'axios';
 import API_ENDPOINTS from '../../../utils/API_ENDPOINTS';
 import dropdown from '../../../assets/dropdown.png'
 import { addToCart } from '../../../store/slices/cartslice';
+
 const ProductList = () => {
     
    const dispatch = useDispatch()

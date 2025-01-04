@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import {z} from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
-import { fetchregister } from '../store/thunks/registerthunk';
+import axios from 'axios';
+import API_ENDPOINTS from '../utils/API_ENDPOINTS';
 
 
 const registerSchema = z
@@ -43,7 +43,6 @@ const registerSchema = z
 const Register = () => {
 
   const { register, handleSubmit,formState: { errors },} = useForm({resolver:zodResolver(registerSchema)});
-  const dispatch =useDispatch();
   const navigate = useNavigate();
 
 
@@ -54,16 +53,18 @@ const Register = () => {
         formData.append(key, data[key]);
       }
      
-      // Await the thunk and unwrap to handle success/failure
-     await dispatch(fetchregister(formData)).unwrap();
-      // On success
-      toast.success('Register Successfully', {
-        duration: 1000,
-      });
-     navigate('/artivastore/login');
+      const response = await axios.post(API_ENDPOINTS.Register,formData)
+      if(response.status === 200){
+        toast.success('Register Successfully', {
+          duration: 1000,
+        });
+       navigate('/artivastore/login');
+      }
+      
     } catch (error) {
       // On failure
       toast.error(error.response.data.message)
+      console.log(error.response.data.message)
     }
   };
  

@@ -5,20 +5,12 @@ import { motion } from 'framer-motion';
 
 function ProductCustomization({ 
   selectedSize, 
-  quantity, 
-  selectedLocations, 
+  quantity,  
   basePrice, 
   onSizeChange, 
   onQuantityChange, 
-  onLocationChange 
+  
 }) {
-  const calculateTotalPrice = () => {
-    const locationsPrices = PRINT_LOCATIONS
-      .filter(loc => selectedLocations.includes(loc.id))
-      .reduce((sum, loc) => sum + loc.price, 0);
-    
-    return (basePrice + locationsPrices) * quantity;
-  };
 
   return (
     <div className="space-y-6">
@@ -74,42 +66,17 @@ function ProductCustomization({
         </div>
       </div>
 
-      {/* Print Locations */}
-      <div>
-        <h3 className="text-lg font-semibold mb-3">Print Locations:</h3>
-        <div className="space-y-2">
-          {PRINT_LOCATIONS.map((location) => (
-            <label
-              key={location.id}
-              className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:border-gray-300 cursor-pointer"
-            >
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={selectedLocations.includes(location.id)}
-                  onChange={() => onLocationChange(location.id)}
-                  className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
-                />
-                <span className="ml-2">{location.name}</span>
-              </div>
-              {location.price > 0 && (
-                <span className="text-sm text-gray-500">+${location.price.toFixed(2)}</span>
-              )}
-            </label>
-          ))}
-        </div>
-      </div>
 
       {/* Price Summary */}
       <div className="mt-6 p-4 bg-gray-50 rounded-lg">
         <div className="flex justify-between items-center">
           <span className="text-lg font-semibold">Total Price:</span>
           <span className="text-2xl font-bold text-blue-600">
-            ${calculateTotalPrice().toFixed(2)}
+            ${basePrice}
           </span>
         </div>
         <p className="text-sm text-gray-500 mt-2">
-          Includes base price and additional print locations
+          Includes base price and additional print Price
         </p>
       </div>
     </div>

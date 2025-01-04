@@ -1,8 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import productsreducer from './slices/productsSlice'
 import productdetailsreducer from './slices/productdetailsslice'
-import registerreducer from './slices/registerslice'
+import loginreducer from './slices/loginslice'
 import  cartslice  from "./slices/cartslice";
+import customshirtreducer from './slices/customshirtslice'
 import storage from "redux-persist/lib/storage"; 
 import { persistStore, persistReducer } from "redux-persist";
 
@@ -16,13 +17,17 @@ const persistconfig={
 const reducers = combineReducers({
     products: productsreducer,
     Productdetails: productdetailsreducer,
-    register: registerreducer,
+    login: loginreducer,
+    customshirts:customshirtreducer,
     cart: cartslice
 })
 const persistedReducer = persistReducer(persistconfig, reducers)
 
 export const store = configureStore({
-    reducer:persistedReducer    
+    reducer:persistedReducer, middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+          serializableCheck: false, 
+        }),    
 })
     
 

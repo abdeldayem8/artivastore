@@ -1,14 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Cover  from '../assets/homeimages/cover.jpg';
 import exchange  from '../assets/homeimages/exchangepolicy.png';
 import returnpolicy  from '../assets/homeimages/returnpolicy.png';
 import customer  from '../assets/homeimages/customer.png';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchproducts } from '../store/thunks/productsThunks';
-import Loading from '../components/common/Loading/Loading';
 import Moresold from '../components/ecommerce/moresold/Moresold';
-import { Link } from 'react-router-dom';
 import Featuredcollection from '../components/ecommerce/somecollection/Featuredcollection';
 
 const Home = () => {
