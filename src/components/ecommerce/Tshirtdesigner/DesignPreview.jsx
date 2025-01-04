@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { RotateCcw, RotateCw, X } from 'lucide-react';
 import { Rnd } from 'react-rnd';
 
 const DesignPreview = ({ 
   selectedColor,
-  selectedProduct,
+  selectedProduct ,
   frontDesignImage,
   backDesignImage,
   view,
@@ -44,21 +44,28 @@ const DesignPreview = ({
   };
 
   const getCurrentProductImage = () => {
+    if (!selectedProduct) return null;
     return view === 'front'
-      ? selectedProduct.image_forward
-      : selectedProduct.image_back || selectedProduct.image_forward; // Fallback to front image if back is unavailable
+      ? selectedProduct?.image_forward
+      : selectedProduct?.image_back || selectedProduct?.image_forward; // Fallback to front image if back is unavailable
   };
 
 
   return (
     <div className="relative">
       <div className="aspect-square relative flex items-center justify-center rounded-lg overflow-hidden">
-        <div className="w-full h-full flex items-center justify-center">
-          <img
-            src={getCurrentProductImage()}
-            alt={`${selectedProduct || 'Product'} ${view} view in ${selectedColor}`}
-            className="w-full h-full object-contain"
-          />
+      <div className="w-full h-full flex items-center justify-center">
+          {getCurrentProductImage() ? (
+            <img
+              src={getCurrentProductImage()}
+              alt={`${selectedProduct || 'Product'} ${view} view in ${selectedColor}`}
+              className="w-full h-full object-contain"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gray-200">
+              <p className="text-gray-500">No product image available</p>
+            </div>
+          )}
 
           {getCurrentDesignImage() && (
             <Rnd

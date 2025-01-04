@@ -13,7 +13,9 @@ function ProductSelector({selectedCategory, onCategorySelect, models }) {
             key={category}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => onCategorySelect(category)}
+            onClick={() => {
+              onCategorySelect(category); // Select category
+            }}
             className="relative rounded-lg overflow-hidden aspect-square"
           >
             

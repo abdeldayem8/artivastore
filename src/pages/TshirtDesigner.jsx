@@ -27,8 +27,8 @@ const {data ,loading ,error} = useSelector((state)=>state.customshirts)
 const dispatch = useDispatch();
 
 useEffect(()=>{
-dispatch(fetchcustomshirts())
-},[dispatch])
+  dispatch(fetchcustomshirts())
+  },[dispatch]) 
     
 // Extract models and pricing from data
 const models = data?.data.models || {};
@@ -91,13 +91,13 @@ const availableColors = [...new Set(products.map((product) => product.color))];
             <div className="p-8 rounded-xl">
               <ProductSelector
                 onCategorySelect={setSelectedCategory}
-                models={data?.data.models}
+                models={models}
                 selectedCategory={selectedCategory}
               />
               <div className="design-preview">
                  <DesignPreview
                   selectedColor={selectedColor}
-                  selectedProduct={filteredProducts[0]} // Show the first matching product
+                  selectedProduct={filteredProducts[0] || null} // Show the first matching product
                   frontDesignImage={frontDesignImage}
                   backDesignImage={backDesignImage}
                   view={view}
