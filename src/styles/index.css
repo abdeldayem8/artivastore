@@ -11,10 +11,10 @@ html {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: black;
-    color: white;
+     background-color: white; 
+    color: black;
     text-align: center;
-    top: -18px;
+    top: -6px;
     right: -1px;
 }
 .mobile-screen-nav{
@@ -27,4 +27,15 @@ html {
     
 }
 
+@media (max-width:768px) {
+ .btns-cart-wrapper {
+    width: 100%;
+    justify-content: space-between;
+    margin-block: 4px;
+ }    
+ .btn-remove{
+    width: 100%;
+    margin-block: 4px;
+ }
+}
   

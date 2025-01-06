@@ -58,7 +58,7 @@ const Productdetails = () => {
                 </div>
                 {/* product information */}
                 <div className='flex-1 '>
-                    <h1 className='font-medium text-2xl mt-2'>{productdetails.name}</h1>
+                    <h1 className='font-medium text-secondary text-2xl mt-2'>{productdetails.name}</h1>
                     <div className='flex items-center gap-1 mt-2 '>
                         <img src={star} className='w-3 5'/>
                         <img src={star} className='w-3 5'/>
@@ -98,8 +98,8 @@ const Productdetails = () => {
                       </div>
                     </div>
                     <div className='flex items-center gap-2'>
-                    <button className='bg-transparent text-secondary border border-black px-8 py-3 text-sm' onClick={()=>dispatch(addToCart(productdetails))}>ADD TO CART</button>
-                    <button className='bg-secondary text-white px-8 py-3 text-sm active:bg-gray-700'>BUY IT NOW</button>
+                    <button className='bg-transparent border border-white-500 text-secondary  px-8 py-3 text-sm' onClick={()=>dispatch(addToCart(productdetails))}>ADD TO CART</button>
+                    <button className='bg-secondary text-primary px-8 py-3 text-sm active:bg-gray-700'>BUY IT NOW</button>
                     </div>
                     <hr className='mt-8 sm:w-4/5 w-full border-t border-black' />
                     <div className='text-sm text-gray-500 mt-5 flex flex-col gap-1'>

@@ -143,9 +143,9 @@ const availableColors = [...new Set(products.map((product) => product.color))];
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-secondary text-white py-3 rounded-lg flex items-center justify-center gap-2"
+              className="w-full bg-secondary text-primary py-3 rounded-lg flex items-center justify-center gap-2"
             >
-              Add To Cart
+              Buy It Now
             </motion.button>
           </motion.div>
         </div>

@@ -7,7 +7,6 @@ import customshirtreducer from './slices/customshirtslice'
 import storage from "redux-persist/lib/storage"; 
 import { persistStore, persistReducer } from "redux-persist";
 
-
 const persistconfig={
     key:"root",
     storage,
@@ -29,7 +28,7 @@ export const store = configureStore({
           serializableCheck: false, 
         }),    
 })
-    
+
 
 export const persistor = persistStore(store);  
 export default store;

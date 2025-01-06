@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 
 export const cartslice = createSlice({
@@ -13,6 +14,7 @@ export const cartslice = createSlice({
       }else{
         const productclone = {...action.payload,quantity :1}
         state.push(productclone)
+        toast.success('Added To Cart Successfuuly')
       }
     },
     increaseQuantity : (state,action)=>{

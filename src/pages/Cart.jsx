@@ -15,8 +15,8 @@ const Cart = () => {
       <div className="rounded-lg p-4 text-center">
         {cart.length === 0 ? (
           <>
-            <p className="text-center text-gray-600 mb-4">Your cart is empty.</p>
-            <Link className="text-center text-blue-500" to={'/artivastore/collection'}>Continue Browsing here.</Link>
+            <p className="text-center text-secondary mb-4">Your cart is empty.</p>
+            <Link className="text-center text-secondary" to={'/artivastore/collection'}>Continue Browsing here.</Link>
           </>
         ) : (
           <>
@@ -32,27 +32,27 @@ const Cart = () => {
                     className="md:w-24 h-24 object-cover rounded mr-4"
                   />
                   <div className='w-full'>
-                    <p className="text-lg font-medium">{product.name}</p>
-                    <p className="text-gray-600">Price: {product.price} EGP</p>
+                    <p className="text-lg font-medium text-secondary">{product.name}</p>
+                    <p className="text-secondary">Price: {product.price} EGP</p>
                   </div>
                 </div>
-                <div className="flex items-center">
+                <div className="btns-cart-wrapper flex items-center">
                   <button
-                    className="bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 mr-2"
+                    className="bg-transparent text-secondary border border-white-500 px-3 py-1 rounded  mr-2"
                     onClick={() => dispatch(decreaseQuantity({ id: product.id }))}
                   >
                     -
                   </button>
-                  <span className="mx-4 text-lg">{product.quantity}</span>
+                  <span className="mx-4 text-lg text-secondary">{product.quantity}</span>
                   <button
-                    className="bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 ml-2"
+                    className="bg-transparent text-secondary border border-white-500 px-3 py-1 rounded  mr-2"
                     onClick={() => dispatch(increaseQuantity({ id: product.id }))}
                   >
                     +
                   </button>
                 </div>
                 <button
-                  className="bg-secondary text-white px-8 py-3 text-sm active:bg-gray-700"
+                  className="btn-remove bg-transparent border border-white-500 text-white px-8 py-3 text-sm active:bg-gray-700"
                   onClick={() => dispatch(removeFromCart({ id: product.id }))}
                 >
                   Remove
@@ -63,12 +63,12 @@ const Cart = () => {
               <h3 className="text-xl font-semibold mb-4">Total Price: {totalPrice.toFixed(2)} EGP</h3>
               <div className='flex items-center gap-2'>
               <button
-                className="bg-transparent text-secondary border border-black px-8 py-3 text-sm"
+                className="bg-transparent  text-secondary border border-white-500 px-8 py-3 text-sm"
                 onClick={() => dispatch(clearCart())}
               >
                 Clear Cart
               </button>
-              <button className='bg-secondary text-white px-8 py-3 text-sm active:bg-gray-700'>BUY IT NOW</button>
+              <button className='bg-secondary text-black px-8 py-3 text-sm active:bg-gray-700'>BUY IT NOW</button>
               </div>
             </div>
           </>

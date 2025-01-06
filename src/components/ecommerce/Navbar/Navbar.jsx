@@ -62,7 +62,7 @@ const languages = [
 
             <div className="relative inline-block">
               <button
-                className="flex items-center space-x-2 bg-transparent border-2 border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex items-center space-x-2 bg-transparent border-2 border-white-300 rounded-lg px-4 py-2 text-secondary focus:outline-none focus:ring-2 focus:ring-blue-500"
                 onClick={toggleDropdown} // Toggle dropdown on click
               >
                 <img
@@ -81,14 +81,14 @@ const languages = [
                       className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-200 cursor-pointer"
                     >
                       <img src={lang.flag} alt={lang.name} className="w-5 h-5 rounded-full" />
-                      <span>{lang.name}</span>
+                      <span className='text-secondary'>{lang.name}</span>
                     </div>
                   ))}
                 </div>
               )}
             </div>
         {/* mobile hamburger menu section  and cart */}
-        <div className='lg:hidden cursor-pointer' onClick={toggleMenu} ref={menuButtonRef} >
+        <div className='lg:hidden cursor-pointer text-secondary' onClick={toggleMenu} ref={menuButtonRef} >
         {openmenu ? <MdClose className='text-4xl' /> : <MdMenu className='text-4xl' />} 
         </div>
         </div>

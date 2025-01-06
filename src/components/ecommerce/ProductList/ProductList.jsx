@@ -8,6 +8,15 @@ import axios from 'axios';
 import API_ENDPOINTS from '../../../utils/API_ENDPOINTS';
 import dropdown from '../../../assets/dropdown.png'
 import { addToCart } from '../../../store/slices/cartslice';
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Typography,
+  Button,
+} from "@material-tailwind/react";
+
 
 const ProductList = () => {
     
@@ -65,69 +74,87 @@ useEffect(() => {
     if (loading) return <p><Loading/></p>;
     if (error) return <p>Error: {error.message}</p>;
   return (
-    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
+       <div className="flex flex-col gap-6 pt-10">
+        <h2 className="text-2xl font-bold text-secondary">{t("products")}</h2>
+
       {/* filter options */}
-      <div className='min-w-60'>
-          <p onClick={()=>setShowfilter(!showfilter)} className='my-2 text-xl flex items-center cursor-pointer gap-2'>FILTERS
-            <img className={`h-3 sm:hidden ${showfilter? 'rotate-90' :''}`} src={dropdown} alt='dropdown'/>
-          </p>
+      <div className="min-w-60 rounded-md text-secondary">
+        <p
+          onClick={() => setShowfilter(!showfilter)}
+          className="text-lg font-semibold cursor-pointer flex items-center gap-2"
+        >
+          FILTERS
+          <img
+            className={`h-4 transform transition-transform ${
+              showfilter ? "rotate-90" : ""
+            }`}
+            src={dropdown}
+            alt="dropdown"
+          />
+        </p>
           {/* category */}
-          <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showfilter ? "" : "hidden"} sm:block`}>
-    <p className="mb-3 text-sm font-medium">CATEGORY</p>
-    <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
-      {categories.length > 0 ? (
-        categories.map((category) => (
-          <p className="flex gap-2 cursor-pointer" key={category.id} onClick={() => handleCategoryFilter(category.id)}>
-            <input 
-              className="w-3" 
-              type="checkbox" 
-              value={category.slug} 
-              id={`category-${category.id}`} 
-              checked={selectedCategories.includes(category.id)} 
-              onChange={() => handleCategoryFilter(category.id)} 
-            />
-            <label htmlFor={`category-${category.id}`}>{category.name}</label>
-          </p>
-        ))
-      ) : (
-        <p>No categories available</p>
-      )}
-    </div>
-  </div>
-</div>
-{/* right side */}
-<div className='flex-1'>
- <div className='flex justify-between text-base sm:text-2xl mb-4'>
- <h2 className="text-2xl text-center font-semibold mb-6">{t('products')}</h2>
- </div>
- {/* map products */}
- <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
- {filteredProducts && filteredProducts.length > 0 ? (
+          <div
+          className={`mt-4 space-y-3 ${
+            showfilter ? "" : "hidden"
+          }`}
+        >
+          <p className="font-semibold text-sm">CATEGORY</p>
+          {categories.length > 0 ? (
+            categories.map((category) => (
+              <p
+                key={category.id}
+                className="flex items-center gap-2 cursor-pointer"
+                onClick={() => handleCategoryFilter(category.id)}
+              >
+                <input
+                  type="checkbox"
+                  className="w-4 h-4"
+                  checked={selectedCategories.includes(category.id)}
+                  onChange={() => handleCategoryFilter(category.id)}
+                />
+                <label className="text-sm">{category.name}</label>
+              </p>
+            ))
+          ) : (
+            <p>No categories available</p>
+          )}
+        </div>
+      </div>
+
+      {/* Product grid */}
+      <div className="flex-1">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4" style={{gap:"2px"}}>
+          {filteredProducts && filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-                        <div key={product.id}>
-                        <Productitem 
-                          id={product.id} 
-                          image={product.images} 
-                          name={product.name} 
-                          price={product.price} 
-                        />
-                        <div className="flex justify-center my-4">
-                          <button
-                            className="uppercase bg-secondary cursor-pointer text-white font-semibold rounded-md border-2 border-primary px-6 py-2"
-                            onClick={()=>dispatch(addToCart(product))}
-                          >
-                            Add To Cart
-                          </button>
-                        </div>
-                      </div>
-                    ))
-                ) : (
-                    <p className="text-center text-gray-500">No products available</p>
-                )}
-          </div>
-</div>
+              <div key={product.id} className="flex flex-col items-center">
+                <Productitem
+                  id={product.id}
+                  image={product.images}
+                  name={product.name}
+                  price={product.price}
+                />
+                <div className='w-full'>
+                <button
+                  className="w-full mb-2 bg-transparent border border-white-500 text-secondary font-semibold py-2 px-6 rounded transition-colors"
+                  onClick={() => dispatch(addToCart(product))}
+                >
+                  Add To Cart
+                </button>
+                </div>
+              </div>
+              
+            ))
+          ) : (
+            <p className="text-center text-secondary">
+              No products available
+            </p>
+          )}
+        </div>
+      </div>
+
+
     </div>
-    );
+  );
 };
 
 export default ProductList;
