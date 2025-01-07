@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 
-html {
-    scroll-behavior: smooth;
-}
+.no-scroll {
+    overflow: hidden;
+  }
 .basketquantity{
     position: absolute;
     width: 30px;

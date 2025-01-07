@@ -51,7 +51,7 @@ const NavMenuItems = ({ ulClassName, liClassName, linkClassName, closeMenu }) =>
      {item.titleKey === 'navbar.logout' ? (
        <button
          onClick={handleLogout}
-         className={`${linkClassName} hover:text-orange-500 transition-all duration-300`}
+         className={`${linkClassName}  transition-all duration-300`}
        >
          {t(item.titleKey)}
        </button>
@@ -64,8 +64,8 @@ const NavMenuItems = ({ ulClassName, liClassName, linkClassName, closeMenu }) =>
          to={item.link}
          className={`${linkClassName} ${
            activelink === item.link
-             ? 'text-orange-500 border-b-2 border-orange-500'
-             : 'hover:text-orange-500'
+             ? 'border-b-2 border-white-500'
+             : 'hover:text-gray-500'
          } transition-all duration-300`}
        >
          {t(item.titleKey)}

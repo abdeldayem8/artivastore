@@ -13,7 +13,7 @@ const Home = () => {
  
   
   return <>
-  <div className="flex flex-col sm:flex-row border-t-2 border-gray-400">
+  <div className="flex flex-col sm:flex-row">
         <div className="w-full">
           <img src={Cover} alt="Top Cover image for home page" className="mx-auto" />
         </div>
