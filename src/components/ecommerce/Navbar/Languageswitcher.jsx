@@ -40,7 +40,7 @@ const Languageswitcher = ({ selectedLanguage, onLanguageChange }) => {
       <span>{selectedLanguage.toUpperCase()}</span>
     </button>
     {dropdownOpen && (
-      <div className="absolute mt-2 z-10">
+      <div className="absolute bottom-full sm:bottom-auto mt-2 z-10">
         {languages.map((lang) => (
           <div
             key={lang.code}

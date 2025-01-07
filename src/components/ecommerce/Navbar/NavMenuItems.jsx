@@ -64,7 +64,7 @@ const NavMenuItems = ({ ulClassName, liClassName, linkClassName, closeMenu }) =>
          to={item.link}
          className={`${linkClassName} ${
            activelink === item.link
-             ? 'border-b-2 border-white-500'
+             ? 'sm:border-b-2 sm:border-white-500'
              : 'hover:text-gray-500'
          } transition-all duration-300`}
        >
