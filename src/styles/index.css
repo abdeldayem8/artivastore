@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 
+body{
+    font-family: "Playfair Display", serif;
+}
 .no-scroll {
     overflow: hidden;
   }

@@ -1,9 +1,8 @@
 import { AnimatePresence,motion } from 'framer-motion'
 import React, {  memo,useEffect, useRef } from 'react'
-import Headerbasket from '../../common/HeaderBasket/Headerbasket'
 import { useTranslation } from 'react-i18next'
 import NavMenuItems from './NavMenuItems';
-import Logo from '../../../assets/homeimages/logo.svg?react'
+
 
 const Responsivemenu = memo(({openmenu,setOpenmenu,menuButtonRef,closeMenu ,languagesComponent}) => {
 
