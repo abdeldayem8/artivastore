@@ -6,6 +6,7 @@ import i18n from '../../../i18n';
 import { useTranslation } from 'react-i18next';
 import NavMenuItems from './NavMenuItems';
 import Languageswitcher from './Languageswitcher';
+import Logo from '../../../assets/homeimages/logo.svg?react'
 
 const Navbar = () => {
 
@@ -37,6 +38,9 @@ const handleLanguageChange = (language) => {
      <nav>
       <div className='flex items-center justify-between mb-4'>
         {/* menu section */}
+        <div className='hidden sm:block'>
+        <Logo/>
+        </div>
         <div className='hidden lg:block'>
            <NavMenuItems
         ulClassName="flex items-center gap-4 text-secondary"
@@ -58,6 +62,9 @@ const handleLanguageChange = (language) => {
                 onLanguageChange={handleLanguageChange}
               />
             </div>
+            <div className='block sm:hidden'>
+                  <Logo/>
+              </div>
             <Headerbasket/>
         </div>
       </div>
