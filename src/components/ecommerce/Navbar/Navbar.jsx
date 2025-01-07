@@ -38,8 +38,8 @@ const handleLanguageChange = (language) => {
      <nav>
       <div className='flex items-center justify-between mb-4'>
         {/* menu section */}
-        <div className='hidden sm:block'>
-        <Logo/>
+        <div className='hidden sm:block mx-4'>
+         <Logo/>
         </div>
         <div className='hidden lg:block'>
            <NavMenuItems
@@ -63,7 +63,7 @@ const handleLanguageChange = (language) => {
               />
             </div>
             <div className='block sm:hidden'>
-                  <Logo/>
+                 <Logo/>
               </div>
             <Headerbasket/>
         </div>
