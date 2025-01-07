@@ -1,4 +1,4 @@
-import{j as c,r as g,g as gi,a as Wt,h as vi,i as xi,m as rt,b as bi,u as yi,k as wi,L as Si}from"./index-F1b1BQF5.js";import{p as qe,a as lt,P as R}from"./tslib.es6-CDSmV5Pe.js";function zi({selectedColor:t,onColorSelect:i,colors:e}){return c.jsx("div",{className:"flex gap-2 my-4",children:e.map(a=>c.jsx("button",{className:`w-8 h-8 rounded-full ${t===a?"ring-2 ring-offset-2 ring-blue-500":""}`,style:{backgroundColor:a},onClick:()=>i(a)},a))})}/**
+import{j as c,r as g,g as gi,a as Wt,h as vi,i as xi,m as rt,b as bi,u as yi,k as wi,L as Si}from"./index-BIrIpaYH.js";import{p as qe,a as lt,P as R}from"./tslib.es6-BP6bA2u-.js";function zi({selectedColor:t,onColorSelect:i,colors:e}){return c.jsx("div",{className:"flex gap-2 my-4",children:e.map(a=>c.jsx("button",{className:`w-8 h-8 rounded-full ${t===a?"ring-2 ring-offset-2 ring-blue-500":""}`,style:{backgroundColor:a},onClick:()=>i(a)},a))})}/**
  * @license lucide-react v0.460.0 - ISC
  *
  * This source code is licensed under the ISC license.
