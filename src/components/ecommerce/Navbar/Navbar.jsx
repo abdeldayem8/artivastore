@@ -6,7 +6,7 @@ import i18n from '../../../i18n';
 import { useTranslation } from 'react-i18next';
 import NavMenuItems from './NavMenuItems';
 import Languageswitcher from './Languageswitcher';
-import Logo from '../../../assets/homeimages/logo.svg?react'
+import Logo from '../../../assets/homeimages/logo.webp'
 
 const Navbar = () => {
 
@@ -39,7 +39,7 @@ const handleLanguageChange = (language) => {
       <div className='flex items-center justify-between mb-4'>
         {/* menu section */}
         <div className='hidden sm:block mx-4'>
-         <Logo/>
+         <img src={Logo} />
         </div>
         <div className='hidden lg:block'>
            <NavMenuItems
@@ -63,7 +63,7 @@ const handleLanguageChange = (language) => {
               />
             </div>
             <div className='block sm:hidden'>
-                 <Logo/>
+            <img src={Logo} />
               </div>
             <Headerbasket/>
         </div>
