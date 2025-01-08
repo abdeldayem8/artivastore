@@ -1,6 +1,6 @@
 import React from 'react';
 import { Plus, Minus } from 'lucide-react';
-import { SIZES, PRINT_LOCATIONS } from '../constants/customization';
+import { SIZES } from '../Constants/customization';
 import { motion } from 'framer-motion';
 
 function ProductCustomization({ 
@@ -24,10 +24,10 @@ function ProductCustomization({
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => onSizeChange(size.id)}
-              className={`py-2 px-4 rounded-lg border ${
+              className={`py-2 px-4 rounded-lg border${
                 selectedSize === size.id
                   ? 'border-blue-500 bg-blue-50 text-blue-700'
-                  : 'border-gray-200 hover:border-gray-300'
+                  : 'border-gray-200 hover:border-gray-300 text-secondary'
               }`}
             >
               {size.name}
@@ -54,7 +54,7 @@ function ProductCustomization({
           >
             <Minus size={20} className={quantity <= 1 ? 'text-gray-400' : ''} />
           </motion.button>
-          <span className="text-xl font-semibold w-12 text-center">{quantity}</span>
+          <span className="text-xl font-semibold w-12 text-secondary text-center">{quantity}</span>
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}

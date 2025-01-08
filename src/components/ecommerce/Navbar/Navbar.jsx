@@ -6,7 +6,7 @@ import i18n from '../../../i18n';
 import { useTranslation } from 'react-i18next';
 import NavMenuItems from './NavMenuItems';
 import Languageswitcher from './Languageswitcher';
-import Logo from '../../../assets/homeimages/logo.webp'
+
 
 const Navbar = () => {
 
@@ -36,10 +36,15 @@ const handleLanguageChange = (language) => {
 
   return <>
      <nav>
-      <div className='flex items-center justify-between mb-4'>
+      <div className='flex items-center justify-between mb-4 sm:gap-8'>
+
+      <div className='lg:hidden cursor-pointer text-secondary' onClick={toggleMenu} ref={menuButtonRef} >
+        {openmenu ? <MdClose className='text-2xl' /> : <MdMenu className='text-2xl' />} 
+      </div>
+
         {/* menu section */}
-        <div className='hidden sm:block mx-4'>
-         <img src={Logo} />
+        <div className='mx-4'>
+        <p className='text-secondary font-black text-2xl'>ARTIVA</p>
         </div>
         <div className='hidden lg:block'>
            <NavMenuItems
@@ -49,24 +54,20 @@ const handleLanguageChange = (language) => {
         closeMenu={closeMenu}
       />
         </div>
-       
+        
             {/* language */}
-            <div className='mobile-screen-nav flex justify-between items-center'>
-               {/* mobile hamburger menu section  and cart */}
-        <div className='lg:hidden cursor-pointer text-secondary' onClick={toggleMenu} ref={menuButtonRef} >
-        {openmenu ? <MdClose className='text-4xl' /> : <MdMenu className='text-4xl' />} 
-        </div>
-        <div className="hidden sm:inline-block">
+            <div className='flex justify-between items-center'>
+
+              <div className="hidden lg:inline-block">
               <Languageswitcher
                 selectedLanguage={selectedLanguage}
                 onLanguageChange={handleLanguageChange}
               />
             </div>
-            <div className='block sm:hidden'>
-            <img src={Logo} />
-              </div>
+            {/* cart */}
             <Headerbasket/>
         </div>
+
       </div>
      </nav>
      {/* mobile sidebar section */}

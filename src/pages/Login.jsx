@@ -51,7 +51,7 @@ const Login = () => {
                 <p className="text-red-500 text-sm">{errors.password.message}</p>
               )}
      <button 
-  className="w-full bg-secondary text-white py-2 rounded-md transition duration-300" 
+  className="w-full bg-secondary text-primary py-2 rounded-md transition duration-300" 
   disabled={loading}>
   {loading ? 'Logging in...' : 'Login'}
 </button>

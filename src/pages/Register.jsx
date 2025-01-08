@@ -133,7 +133,7 @@ const Register = () => {
               {errors.phone && (
                 <p className="text-red-500 text-sm">{errors.phone.message}</p>
               )}
-              <button className="w-full bg-secondary text-white py-2 rounded-md transition duration-300 cursor-pointer">
+              <button className="w-full bg-secondary text-primary py-2 rounded-md transition duration-300 cursor-pointer">
                 CREATE ACCOUNT
               </button>
             </form>
