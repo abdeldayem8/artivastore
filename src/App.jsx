@@ -13,7 +13,7 @@ function App() {
    <Provider store={store}>
     <PersistGate  loading={<Loading/>} persistor={persistor}>
    <div className="flex flex-col min-h-screen bg-primary">
-    <div className="p-6 lg:mx-auto mb-4">
+    <div className="container p-6 lg:mx-auto mb-4">
     <Navbar />
     </div>
     <div className="container mx-auto px-6 flex-grow">
