@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
 
-         const {t} =useTranslation();
+  const {t} =useTranslation();
   const navigate = useNavigate();
   const {data} = useSelector((state)=>state.social)
 
@@ -17,6 +17,16 @@ const Home = () => {
   useEffect(()=>{
     dispatch(fetchSocialData())
   },[dispatch])
+
+  const imageUrl= data.image;
+  const preloadImage = (url) => {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.href = url;
+    link.as = "image";
+    document.head.appendChild(link);
+  };
+  preloadImage(imageUrl)
       
         // Animation Variants
   const fadeInUp = {
@@ -64,9 +74,10 @@ const Home = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <img
-            src={data.image}
+            srcSet={imageUrl}
             alt="Top Cover image for home page"
-            className="mx-auto rounded-lg shadow-lg transform hover:scale-105 transition"
+            className="mx-auto w-full h-full transform hover:scale-105 transition"
+            loading='eager'
           />
         </motion.div>
       </motion.div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from '../../../assets/homeimages/cart.svg?react'
+import Logo from '../../../assets/cart.svg?react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 

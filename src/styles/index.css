@@ -3,11 +3,10 @@
 @tailwind utilities;
 
 
-body{
-    font-family: "Nunito Sans", serif;
+body {
+    font-family: "Nunito Sans", sans-serif;
     font-style: normal;
     font-weight: 400;
-    
 }
 .no-scroll {
     overflow: hidden;

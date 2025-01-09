@@ -59,25 +59,6 @@ const Footer = () => {
                 </div>
             </div>
         </div>
-        {/* subscribe */}
-        <div className='mb-4'>
-        <div className="p-8 rounded-lg  max-w-sm w-full">
-        <h2 className="text-2xl font-bold  mb-4 text-center">Be Our Friend</h2>
-        <div className='text-center'>
-        <label htmlFor='email' className=" mb-2">Enter Your Email Here <span className="text-red-500">*</span></label>
-        <input
-          id='email'
-          type="email"
-          className="w-full px-4 py-2  bg-transparent border-b-2 border-gray-500 focus:outline-none focus:ring-0 "
-        />
-        </div>
-        <button
-          className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg  transition duration-200"
-        >
-          Subscribe Now 
-        </button>
-      </div>
-        </div>
       </div>
     </footer>
   )

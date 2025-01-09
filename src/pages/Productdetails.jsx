@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchproductdetails } from '../store/thunks/productdetailsthunks';
 import Loading from '../components/common/Loading/Loading';
-import star from '../assets/star.png'
-import unstar from '../assets/unstar.png'
 import Moresold from '../components/ecommerce/moresold/Moresold'
 import { addToCart } from '../store/slices/cartslice';
 
@@ -59,14 +57,6 @@ const Productdetails = () => {
                 {/* product information */}
                 <div className='flex-1 '>
                     <h1 className='font-medium text-secondary text-2xl mt-2'>{productdetails.name}</h1>
-                    <div className='flex items-center gap-1 mt-2 '>
-                        <img src={star} className='w-3 5'/>
-                        <img src={star} className='w-3 5'/>
-                        <img src={star} className='w-3 5'/>
-                        <img src={star} className='w-3 5'/>
-                        <img src={unstar} className='w-3 5'/>
-                         <p className='pl-2'>(122)</p>
-                    </div>
                        {/* Calculate and display price and discount */}
     <div className='mt-5'>
         {productdetails.discount > 0 ? (
