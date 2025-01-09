@@ -6,6 +6,7 @@ import i18n from '../../../i18n';
 import { useTranslation } from 'react-i18next';
 import NavMenuItems from './NavMenuItems';
 import Languageswitcher from './Languageswitcher';
+import { useSelector } from 'react-redux';
 
 
 const Navbar = () => {
@@ -14,7 +15,7 @@ const Navbar = () => {
  const menuButtonRef = useRef(null);
  const { t } = useTranslation();
  const selectedLanguage = localStorage.getItem('i18nextLng') || "en";
-
+ const {data} = useSelector((state)=>state.social)
 
  
  const toggleMenu = useCallback(() => {
@@ -44,7 +45,7 @@ const handleLanguageChange = (language) => {
 
         {/* menu section */}
         <div className='mx-4'>
-        <p className='text-secondary font-black text-2xl'>ARTIVA</p>
+        <p className='text-secondary font-black text-2xl'>{data.name}</p>
         </div>
         <div className='hidden lg:block'>
            <NavMenuItems

@@ -60,7 +60,7 @@ const Cart = () => {
               </div>
             ))}
             <div className="flex flex-col md:flex-row justify-between items-center border-b pb-4 mb-4">
-              <h3 className="text-xl font-semibold mb-4">Total Price: {totalPrice.toFixed(2)} EGP</h3>
+              <h3 className="text-xl font-semibold mb-4 text-secondary">Total Price: {totalPrice.toFixed(2)} EGP</h3>
               <div className='flex items-center gap-2'>
               <button
                 className="bg-transparent  text-secondary border border-white-500 px-8 py-3 text-sm"

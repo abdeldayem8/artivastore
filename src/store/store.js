@@ -4,6 +4,7 @@ import productdetailsreducer from './slices/productdetailsslice'
 import loginreducer from './slices/loginslice'
 import  cartslice  from "./slices/cartslice";
 import customshirtreducer from './slices/customshirtslice'
+import socialreducer from './slices/socialslice'
 import storage from "redux-persist/lib/storage"; 
 import { persistStore, persistReducer } from "redux-persist";
 
@@ -18,7 +19,8 @@ const reducers = combineReducers({
     Productdetails: productdetailsreducer,
     login: loginreducer,
     customshirts:customshirtreducer,
-    cart: cartslice
+    cart: cartslice,
+    social:socialreducer
 })
 const persistedReducer = persistReducer(persistconfig, reducers)
 

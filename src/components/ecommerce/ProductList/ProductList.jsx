@@ -8,15 +8,7 @@ import axios from 'axios';
 import API_ENDPOINTS from '../../../utils/API_ENDPOINTS';
 import dropdown from '../../../assets/dropdown.png'
 import { addToCart } from '../../../store/slices/cartslice';
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button,
-} from "@material-tailwind/react";
-
+import { motion } from "framer-motion";
 
 const ProductList = () => {
     
@@ -73,12 +65,46 @@ useEffect(() => {
 
     if (loading) return <p><Loading/></p>;
     if (error) return <p>Error: {error.message}</p>;
-  return (
-       <div className="flex flex-col gap-6 pt-10">
-        <h2 className="text-2xl font-bold text-secondary">{t("products")}</h2>
 
-      {/* filter options */}
-      <div className="min-w-60 rounded-md text-secondary">
+     // Animation Variants
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      className="flex flex-col gap-6 pt-10"
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+      variants={staggerContainer}
+    >
+      {/* Heading */}
+      <motion.h2
+        className="text-2xl font-bold text-secondary"
+        variants={fadeInUp}
+        transition={{ duration: 0.5 }}
+      >
+        {t("products")}
+      </motion.h2>
+
+      {/* Filter Options */}
+      <motion.div
+        className="min-w-60 rounded-md text-secondary"
+        variants={fadeInUp}
+        transition={{ duration: 0.5 }}
+      >
         <p
           onClick={() => setShowfilter(!showfilter)}
           className="text-lg font-semibold cursor-pointer flex items-center gap-2"
@@ -92,12 +118,8 @@ useEffect(() => {
             alt="dropdown"
           />
         </p>
-          {/* category */}
-          <div
-          className={`mt-4 space-y-3 ${
-            showfilter ? "" : "hidden"
-          }`}
-        >
+        {/* Category Filters */}
+        <div className={`mt-4 space-y-3 ${showfilter ? "" : "hidden"}`}>
           <p className="font-semibold text-sm">CATEGORY</p>
           {categories.length > 0 ? (
             categories.map((category) => (
@@ -119,41 +141,44 @@ useEffect(() => {
             <p>No categories available</p>
           )}
         </div>
-      </div>
+      </motion.div>
 
-      {/* Product grid */}
-      <div className="flex-1">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4" style={{gap:"2px"}}>
-          {filteredProducts && filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
-              <div key={product.id} className="flex flex-col items-center">
-                <Productitem
-                  id={product.id}
-                  image={product.images}
-                  name={product.name}
-                  price={product.price}
-                />
-                <div className='w-full'>
-                <button
-                  className="w-full mb-2 bg-transparent border border-white-500 text-secondary font-semibold py-2 px-6 rounded transition-colors"
+      {/* Product Grid */}
+      <motion.div
+        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+        variants={staggerContainer}
+      >
+        {filteredProducts && filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
+            <motion.div
+              key={product.id}
+              className="flex flex-col items-center"
+              variants={fadeInUp}
+              transition={{ duration: 0.5 }}
+            >
+              <Productitem
+                id={product.id}
+                image={product.images}
+                name={product.name}
+                price={product.price}
+              />
+              <div className="w-full">
+                <motion.button
+                  className="w-full mb-2 bg-transparent border border-white-500 text-secondary font-semibold py-2 px-6 rounded transition-colors hover:bg-secondary hover:text-primary"
                   onClick={() => dispatch(addToCart(product))}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   Add To Cart
-                </button>
-                </div>
+                </motion.button>
               </div>
-              
-            ))
-          ) : (
-            <p className="text-center text-secondary">
-              No products available
-            </p>
-          )}
-        </div>
-      </div>
-
-
-    </div>
+            </motion.div>
+          ))
+        ) : (
+          <p className="text-center text-secondary">No products available</p>
+        )}
+      </motion.div>
+    </motion.div>
   );
 };
 

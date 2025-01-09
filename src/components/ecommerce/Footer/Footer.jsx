@@ -1,13 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FaFacebook } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaTiktok } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSocialData } from '../../../store/thunks/social';
 
 const Footer = () => {
+
+  const {data} = useSelector((state)=>state.social)
+
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(fetchSocialData())
+  },[dispatch])
+
   return (
-    <footer className='bg-primary  p-8 text-center '>
+    <footer className='bg-primary text-secondary p-8 text-center '>
       <div className='flex items-center justify-around flex-col sm:flex-row'>
         {/* our store */}
         <div className='mb-4'>
@@ -24,8 +34,8 @@ const Footer = () => {
             </div>
             <div>
             <h2 class="text-xl font-semibold mb-4">NEED ASSISTANCE?</h2>
-            <p class="mb-2">123-456-789</p>
-            <p>artiva@gmail.com</p>
+            <p class="mb-2">{data.phone}</p>
+            <p>{data.email}</p>
             </div>
         </div>
         {/* terms and conditions */}

@@ -9,6 +9,7 @@ const API_ENDPOINTS = {
     Login:`${BASE_URL}/api/login`,
     Logout:`${BASE_URL}/api/logout`,
     Order:`${BASE_URL}/api/order`,
-    Models:`${BASE_URL}/api/models/`
+    Models:`${BASE_URL}/api/models/`,
+    Social:`${BASE_URL}/api/social`
    };
 export default API_ENDPOINTS;
