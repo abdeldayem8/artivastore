@@ -6,6 +6,7 @@ import Footer from "./components/ecommerce/Footer/Footer"
 import { Toaster } from "react-hot-toast"
 import { PersistGate } from "redux-persist/integration/react"
 import Loading from "./components/common/Loading/Loading"
+
 function App() {
   
   return (

@@ -12,7 +12,7 @@ const Productdetails = () => {
     const dispatch = useDispatch();
     const [image,setImage] = useState('');
     const [size,setSize] = useState('');
-
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         dispatch(fetchproductdetails(id));
@@ -28,7 +28,7 @@ const Productdetails = () => {
     if (error) return <p>Error: {error.message}</p>;
     if (!productdetails) return <div>No product details found.</div>;
 
-   
+  
 
     return productdetails ? (
         <>
@@ -83,12 +83,35 @@ const Productdetails = () => {
                       <p>Select Size</p>
                       <div className='flex gap-2'>
                         {productdetails.size.map((item,index)=>(
-                            <button onClick={()=>setSize(item)} className={`border py-2 px-4 bg-gray-100 ${item === size ? 'border-orange-500' : ''}`} key={index}>{item}</button>
+                            <button onClick={()=>setSize(item)} className={`border py-2 px-4 text-secondary ${item === size ? 'bg-gray-500' : ''}`} key={index}>{item}</button>
                         ))}
                       </div>
                     </div>
+                      {/* Quantity Selection */}
+                      <div className='flex items-center gap-2 my-4'>
+                            <button
+                                className='border border-gray-500 text-secondary px-4 py-2'
+                                onClick={() => setQuantity(Math.max(quantity - 1, 1))}
+                            >
+                                -
+                            </button>
+                            <input
+                                type="number"
+                                value={quantity}
+                                min={1}
+                                className="border border-gray-500 bg-black text-white text-lg rounded-md py-2 px-4 w-16 text-center"
+                                readOnly
+                            />
+                            <button
+                                className='border border-gray-500 text-secondary px-4 py-2'
+                                onClick={() => setQuantity(quantity + 1)}
+                            >
+                                +
+                            </button>
+                        </div>
+
                     <div className='flex items-center gap-2'>
-                    <button className='bg-transparent border border-white-500 text-secondary  px-8 py-3 text-sm' onClick={()=>dispatch(addToCart(productdetails))}>ADD TO CART</button>
+                    <button className='bg-transparent border border-white-500 text-secondary  px-8 py-3 text-sm' onClick={()=>dispatch(addToCart({...productdetails,size:size,quantity}))}>ADD TO CART</button>
                     <button className='bg-secondary text-primary px-8 py-3 text-sm active:bg-gray-700'>BUY IT NOW</button>
                     </div>
                     <hr className='mt-8 sm:w-4/5 w-full border-t border-black' />

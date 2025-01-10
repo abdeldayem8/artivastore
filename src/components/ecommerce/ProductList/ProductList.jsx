@@ -9,6 +9,7 @@ import API_ENDPOINTS from '../../../utils/API_ENDPOINTS';
 import dropdown from '../../../assets/dropdown.png'
 import { addToCart } from '../../../store/slices/cartslice';
 import { motion } from "framer-motion";
+import ProductModal from '../Model/Productmodel';
 
 const ProductList = () => {
     
@@ -19,6 +20,8 @@ const ProductList = () => {
    const [categories,setCategories] = useState([]);
    const [selectedCategories, setSelectedCategories] = useState([]);
    const [showfilter,setShowfilter] = useState(false)
+   const [selectedProduct, setSelectedProduct] = useState(null); 
+   const [isModalOpen, setIsModalOpen] = useState(false); 
     
   //  fetch catgories
     const fetchCategories = async () => {
@@ -82,6 +85,7 @@ useEffect(() => {
     },
   };
 
+  console.log(selectedProduct)
   return (
     <motion.div
       className="flex flex-col gap-6 pt-10"
@@ -165,11 +169,14 @@ useEffect(() => {
               <div className="w-full">
                 <motion.button
                   className="w-full mb-2 bg-transparent border border-white-500 text-secondary font-semibold py-2 px-6 rounded transition-colors hover:bg-secondary hover:text-primary"
-                  onClick={() => dispatch(addToCart(product))}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    setSelectedProduct(product);
+                    setIsModalOpen(true);
+                  }}
                 >
-                  Add To Cart
+                  Choose Options
                 </motion.button>
               </div>
             </motion.div>
@@ -178,6 +185,13 @@ useEffect(() => {
           <p className="text-center text-secondary">No products available</p>
         )}
       </motion.div>
+       {/* Product Modal */}
+       <ProductModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        product={selectedProduct}
+        onAddToCart={(product) => dispatch(addToCart(product))}
+      />
     </motion.div>
   );
 };
