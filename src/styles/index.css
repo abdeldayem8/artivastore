@@ -27,15 +27,5 @@ body {
 }
 
 
-@media (max-width:768px) {
- .btns-cart-wrapper {
-    width: 100%;
-    justify-content: space-between;
-    margin-block: 4px;
- }    
- .btn-remove{
-    width: 100%;
-    margin-block: 4px;
- }
-}
+
   
