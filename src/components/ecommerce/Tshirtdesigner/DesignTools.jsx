@@ -77,7 +77,7 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Text Color:</label>
+              <label className="block text-sm text-secondary font-medium mb-2">Text Color:</label>
               <input
                 type="color"
                 value={textColor}

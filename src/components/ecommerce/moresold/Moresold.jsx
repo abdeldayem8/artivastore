@@ -2,7 +2,6 @@ import React from 'react'
 import useFetchmoresold from '../../../hooks/useFetchmoresold'
 import API_ENDPOINTS from '../../../utils/API_ENDPOINTS'
 import Loading from '../../common/Loading/Loading';
-import { Link } from 'react-router-dom';
 import Titlesection from '../../common/Titlesection/Titlesection';
 import Productitem from '../Productitem/Productitem';
 

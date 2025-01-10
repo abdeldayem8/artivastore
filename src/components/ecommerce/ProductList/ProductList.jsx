@@ -85,7 +85,7 @@ useEffect(() => {
     },
   };
 
-  console.log(selectedProduct)
+  
   return (
     <motion.div
       className="flex flex-col gap-6 pt-10"
