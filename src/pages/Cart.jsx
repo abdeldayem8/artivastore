@@ -83,7 +83,7 @@ const Cart = () => {
                       </div>
                       <button
                         className="text-red-500 hover:text-red-700 p-2"
-                        onClick={() => dispatch(removeFromCart({ id: product.id }))}
+                        onClick={() => dispatch(removeFromCart({ id: product.id,size:product.size }))}
                       >
                         <MdDelete className="w-4 h-4" />
                       </button>
