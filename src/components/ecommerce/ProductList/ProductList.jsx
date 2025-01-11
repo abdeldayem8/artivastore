@@ -10,19 +10,25 @@ import dropdown from '../../../assets/dropdown.png'
 import { addToCart } from '../../../store/slices/cartslice';
 import { motion } from "framer-motion";
 import ProductModal from '../Model/Productmodel';
+import { Pagination, Stack } from '@mui/material';
 
 const ProductList = () => {
     
    const dispatch = useDispatch()
    const {products,loading,error} = useSelector((state)=>state.products)
    const {t} =useTranslation();
-
+ 
    const [categories,setCategories] = useState([]);
    const [selectedCategories, setSelectedCategories] = useState([]);
    const [showfilter,setShowfilter] = useState(false)
    const [selectedProduct, setSelectedProduct] = useState(null); 
    const [isModalOpen, setIsModalOpen] = useState(false); 
-    
+   const pageSize=4;
+      const [pagination,setPagination] = useState({
+    from:0,
+    to:pageSize,
+   })
+  
   //  fetch catgories
     const fetchCategories = async () => {
       try {
@@ -84,7 +90,12 @@ useEffect(() => {
       },
     },
   };
-
+  const handlePagination = (event, page) => {
+   
+    const from = (page - 1) * pageSize;
+    const to = page * pageSize;
+    setPagination({ from, to });
+  };
   
   return (
     <motion.div
@@ -153,7 +164,7 @@ useEffect(() => {
         variants={staggerContainer}
       >
         {filteredProducts && filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
+          filteredProducts.slice(pagination.from,pagination.to).map((product) => (
             <motion.div
               key={product.id}
               className="flex flex-col items-center"
@@ -192,6 +203,24 @@ useEffect(() => {
         product={selectedProduct}
         onAddToCart={(product) => dispatch(addToCart(product))}
       />
+      {/* pagination */}
+      <Stack spacing={2} className='flex justify-center my-4 mx-auto'>
+      <Pagination onChange={handlePagination} count={Math.ceil(filteredProducts.length/pageSize)} variant="outlined" shape="rounded"  sx={{
+          "& .MuiPaginationItem-root": {
+            color: "white", // Change text color
+            "&.Mui-selected": {
+              backgroundColor: "#000", // Tailwind's black
+              color: "#F3E4DD", // Your primary color
+              borderColor: "#D1D5DB",
+            },
+            "&:hover": {
+              backgroundColor: "#374151", // Tailwind's gray-700
+              color: "#fff",
+            },
+          },
+        }}
+      />
+    </Stack>
     </motion.div>
   );
 };
