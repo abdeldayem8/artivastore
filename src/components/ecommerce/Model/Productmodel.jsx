@@ -5,11 +5,14 @@ import { useNavigate } from 'react-router-dom';
 const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState(product?.size || '');
+  const [selectedcolor,setSelectedColor] = useState(product?.color || null)
   const navigate = useNavigate(); 
 
   const handleSizeChange = (e) => {
     setSelectedSize(e.target.value);
   };
+
+ 
 
   // Handle quantity change
   const handleQuantityChange = (e) => {
@@ -77,6 +80,18 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
               </select>
             </div>
             </div>
+            {/* color */}
+            <p className='text-secondary my-4'>Available Colors</p>
+            {product?.color?.map((color) => (
+        <button
+          key={color}
+          className={`w-8 h-8 rounded-full ${
+            selectedcolor === color ? 'ring-2 ring-offset-2 ring-blue-500' : ''
+          }`}
+          style={{ backgroundColor: color }}
+          onClick={()=>setSelectedColor(color)}
+        />
+      ))}
 
             {/* Quantity */}
             <div className="space-y-4">
@@ -110,7 +125,7 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
             <div className="flex flex-col gap-4">
               <button
                 onClick={() => {
-                  onAddToCart({ ...product, size: selectedSize, quantity });
+                  onAddToCart({ ...product, size: selectedSize, quantity ,color:selectedcolor});
                   onClose(); // Close the modal after adding to the cart
                 }}
                 className="bg-secondary text-black text-lg font-semibold py-3 px-4 rounded-md w-full hover:bg-gray-400"

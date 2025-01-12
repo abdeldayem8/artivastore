@@ -96,7 +96,8 @@ useEffect(() => {
     const to = page * pageSize;
     setPagination({ from, to });
   };
-  
+
+
   return (
     <motion.div
       className="flex flex-col gap-6 pt-10"

@@ -63,6 +63,10 @@ const Cart = () => {
                       <p className="font-medium">{(product.price * product.quantity).toFixed(2)} EGP</p>
                     </div>
                     <p className="text-sm text-gray-500">Size: {product.size || 'N/A'}</p>
+                    <div className='flex items-center'>
+                    <span className='text-sm text-gray-500 mr-2'>Color:</span><button className='w-8 h-8 rounded-full'style={{color:product.color , backgroundColor:product.color}}></button>
+                    </div>
+                    
 
                     {/* Quantity and Remove Button */}
                     <div className="flex items-center justify-between">
@@ -83,7 +87,7 @@ const Cart = () => {
                       </div>
                       <button
                         className="text-red-500 hover:text-red-700 p-2"
-                        onClick={() => dispatch(removeFromCart({ id: product.id,size:product.size }))}
+                        onClick={() => dispatch(removeFromCart({ id: product.id,size:product.size,color:product.color }))}
                       >
                         <MdDelete className="w-4 h-4" />
                       </button>

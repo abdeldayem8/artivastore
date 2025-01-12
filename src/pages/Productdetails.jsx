@@ -12,6 +12,7 @@ const Productdetails = () => {
     const dispatch = useDispatch();
     const [image,setImage] = useState('');
     const [size,setSize] = useState('');
+    const [color,setColor] = useState(null)
     const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
@@ -78,7 +79,21 @@ const Productdetails = () => {
             </p>
         )}
     </div>
-                    <p className='mt-5 text-gray-500 md:w-4/5'>{productdetails.description}</p>
+                    <p className='my-5 text-gray-500 md:w-4/5'>{productdetails.description}</p>
+                    {/* colors */}
+                    <p className='text-secondary my-4'>Available Colors</p>
+                    {productdetails?.color?.map((color) => (
+        <button
+          key={color}
+          className={`w-8 h-8 rounded-full ${
+            color === color ? 'ring-2 ring-offset-2 ring-blue-500' : ''
+          }`}
+          style={{ backgroundColor: color }}
+          onClick={()=>setColor(color)}
+        />
+      ))}
+
+                    {/* sizes */}
                     <div className='flex flex-col gap-4 my-8'>
                       <p>Select Size</p>
                       <div className='flex gap-2'>
@@ -111,7 +126,7 @@ const Productdetails = () => {
                         </div>
 
                     <div className='flex items-center gap-2'>
-                    <button className='bg-transparent border border-white-500 text-secondary  px-8 py-3 text-sm' onClick={()=>dispatch(addToCart({...productdetails,size:size,quantity}))}>ADD TO CART</button>
+                    <button className='bg-transparent border border-white-500 text-secondary  px-8 py-3 text-sm' onClick={()=>dispatch(addToCart({...productdetails,size,quantity,color}))}>ADD TO CART</button>
                     <button className='bg-secondary text-primary px-8 py-3 text-sm active:bg-gray-700'>BUY IT NOW</button>
                     </div>
                     <hr className='mt-8 sm:w-4/5 w-full border-t border-black' />

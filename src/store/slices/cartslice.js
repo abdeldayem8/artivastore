@@ -8,16 +8,16 @@ export const cartslice = createSlice({
   reducers:{
 
     addToCart: (state, action) => {
-      const { id, size, quantity } = action.payload; // Get the product id, size, and quantity from the action payload
+      const { id, size, quantity ,color } = action.payload; // Get the product id, size, color and quantity from the action payload
 
-      if(!size){
-        toast.error("Please select a size before adding to the cart!");
+      if(!size || !color){
+        toast.error("Please select a size and Color before adding to the cart!");
         return;
       }
     
       // Check if this product with the same size already exists in the cart
       const findProduct = state.find(
-        (product) => product.id === id && product.size === size
+        (product) => product.id === id && product.size === size && product.color === color
       );
     
       if (findProduct) {
@@ -49,9 +49,9 @@ export const cartslice = createSlice({
     },
 
     removeFromCart : (state,action)=>{
-      const {id,size} = action.payload;
+      const {id,size,color} = action.payload;
 
-     const remove =  state.filter((product)=> !(product.id === id && product.size === size)
+     const remove =  state.filter((product)=> !(product.id === id && product.size === size && product.color === color)
    
       )
       return remove
