@@ -10,6 +10,22 @@ const Cart = () => {
   const navigate = useNavigate();
   const totalPrice = cart.reduce((acc, product) => acc + product.price * product.quantity, 0);
 
+  const handleCheckout = () => {
+    const orderData = {
+      items: cart.map((product) => ({
+        id: product.id,
+        name: product.name,
+        image:product.images[0],
+        size: product.size,
+        color: product.color,
+        quantity: product.quantity,
+        price: product.price,
+      })),
+      totalPrice,
+    };
+  
+    navigate('/artivastore/order', { state: orderData });
+  };
   return (
     <div className="container mx-auto py-8">
       {cart.length === 0 ? (
@@ -52,7 +68,7 @@ const Cart = () => {
                     <img
                       src={product.images[0]}
                       alt={product.name}
-                      className="absolute inset-0 w-full h-full object-cover rounded-md"
+                      className="absolute inset-0 w-auto h-full object-cover rounded-md"
                     />
                   </div>
 
@@ -64,7 +80,7 @@ const Cart = () => {
                     </div>
                     <p className="text-sm text-gray-500">Size: {product.size || 'N/A'}</p>
                     <div className='flex items-center'>
-                    <span className='text-sm text-gray-500 mr-2'>Color:</span><button className='w-8 h-8 rounded-full'style={{color:product.color , backgroundColor:product.color}}></button>
+                    <span className='text-sm text-gray-500 mr-2'>Color:</span><button className='w-8 h-8 rounded-full border-2 border-gray-500'style={{color:product.color , backgroundColor:product.color}}></button>
                     </div>
                     
 
@@ -120,7 +136,7 @@ const Cart = () => {
                   </div>
                 </div>
                 <div className="p-6 bg-gray-50 border-t border-gray-200 rounded-b-lg">
-                  <button className="w-full bg-black text-white py-3 rounded-md hover:bg-gray-800 mb-2">
+                  <button onClick={handleCheckout} className="w-full bg-black text-white py-3 rounded-md hover:bg-gray-800 mb-2">
                     Checkout Now
                   </button>
                   <button

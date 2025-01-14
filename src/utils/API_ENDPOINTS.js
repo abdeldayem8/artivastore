@@ -8,7 +8,6 @@ const API_ENDPOINTS = {
     Register:`${BASE_URL}/api/register`,
     Login:`${BASE_URL}/api/login`,
     Logout:`${BASE_URL}/api/logout`,
-    Logout:`${BASE_URL}/api/logout`,
     Order:`${BASE_URL}/api/order`,
     Models:`${BASE_URL}/api/models/`,
     Social:`${BASE_URL}/api/social`

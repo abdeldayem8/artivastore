@@ -23,7 +23,7 @@ const ProductList = () => {
    const [showfilter,setShowfilter] = useState(false)
    const [selectedProduct, setSelectedProduct] = useState(null); 
    const [isModalOpen, setIsModalOpen] = useState(false); 
-   const pageSize=4;
+   const pageSize=16;
       const [pagination,setPagination] = useState({
     from:0,
     to:pageSize,
@@ -180,7 +180,7 @@ useEffect(() => {
               />
               <div className="w-full">
                 <motion.button
-                  className="w-full mb-2 bg-transparent border border-white-500 text-secondary font-semibold py-2 px-6 rounded transition-colors hover:bg-secondary hover:text-primary"
+                  className="w-full mb-2 bg-transparent border border-white-500 text-secondary font-semibold py-2 sm:px-6 rounded transition-colors hover:bg-secondary hover:text-primary"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {

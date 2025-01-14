@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 export const fetchlogin = createAsyncThunk("login",async ({email,password,navigate},{rejectWithValue})=>{
     try {
-        const response = await axios.post(API_ENDPOINTS.Login,{ email, password });
+        const response = await axios.post(API_ENDPOINTS.Login,{email, password});
         if (response.status === 200) {
           localStorage.setItem('token', response.data.data.access_token);
           toast.success(response.data.message, { duration: 1000 });

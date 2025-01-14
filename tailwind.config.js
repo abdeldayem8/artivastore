@@ -10,7 +10,12 @@ export default {
        primary:"#000",
        secondary:"#fff"
       },
+      aspectRatio: {
+        '4/3': '4 / 3',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+  ],
 }

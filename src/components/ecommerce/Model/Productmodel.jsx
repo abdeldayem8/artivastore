@@ -30,7 +30,7 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-scroll"
       onClick={handleModalClick} // Close modal when clicked outside
     >
       <div
@@ -48,11 +48,11 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
         {/* Modal Content */}
         <div className="flex flex-col md:flex-row gap-6 h-full w-full">
           {/* Product Image */}
-          <div className="w-full md:w-1/2  md:h-full">
+          <div className="">
             <img
               src={product?.images[0]}
               alt={product?.name}
-              className="w-full h-full object-cover rounded-md"
+              className="aspect-[4/5] w-2/3 h-full object-cover  rounded-md"
             />
           </div>
 
@@ -82,16 +82,21 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
             </div>
             {/* color */}
             <p className='text-secondary my-4'>Available Colors</p>
+            <div className='flex items-center gap-4'>
             {product?.color?.map((color) => (
         <button
           key={color}
-          className={`w-8 h-8 rounded-full ${
-            selectedcolor === color ? 'ring-2 ring-offset-2 ring-blue-500' : ''
-          }`}
+          className={`w-8 h-8 rounded-full border-2 transition ${
+            selectedcolor === color
+            ? 'border-gray-500' // Change border to gray when selected
+            : 'border-orange-500' // Default orange border
+        }`}
           style={{ backgroundColor: color }}
           onClick={()=>setSelectedColor(color)}
         />
       ))}
+            </div>
+            
 
             {/* Quantity */}
             <div className="space-y-4">

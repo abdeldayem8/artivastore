@@ -9,11 +9,12 @@ const Productitem = ({id,image,name ,price}) => {
   >
     {/* Product Image */}
     {image && image.length > 0 ? (
-      <div className='overflow-hidden'>
+      <div>
       <img 
         src={image[0]} 
         alt={`${name} main image`} 
-        className="w-full h-full hover:scale-90 transition-transform"
+        className="aspect-[4/5] w-full h-full object-cover hover:scale-90 transition-transform"
+        
       />
       </div>
     ) : (

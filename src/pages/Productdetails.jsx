@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchproductdetails } from '../store/thunks/productdetailsthunks';
 import Loading from '../components/common/Loading/Loading';
 import Moresold from '../components/ecommerce/moresold/Moresold'
 import { addToCart } from '../store/slices/cartslice';
+import toast from 'react-hot-toast';
 
 const Productdetails = () => {
     const { id } = useParams();
@@ -12,9 +13,9 @@ const Productdetails = () => {
     const dispatch = useDispatch();
     const [image,setImage] = useState('');
     const [size,setSize] = useState('');
-    const [color,setColor] = useState(null)
+    const [selectedcolor,setSelectedcolor] = useState(null)
     const [quantity, setQuantity] = useState(1);
-
+    const navigate = useNavigate()
     useEffect(() => {
         dispatch(fetchproductdetails(id));
     }, [id, dispatch]);
@@ -24,6 +25,29 @@ const Productdetails = () => {
             setImage(productdetails.images[0]); // Set first image as the main image
         }
     }, [productdetails]);
+
+    const handleCheckout = () => {
+        if(!size || !selectedcolor){
+            toast.error("Please select a size and color before proceeding.")
+            return;
+        }
+        const orderData = {
+          items: [
+            {
+              id: productdetails.id,
+              name: productdetails.name,
+              image:productdetails.images[0],
+              size: size,
+              color: selectedcolor,
+              quantity: quantity,
+              price: productdetails.price,
+            },
+          ],
+          totalPrice: productdetails.price * quantity,
+        };
+      
+        navigate('/artivastore/order', { state: orderData });
+      };
 
     if (loading) return <p><Loading/></p>;
     if (error) return <p>Error: {error.message}</p>;
@@ -82,16 +106,21 @@ const Productdetails = () => {
                     <p className='my-5 text-gray-500 md:w-4/5'>{productdetails.description}</p>
                     {/* colors */}
                     <p className='text-secondary my-4'>Available Colors</p>
+                    <div className='flex gap-2'>
                     {productdetails?.color?.map((color) => (
         <button
           key={color}
-          className={`w-8 h-8 rounded-full ${
-            color === color ? 'ring-2 ring-offset-2 ring-blue-500' : ''
-          }`}
+          className={`w-8 h-8 rounded-full border-2 transition ${
+            selectedcolor === color
+            ? 'border-gray-500' // Change border to gray when selected
+            : 'border-orange-500' // Default orange border
+        }`}
           style={{ backgroundColor: color }}
-          onClick={()=>setColor(color)}
+          onClick={()=>setSelectedcolor(color)}
         />
       ))}
+                    </div>
+                    
 
                     {/* sizes */}
                     <div className='flex flex-col gap-4 my-8'>
@@ -126,8 +155,8 @@ const Productdetails = () => {
                         </div>
 
                     <div className='flex items-center gap-2'>
-                    <button className='bg-transparent border border-white-500 text-secondary  px-8 py-3 text-sm' onClick={()=>dispatch(addToCart({...productdetails,size,quantity,color}))}>ADD TO CART</button>
-                    <button className='bg-secondary text-primary px-8 py-3 text-sm active:bg-gray-700'>BUY IT NOW</button>
+                    <button className='bg-transparent border border-white-500 text-secondary  px-8 py-3 text-sm' onClick={()=>dispatch(addToCart({...productdetails,size,quantity,color:selectedcolor}))}>ADD TO CART</button>
+                    <button onClick={handleCheckout} className='bg-secondary text-primary px-8 py-3 text-sm active:bg-gray-700'>BUY IT NOW</button>
                     </div>
                     <hr className='mt-8 sm:w-4/5 w-full border-t border-black' />
                     <div className='text-sm text-gray-500 mt-5 flex flex-col gap-1'>
