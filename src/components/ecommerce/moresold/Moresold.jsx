@@ -3,7 +3,7 @@ import useFetchmoresold from '../../../hooks/useFetchmoresold'
 import API_ENDPOINTS from '../../../utils/API_ENDPOINTS'
 import Loading from '../../common/Loading/Loading';
 import Titlesection from '../../common/Titlesection/Titlesection';
-import Productitem from '../Productitem/Productitem';
+import ProductItem from '../Productitem/Productitem';
 
 
 const Moresold = ({title}) => {
@@ -20,7 +20,7 @@ const Moresold = ({title}) => {
                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5">
                    {bestsellersdata && bestsellersdata.length > 0 ? (
                        bestsellersdata.map((product) => (
-                           <Productitem key={product.id} id={product.id} image={product.images} name={product.name} price={product.price} />
+                           <ProductItem product={product} />
                        ))
                    ) : (
                        <p className="text-center text-gray-500">No products available</p>

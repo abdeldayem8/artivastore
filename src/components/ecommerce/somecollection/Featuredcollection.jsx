@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchproducts } from '../../../store/thunks/productsThunks';
 import Loading from '../../common/Loading/Loading';
-import Productitem from '../Productitem/Productitem';
+import ProductItem from '../Productitem/Productitem';
 
 const Featuredcollection = () => {
      const dispatch = useDispatch()
@@ -25,7 +25,7 @@ const Featuredcollection = () => {
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5">
         {homeProducts && homeProducts.length > 0 ? (
           homeProducts.map((product) => (
-            <Productitem key={product.id} id={product.id} image={product.images} name={product.name} price={product.price}/>
+            <ProductItem product={product}/>
           ))
         ) : (
           <p className="text-center text-gray-500">No products available</p>

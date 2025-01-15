@@ -1,76 +1,216 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import API_ENDPOINTS from '../utils/API_ENDPOINTS';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import {z} from "zod"
+import toast from 'react-hot-toast';
 
+const orderSchema = z.object({
+  first_name: z.string().refine(value => value?.trim() !== '', { message: 'First Name is required' }),
+  
+  last_name: z.string().refine(value => value?.trim() !== '', { message: 'Last Name is required' }),
+
+  email: z.string().email("Invalid email address").refine(value => value?.trim() !== '', { message: 'Email is required' }),
+
+  phone: z
+  .string()
+  .regex(/^01[0-25][0-9]{8}$/, {
+    message: "Invalid phone number. It should start with 01 and have 11 digits.",
+  })
+    .optional(),
+
+  address: z.string().refine(value => value?.trim() !== '', { message: 'Address is required' }),
+
+  city: z.string().or(z.number()).refine(value => value?.trim() !== '', { message: 'City is required' }),
+});
 const Order = () => {
-  const location = useLocation();
-  const orderdata = location.state;
-  console.log(orderdata)
+
+  const { register, handleSubmit, setValue, formState: { errors }} = useForm({
+    resolver: zodResolver(orderSchema),
+    defaultValues: {
+      city: '' // Initialize with empty string
+    }
+  });
+   const location = useLocation();
+   const orderdata = location.state;
+   const prevpage = location.state.from;
+   const [cities, setCities] = useState([]); 
+   const [shippingPrice, setShippingPrice] = useState(null); 
+
+  useEffect(()=>{
+    const getCities = async()=>{
+      try {
+        const response = await axios.post(API_ENDPOINTS.City);
+        const fetchedCities = response.data.data
+         setCities(fetchedCities);
+         if (fetchedCities.length > 0) {
+           const firstCity = fetchedCities[0];
+          setValue("city", firstCity.id.toString()); // Convert ID to string
+           setShippingPrice(parseFloat(firstCity.price) || 0); // Set initial shipping price
+         }
+     } catch (error) {
+       console.log(error)
+     }
+    }
+   getCities()
+  },[setValue])
+
+  const handleCityChange = (event) => {
+
+    const cityId = event.target.value;
+
+    if (cities.length === 0) {
+        console.log("Cities state is not populated yet.");
+        return;
+    }
+
+    // Ensure that the city ID is compared correctly by converting it to a string
+    const cityData = cities.find((c) => c.id.toString() === cityId);
+
+    if (cityData) {
+        setShippingPrice(parseFloat(cityData.price) || 0); // Update price
+    } else {
+        setShippingPrice(null); // Reset price
+    }
+};
+
+
+  const submitOrder = async (formDataValues) => {
+    // Check if items are available before proceeding
+    if (!orderdata?.items || orderdata.items.length === 0) {
+      toast.error("No items in the order.");
+      return; // Prevent form submission
+    }
+  
+    try {
+      const formData = new FormData();
+      
+      // Add form data to FormData
+      Object.entries(formDataValues).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          formData.append(key, value);
+        }
+      });
+      if (prevpage === "fromCart") {
+        // Handle items for regular orders
+        const { items } = orderdata;
+        items.forEach((item, index) => {
+          formData.append(`items[${index}][product_id]`, item.id);
+          formData.append(`items[${index}][size]`, item.size);
+          formData.append(`items[${index}][color]`, item.color);
+          formData.append(`items[${index}][quantity]`, item.quantity);
+        });
+  
+      } else if (prevpage === "fromCustom") {
+        // Handle items for custom orders
+        const { items } = orderdata;
+        items.forEach((item, index) => {
+          formData.append(`special_items[${index}][name]`, item.category);
+          formData.append(`special_items[${index}][size]`, item.size);
+          formData.append(`special_items[${index}][color]`, item.color);
+          formData.append(`special_items[${index}][quantity]`, item.quantity);
+  
+          // Assuming `item.front` and `item.back` are File objects (image files)
+          if (item.front) {
+            formData.append(`special_items[${index}][image][0]`, item.front);
+          }
+          if (item.back) {
+            formData.append(`special_items[${index}][image][1]`, item.back);
+          }
+        });
+      }
+      console.log("FormData Contents:");
+    for (let pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+  
+      // Make the request
+      const response = await axios.post(API_ENDPOINTS.Order, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+  
+      toast.success("Order submitted successfully!");
+      
+     
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <div className="flex gap-4 flex-col sm:flex-row max-w-4xl mx-auto p-6 text-secondary">
     {/* Delivery Section */}
     <div className="flex-1 sm:pr-4">
       <h2 className="text-2xl font-semibold mb-4">Delivery Details</h2>
+    <form onSubmit={handleSubmit(submitOrder)}>
       <div className="my-4 relative space-y-4">
-        <select
-          name="countrycode"
-          className="bg-transparent border-2 border-gray-500 w-full p-2 rounded-md"
-          defaultValue=""
-        >
-          <option value="" disabled>
-            Select Country
-          </option>
-          <option value="EG">EGYPT</option>
-        </select>
-  
+        {/* names */}
         <div className="grid grid-cols-2 gap-4">
           <input
+          {...register("first_name")}
             type="text"
             placeholder="First Name"
             className="bg-transparent p-2 border-2 border-gray-500 w-full rounded-md"
           />
+          {errors.first_name && <p className="text-red-500">{errors.first_name.message}</p>}
+          
           <input
+          {...register("last_name")}
             type="text"
             placeholder="Last Name"
             className="bg-transparent p-2 border-2 border-gray-500 w-full rounded-md"
           />
+          {errors.last_name && <p className="text-red-500">{errors.last_name.message}</p>}
         </div>
-  
+        {/* mail,address,city,phone and payment */}
         <input
+        {...register("email")}
+          type="email"
+          placeholder="Email"
+          className="bg-transparent p-2 border-2 border-gray-500 w-full rounded-md"
+        />
+          {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+        <input
+        {...register("address")}
           type="text"
           placeholder="Address"
           className="bg-transparent p-2 border-2 border-gray-500 w-full rounded-md"
         />
-  
-        <input
-          type="text"
-          placeholder="Apartment, Suite, etc."
-          className="bg-transparent p-2 border-2 border-gray-500 w-full rounded-md"
-        />
-  
-        <div className="grid grid-cols-2 gap-4">
+         {errors.address && <p className="text-red-500">{errors.address.message}</p>}
+         <select
+              {...register("city")}
+              onChange={(e) => {
+                handleCityChange(e);
+                register("city").onChange(e);
+              }}
+              className="bg-transparent p-2 border-2 border-gray-500 w-full rounded-md"
+            >
+              {cities.map((city) => (
+                <option key={city.id} value={city.id.toString()} className='text-primary'>
+                  {city.name}
+                </option>
+              ))}
+            </select>
+            {errors.city && <p className="text-red-500">{errors.city.message}</p>}
+
           <input
-            type="text"
-            placeholder="City"
-            className="bg-transparent p-2 border-2 border-gray-500 w-full rounded-md"
-          />
-          <input
-            type="text"
-            placeholder="Governorate"
-            className="bg-transparent p-2 border-2 border-gray-500 w-full rounded-md"
-          />
-        </div>
-  
-        <input
+        {...register("phone")}
           type="tel"
           placeholder="Phone"
           className="bg-transparent p-2 border-2 border-gray-500 w-full rounded-md"
         />
+         {errors.phone && <p className="text-red-500">{errors.phone.message}</p>}
+      
       </div>
   
       <h3 className="text-xl font-semibold mt-8 mb-4">Shipping Method</h3>
       <div className="flex items-center justify-between border-2 border-gray-500 p-4 rounded-md">
         <p>Standard</p>
-        <p>Free</p>
+        <p>{shippingPrice === 0 ? "Free" : `${shippingPrice} EGP`}</p>
       </div>
   
       <h3 className="text-xl font-semibold mt-8 mb-4">Payment Method</h3>
@@ -93,8 +233,10 @@ const Order = () => {
       >
         Place Order
       </button>
-    </div>
-  
+    </form>
+    </div> 
+
+
     {/* Order Summary Section */}
     <div className="flex-shrink-0 sm:w-1/3">
       <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
@@ -106,7 +248,7 @@ const Order = () => {
           >
             <div className="w-20 h-20 flex-shrink-0">
               <img
-                src={item.image}
+                src={item.image || item.front}
                 alt={item.name}
                 className="w-auto h-full object-cover rounded-md"
               />
@@ -123,14 +265,12 @@ const Order = () => {
         <div className="mt-4 pt-4">
           <div className="flex justify-between">
             <span>Subtotal</span>
-            <span className="font-semibold">{orderdata?.totalPrice} EGP</span>
+            <span className="font-semibold">{orderdata?.totalPrice || orderdata?.items[0].price} EGP</span>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
-
   )
 }
 

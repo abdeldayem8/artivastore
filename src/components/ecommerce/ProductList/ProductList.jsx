@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Loading from '../../common/Loading/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchproducts } from '../../../store/thunks/productsThunks';
-import Productitem from '../Productitem/Productitem'
+import ProductItem from '../Productitem/Productitem'
 import axios from 'axios';
 import API_ENDPOINTS from '../../../utils/API_ENDPOINTS';
 import dropdown from '../../../assets/dropdown.png'
@@ -172,12 +172,8 @@ useEffect(() => {
               variants={fadeInUp}
               transition={{ duration: 0.5 }}
             >
-              <Productitem
-                id={product.id}
-                image={product.images}
-                name={product.name}
-                price={product.price}
-              />
+              {console.log(product)}
+              <ProductItem product={product} />
               <div className="w-full">
                 <motion.button
                   className="w-full mb-2 bg-transparent border border-white-500 text-secondary font-semibold py-2 sm:px-6 rounded transition-colors hover:bg-secondary hover:text-primary"

@@ -34,7 +34,7 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
       onClick={handleModalClick} // Close modal when clicked outside
     >
       <div
-        className="bg-primary w-11/12 md:w-3/5 h-auto md:h-3/5 p-6 rounded-md relative flex flex-col md:flex-row"
+        className="bg-primary w-3/5 h-auto md:h-3/5 p-6 rounded-md relative flex flex-col md:flex-row"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -48,11 +48,11 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
         {/* Modal Content */}
         <div className="flex flex-col md:flex-row gap-6 h-full w-full">
           {/* Product Image */}
-          <div className="">
+          <div className="w-32 h-32 sm:w-full sm:h-full">
             <img
               src={product?.images[0]}
               alt={product?.name}
-              className="aspect-[4/5] w-2/3 h-full object-cover  rounded-md"
+              className="aspect-[4/5] w-full h-full object-cover  rounded-md"
             />
           </div>
 

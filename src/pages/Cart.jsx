@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCart, decreaseQuantity, increaseQuantity, removeFromCart } from '../store/slices/cartslice';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { MdAdd, MdDelete, MdRemove } from "react-icons/md";
 
 const Cart = () => {
@@ -23,8 +23,13 @@ const Cart = () => {
       })),
       totalPrice,
     };
-  
-    navigate('/artivastore/order', { state: orderData });
+    dispatch(clearCart())
+    navigate('/artivastore/order', {
+      state: {
+        ...orderData,
+        from: "fromCart",  // Pass a specific word to indicate the origin
+      },
+    });
   };
   return (
     <div className="container mx-auto py-8">

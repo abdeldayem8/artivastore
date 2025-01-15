@@ -8,6 +8,7 @@ import ProductCustomization from '../components/ecommerce/Tshirtdesigner/Product
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchcustomshirts } from '../store/thunks/customshirtthunk';
 import Loading from '../components/common/Loading/Loading' 
+import { useNavigate } from 'react-router-dom';
 
 
 function TshirtDesigner() {
@@ -22,6 +23,7 @@ function TshirtDesigner() {
   const [frontDesignImage, setFrontDesignImage] = useState(null); // For front
   const [backDesignImage, setBackDesignImage] = useState(null); // For back
   const [view, setView] = useState('front'); // Track current view (front/back)
+  const navigate= useNavigate()
 
 const {data ,loading ,error} = useSelector((state)=>state.customshirts)
 const dispatch = useDispatch();
@@ -69,6 +71,32 @@ const availableColors = [...new Set(products.map((product) => product.color))];
  
   if (loading) return <Loading/>;
   if (error) return <p>Error: {error}</p>;
+  const handleCheckout = () => {
+    if (!selectedCategory || !selectedSize || !selectedColor) {
+      toast.error("Please select a category, size, and color before proceeding.");
+      return;
+    }
+  
+    const orderData = {
+      items: [
+        {
+          category: selectedCategory,
+          front: frontDesignImage,
+          back: backDesignImage,
+          size: selectedSize,
+          color: selectedColor,
+          quantity: quantity,
+          price: pricing,
+        },
+      ],
+    };
+    navigate('/artivastore/order', {
+      state: {
+        ...orderData,
+        from: "fromCustom",  // Pass a specific word to indicate the origin
+      },
+    });
+  };
 
   return (
     <div className="min-h-screen">
@@ -144,6 +172,7 @@ const availableColors = [...new Set(products.map((product) => product.color))];
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="w-full bg-secondary text-primary py-3 rounded-lg flex items-center justify-center gap-2"
+              onClick={handleCheckout}
             >
               Buy It Now
             </motion.button>

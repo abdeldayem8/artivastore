@@ -46,9 +46,13 @@ const Productdetails = () => {
           totalPrice: productdetails.price * quantity,
         };
       
-        navigate('/artivastore/order', { state: orderData });
-      };
-
+        navigate('/artivastore/order', {
+            state: {
+              ...orderData,
+              from: "fromCart",  // Pass a specific word to indicate the origin
+            },
+          });
+        };
     if (loading) return <p><Loading/></p>;
     if (error) return <p>Error: {error.message}</p>;
     if (!productdetails) return <div>No product details found.</div>;
