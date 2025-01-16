@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { Upload, Palette, Type, Undo, Redo, RotateCcw } from "lucide-react";
+import { Upload, Palette} from "lucide-react";
 import { useDropzone } from "react-dropzone";
 
 function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) {
@@ -9,13 +9,12 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
   // Handle file upload via dropzone
   const onDrop = useCallback(
     (acceptedFiles) => {
-      const file = acceptedFiles[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          onDesignUpload(e.target.result);
-        };
-        reader.readAsDataURL(file);
+      const file = acceptedFiles[0]; // Select the first file
+      if (file && file instanceof File) { // Ensure it's a valid File object
+        // Pass the file object to onDesignUpload
+        onDesignUpload(file); // Pass the file directly
+      } else {
+        console.error("Invalid file type or no file selected");
       }
     },
     [onDesignUpload]
@@ -23,7 +22,11 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: { "image/*": [".png", ".jpg", ".jpeg", ".gif"] },
+    accept: {
+      "image/png": [".png"],
+      "image/jpeg": [".jpg", ".jpeg"],
+      "image/webp": [".webp"],
+    },
     multiple: false,
   });
 

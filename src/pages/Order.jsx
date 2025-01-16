@@ -25,6 +25,7 @@ const orderSchema = z.object({
 
   city: z.string().or(z.number()).refine(value => value?.trim() !== '', { message: 'City is required' }),
 });
+
 const Order = () => {
 
   const { register, handleSubmit, setValue, formState: { errors }} = useForm({
@@ -141,6 +142,7 @@ const Order = () => {
     }
   };
 
+   console.log(orderdata)
   return (
     <div className="flex gap-4 flex-col sm:flex-row max-w-4xl mx-auto p-6 text-secondary">
     {/* Delivery Section */}
@@ -248,7 +250,7 @@ const Order = () => {
           >
             <div className="w-20 h-20 flex-shrink-0">
               <img
-                src={item.image || item.front}
+                src={item.image || item.frontPreview || item.backPreview}
                 alt={item.name}
                 className="w-auto h-full object-cover rounded-md"
               />

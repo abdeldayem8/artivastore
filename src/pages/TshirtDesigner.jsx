@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchcustomshirts } from '../store/thunks/customshirtthunk';
 import Loading from '../components/common/Loading/Loading' 
 import { useNavigate } from 'react-router-dom';
+import { fileToBase64 } from '../utils/imageUtils';
 
 
 function TshirtDesigner() {
@@ -21,7 +22,10 @@ function TshirtDesigner() {
   const [selectedSize, setSelectedSize] = useState('M');
   const [quantity, setQuantity] = useState(1);
   const [frontDesignImage, setFrontDesignImage] = useState(null); // For front
+  const [frontDesignImageFile, setFrontDesignImageFile] = useState(null); // For front
   const [backDesignImage, setBackDesignImage] = useState(null); // For back
+  const [backDesignImageFile, setBackDesignImageFile] = useState(null); // For back
+
   const [view, setView] = useState('front'); // Track current view (front/back)
   const navigate= useNavigate()
 
@@ -53,11 +57,14 @@ const availableColors = [...new Set(products.map((product) => product.color))];
     setTextColor(color); // Update the color as well
   };
   
-  const handleDesignUpload = (imageData) => {
+  const handleDesignUpload = async(file) => {
+    const base64String = await fileToBase64(file);
     if (view === 'front') {
-      setFrontDesignImage(imageData);
+      setFrontDesignImage(base64String);
+      setFrontDesignImageFile(file)
     } else {
-      setBackDesignImage(imageData);
+      setBackDesignImage(base64String);
+      setBackDesignImageFile(file)
     }
   };
 
@@ -81,8 +88,10 @@ const availableColors = [...new Set(products.map((product) => product.color))];
       items: [
         {
           category: selectedCategory,
-          front: frontDesignImage,
-          back: backDesignImage,
+          front: frontDesignImageFile,
+          back: backDesignImageFile,
+          frontPreview:frontDesignImage,
+          backPreview:backDesignImage,
           size: selectedSize,
           color: selectedColor,
           quantity: quantity,
@@ -90,6 +99,7 @@ const availableColors = [...new Set(products.map((product) => product.color))];
         },
       ],
     };
+    console.log(orderData)
     navigate('/artivastore/order', {
       state: {
         ...orderData,

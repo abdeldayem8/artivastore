@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState(product?.size || '');
-  const [selectedcolor,setSelectedColor] = useState(product?.color || null)
+  const [selectedColor,setSelectedColor] = useState(product?.color || null)
   const navigate = useNavigate(); 
 
   const handleSizeChange = (e) => {
@@ -29,74 +29,73 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
   if (!isOpen) return null;
 
   return (
-    <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-scroll"
-      onClick={handleModalClick} // Close modal when clicked outside
+<div
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto"
+      onClick={handleModalClick}
     >
       <div
-        className="bg-primary w-3/5 h-auto md:h-3/5 p-6 rounded-md relative flex flex-col md:flex-row"
+        className="bg-primary w-full max-w-md md:max-w-3xl max-h-screen h-auto md:h-4/5 p-6 rounded-md relative flex flex-col md:flex-row overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-secondary hover:text-gray-700"
+          className="absolute top-4 right-4 text-secondary hover:text-gray-700 z-10"
         >
           <MdClose className="w-6 h-6" />
         </button>
 
         {/* Modal Content */}
-        <div className="flex flex-col md:flex-row gap-6 h-full w-full">
+        <div className="flex flex-col md:flex-row gap-6 h-full w-full overflow-y-auto">
           {/* Product Image */}
-          <div className="w-32 h-32 sm:w-full sm:h-full">
+          <div>
             <img
               src={product?.images[0]}
               alt={product?.name}
-              className="aspect-[4/5] w-full h-full object-cover  rounded-md"
+              className="aspect-[4/5] w-full h-full object-cover rounded-md"
             />
           </div>
 
           {/* Product Information */}
           <div className="w-full md:w-1/2 space-y-6 text-secondary flex flex-col justify-between">
-            {/* Product Name and Price */}
             <div>
               <h3 className="text-2xl font-bold text-white">{product?.name}</h3>
               <p className="text-xl font-medium text-gray-300 mt-2">{product?.price} EGP</p>
 
-            {/* Size Selection */}
-            <div className="space-y-2">
-              <p className="text-sm text-gray-500">Sizes:</p>
-              <select
-                value={selectedSize}
-                onChange={handleSizeChange}
-                className="border rounded-md text-primary py-2 px-3 w-full"
-              >
-                 <option value="">Select Size</option> {/* Default placeholder */}
-                {product?.size?.map((size) => (
-                  <option key={size} value={size}>
-                    {size}
-                  </option>
-                ))}
-              </select>
+              {/* Size Selection */}
+              <div className="space-y-2">
+                <p className="text-sm text-gray-500">Sizes:</p>
+                <select
+                  value={selectedSize}
+                  onChange={handleSizeChange}
+                  className="border rounded-md text-primary py-2 px-3 w-full"
+                >
+                  <option value="">Select Size</option>
+                  {product?.size?.map((size) => (
+                    <option key={size} value={size}>
+                      {size}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
+
+            {/* Colors */}
+            <p className="text-secondary my-4">Available Colors</p>
+            <div className="flex items-center gap-4">
+              {product?.color?.map((color) => (
+                <button
+                  key={color}
+                  className={`w-8 h-8 rounded-full border-2 transition ${
+                    selectedColor === color
+                      ? 'border-gray-500'
+                      : 'border-orange-500'
+                  }`}
+                  style={{ backgroundColor: color }}
+                  onClick={() => setSelectedColor(color)}
+                />
+              ))}
             </div>
-            {/* color */}
-            <p className='text-secondary my-4'>Available Colors</p>
-            <div className='flex items-center gap-4'>
-            {product?.color?.map((color) => (
-        <button
-          key={color}
-          className={`w-8 h-8 rounded-full border-2 transition ${
-            selectedcolor === color
-            ? 'border-gray-500' // Change border to gray when selected
-            : 'border-orange-500' // Default orange border
-        }`}
-          style={{ backgroundColor: color }}
-          onClick={()=>setSelectedColor(color)}
-        />
-      ))}
-            </div>
-            
 
             {/* Quantity */}
             <div className="space-y-4">
@@ -130,8 +129,13 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
             <div className="flex flex-col gap-4">
               <button
                 onClick={() => {
-                  onAddToCart({ ...product, size: selectedSize, quantity ,color:selectedcolor});
-                  onClose(); // Close the modal after adding to the cart
+                  onAddToCart({
+                    ...product,
+                    size: selectedSize,
+                    quantity,
+                    color: selectedColor,
+                  });
+                  onClose();
                 }}
                 className="bg-secondary text-black text-lg font-semibold py-3 px-4 rounded-md w-full hover:bg-gray-400"
               >
@@ -140,9 +144,9 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
 
               <button
                 onClick={() => {
-                    onClose(); // Close the modal
-                    navigate(`/artivastore/collection/${product?.id}`); // Navigate to the product details page
-                  }}
+                  onClose();
+                  navigate(`/artivastore/collection/${product?.id}`);
+                }}
                 className="text-secondary text-lg font-semibold w-full text-center border border-gray-500 py-3 rounded-md hover:bg-gray-700"
               >
                 View Full Details
