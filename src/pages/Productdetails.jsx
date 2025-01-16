@@ -49,7 +49,7 @@ const Productdetails = () => {
         navigate('/artivastore/order', {
             state: {
               ...orderData,
-              from: "fromCart",  // Pass a specific word to indicate the origin
+              from: "fromproduct",  // Pass a specific word to indicate the origin
             },
           });
         };

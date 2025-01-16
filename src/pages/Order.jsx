@@ -97,13 +97,41 @@ const Order = () => {
       if (prevpage === "fromCart") {
         // Handle items for regular orders
         const { items } = orderdata;
+        let normalItemIndex = 0;
+        let customItemIndex = 0;
+        items.forEach((item) => {
+          if(item.isCustom){
+            formData.append(`special_items[${customItemIndex}][name]`, item.category);
+            formData.append(`special_items[${customItemIndex}][size]`, item.size);
+            formData.append(`special_items[${customItemIndex}][color]`, item.color);
+            formData.append(`special_items[${customItemIndex}][quantity]`, item.quantity); 
+            // Assuming `item.front` and `item.back` are File objects (image files)
+          if (item.frontDesignImage) {
+            formData.append(`special_items[${customItemIndex}][image][0]`, item.frontDesignImage);
+          }
+          if (item.backdesignimage) {
+            formData.append(`special_items[${customItemIndex}][image][1]`, item.backdesignimage);
+          }
+          console.log(item)
+          customItemIndex++;
+          }else{
+            formData.append(`items[${normalItemIndex}][product_id]`, item.id);
+            formData.append(`items[${normalItemIndex}][size]`, item.size);
+            formData.append(`items[${normalItemIndex}][color]`, item.color);
+            formData.append(`items[${normalItemIndex}][quantity]`, item.quantity);
+            normalItemIndex++;
+          }
+          
+        });
+  
+      }else if (prevpage === "fromproduct"){
+        const { items } = orderdata;
         items.forEach((item, index) => {
           formData.append(`items[${index}][product_id]`, item.id);
           formData.append(`items[${index}][size]`, item.size);
           formData.append(`items[${index}][color]`, item.color);
           formData.append(`items[${index}][quantity]`, item.quantity);
         });
-  
       } else if (prevpage === "fromCustom") {
         // Handle items for custom orders
         const { items } = orderdata;
@@ -250,7 +278,7 @@ const Order = () => {
           >
             <div className="w-20 h-20 flex-shrink-0">
               <img
-                src={item.image || item.frontPreview || item.backPreview}
+                src={item.image}
                 alt={item.name}
                 className="w-auto h-full object-cover rounded-md"
               />

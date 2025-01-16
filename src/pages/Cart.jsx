@@ -15,19 +15,27 @@ const Cart = () => {
       items: cart.map((product) => ({
         id: product.id,
         name: product.name,
-        image:product.images[0],
+        category:product.category,
+        image: product.isCustom 
+        ? (product.frontPreview || product.backPreview)
+        : product.images[0],
+        frontDesignImage:product.frontDesignImageFile,
+        backdesignimage:product.backDesignImageFile,
         size: product.size,
         color: product.color,
         quantity: product.quantity,
         price: product.price,
+        isCustom: product.isCustom,
+        typedText: product.typedText,
+        textColor: product.textColor
       })),
       totalPrice,
     };
-    dispatch(clearCart())
+    dispatch(clearCart());
     navigate('/artivastore/order', {
       state: {
         ...orderData,
-        from: "fromCart",  // Pass a specific word to indicate the origin
+        from: "fromCart",
       },
     });
   };
@@ -71,16 +79,25 @@ const Cart = () => {
                   {/* Product Image */}
                   <div className="relative w-32 h-32 flex items-center justify-center">
                     <img
-                      src={product.images[0]}
+                      src={product.isCustom 
+                        ? (product.frontPreview || product.backPreview)
+                        : product.images[0]
+                      }
                       alt={product.name}
                       className="absolute inset-0 w-auto h-full object-cover rounded-md"
                     />
+                    {console.log(product)}
                   </div>
 
                   {/* Product Details */}
                   <div className="flex-1 space-y-2">
                     <div className="flex justify-between items-center text-secondary">
-                      <h3 className="font-semibold text-lg">{product.name}</h3>
+                      <h3 className="font-semibold text-lg"> {product.isCustom ? 'Custom Design Product' : product.name}
+                        {product.typedText && (
+                          <span className="block text-sm text-gray-500">
+                            Text: {product.typedText}
+                          </span>
+                        )}</h3>
                       <p className="font-medium">{(product.price * product.quantity).toFixed(2)} EGP</p>
                     </div>
                     <p className="text-sm text-gray-500">Size: {product.size || 'N/A'}</p>
@@ -94,14 +111,14 @@ const Cart = () => {
                       <div className="flex items-center border rounded-md text-secondary">
                         <button
                           className="p-2"
-                          onClick={() => dispatch(decreaseQuantity({ id: product.id }))}
+                          onClick={() => dispatch(decreaseQuantity({ id: product.id,size:product.size,color:product.color }))}
                         >
                           <MdRemove className="w-4 h-4" />
                         </button>
                         <span className="w-12 text-center">{product.quantity}</span>
                         <button
                           className="p-2"
-                          onClick={() => dispatch(increaseQuantity({ id: product.id }))}
+                          onClick={() => dispatch(increaseQuantity({ id: product.id,size:product.size,color:product.color }))}
                         >
                           <MdAdd className="w-4 h-4" />
                         </button>

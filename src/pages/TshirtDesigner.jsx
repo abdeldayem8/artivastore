@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { color, motion } from 'framer-motion';
 import ColorPicker from '../components/ecommerce/Tshirtdesigner/ColorPicker';
 import DesignPreview from '../components/ecommerce/Tshirtdesigner/DesignPreview';
 import DesignTools from '../components/ecommerce/Tshirtdesigner/DesignTools';
@@ -10,6 +10,7 @@ import { fetchcustomshirts } from '../store/thunks/customshirtthunk';
 import Loading from '../components/common/Loading/Loading' 
 import { useNavigate } from 'react-router-dom';
 import { fileToBase64 } from '../utils/imageUtils';
+import { addToCart } from '../store/slices/cartslice';
 
 
 function TshirtDesigner() {
@@ -25,7 +26,6 @@ function TshirtDesigner() {
   const [frontDesignImageFile, setFrontDesignImageFile] = useState(null); // For front
   const [backDesignImage, setBackDesignImage] = useState(null); // For back
   const [backDesignImageFile, setBackDesignImageFile] = useState(null); // For back
-
   const [view, setView] = useState('front'); // Track current view (front/back)
   const navigate= useNavigate()
 
@@ -78,6 +78,7 @@ const availableColors = [...new Set(products.map((product) => product.color))];
  
   if (loading) return <Loading/>;
   if (error) return <p>Error: {error}</p>;
+
   const handleCheckout = () => {
     if (!selectedCategory || !selectedSize || !selectedColor) {
       toast.error("Please select a category, size, and color before proceeding.");
@@ -182,6 +183,14 @@ const availableColors = [...new Set(products.map((product) => product.color))];
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="w-full bg-secondary text-primary py-3 rounded-lg flex items-center justify-center gap-2"
+              onClick={()=>dispatch(addToCart({isCustom: true,size:selectedSize,color:selectedColor,quantity,category:selectedCategory,textColor,typedText,frontDesignImageFile,backDesignImageFile,backPreview:backDesignImage,frontPreview:frontDesignImage,price:pricing}))} 
+            >
+              Add To Cart
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full bg-Transparent text-secondary border border-gray-500 py-3 rounded-lg flex items-center justify-center gap-2"
               onClick={handleCheckout}
             >
               Buy It Now
