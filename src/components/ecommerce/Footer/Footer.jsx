@@ -17,36 +17,49 @@ const Footer = () => {
   },[dispatch])
 
   return (
-    <footer className='bg-primary text-secondary p-8 text-center '>
-        {/* terms and conditions */}
-        <div className='mb-4'>
-            <div>
-                <h2 className='mb-2'>Quick Links</h2>
-                <div className='flex items-center justify-center gap-4 text-sm'>
-                    <p>Exchange Policy</p>
-                    <p>Shipping Policy</p>
-                    <p>Refund Policy</p>
-                </div>
-                <div>
-                    <h2 className='my-4'>Stay Connected</h2>
-                    <ul className='flex gap-4 items-center justify-center text-smxl'>
-                        <li><FaFacebook/></li>
-                        <li><FaTiktok/></li>
-                        <li><FaInstagram/></li>
-                    </ul>
-                </div>
-            <div className='my-4'>
-            <div>
-            <h2 className="mb-4">NEED ASSISTANCE?</h2>
-            <div className='flex items-center gap-4 justify-center'>
-            <p>{data.phone}</p>
-            <p>{data.email}</p>
-            </div>
-            </div>
-             </div>
-            </div>
+    <footer className="bg-primary text-secondary p-8 text-center">
+    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      {/* Quick Links Section */}
+      <div>
+        <h2 className="mb-4 text-lg font-semibold">Quick Links</h2>
+        <div className="flex flex-col items-center  gap-2 text-sm">
+          <a href="#" className="hover:underline">Exchange Policy</a>
+          <a href="#" className="hover:underline">Shipping Policy</a>
+          <a href="#" className="hover:underline">Refund Policy</a>
         </div>
-    </footer>
+      </div>
+  
+      {/* Stay Connected Section */}
+      <div>
+        <h2 className="mb-4 text-lg font-semibold">Stay Connected</h2>
+        <ul className="flex gap-6 justify-center">
+          <li className="text-2xl hover:text-accent">
+            <FaFacebook />
+          </li>
+          <li className="text-2xl hover:text-accent">
+            <FaTiktok />
+          </li>
+          <li className="text-2xl hover:text-accent">
+            <FaInstagram />
+          </li>
+        </ul>
+      </div>
+  
+      {/* Assistance Section */}
+      <div>
+        <h2 className="mb-4 text-lg font-semibold">Need Assistance?</h2>
+        <div className="flex flex-col items-center gap-2 text-sm">
+          <p>{data.phone}</p>
+          <p>{data.email}</p>
+        </div>
+      </div>
+    </div>
+  
+    <div className="mt-8 text-xs text-gray-400">
+      <p>&copy; {new Date().getFullYear()} Artiva Store. All rights reserved.</p>
+    </div>
+  </footer>
+  
   )
 }
 
