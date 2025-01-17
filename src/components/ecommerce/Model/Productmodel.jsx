@@ -81,8 +81,9 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
             </div>
 
             {/* Colors */}
-            <p className="text-secondary my-4">Available Colors</p>
-            <div className="flex items-center gap-4">
+            <div>
+            <p className="text-secondary">Available Colors</p>
+            <div className="flex items-center gap-4 my-4">
               {product?.color?.map((color) => (
                 <button
                   key={color}
@@ -96,7 +97,7 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
                 />
               ))}
             </div>
-
+            </div>
             {/* Quantity */}
             <div className="space-y-4">
               <div>

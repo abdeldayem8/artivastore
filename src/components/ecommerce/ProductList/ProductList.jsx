@@ -172,7 +172,7 @@ useEffect(() => {
               variants={fadeInUp}
               transition={{ duration: 0.5 }}
             >
-              {console.log(product)}
+      
               <ProductItem product={product} />
               <div className="w-full">
                 <motion.button

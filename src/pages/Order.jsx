@@ -112,7 +112,7 @@ const Order = () => {
           if (item.backdesignimage) {
             formData.append(`special_items[${customItemIndex}][image][1]`, item.backdesignimage);
           }
-          console.log(item)
+
           customItemIndex++;
           }else{
             formData.append(`items[${normalItemIndex}][product_id]`, item.id);

@@ -8,7 +8,7 @@ export const cartslice = createSlice({
   reducers:{
 
     addToCart: (state, action) => {
-      const { isCustom, frontDesignImage, backDesignImage, frontPreview,backPreview ,category,typedText, textColor, size, quantity, color, id } = action.payload;
+      const { isCustom, frontDesignImage, backDesignImage, frontPreview,backPreview ,category, size, quantity, color, id } = action.payload;
     
       if (!size || !color) {
         toast.error("Please select a size and color before adding to the cart!");
@@ -24,7 +24,6 @@ export const cartslice = createSlice({
             product.id === customId &&
             product.frontDesignImage === frontDesignImage &&
             product.backDesignImage === backDesignImage &&
-            product.typedText === typedText &&
             product.size === size &&
             product.color === color &&
             product.category === category

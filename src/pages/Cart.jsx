@@ -25,9 +25,7 @@ const Cart = () => {
         color: product.color,
         quantity: product.quantity,
         price: product.price,
-        isCustom: product.isCustom,
-        typedText: product.typedText,
-        textColor: product.textColor
+        isCustom: product.isCustom
       })),
       totalPrice,
     };

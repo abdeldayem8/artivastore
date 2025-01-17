@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { color, motion } from 'framer-motion';
 import ColorPicker from '../components/ecommerce/Tshirtdesigner/ColorPicker';
 import DesignPreview from '../components/ecommerce/Tshirtdesigner/DesignPreview';
@@ -11,6 +11,7 @@ import Loading from '../components/common/Loading/Loading'
 import { useNavigate } from 'react-router-dom';
 import { fileToBase64 } from '../utils/imageUtils';
 import { addToCart } from '../store/slices/cartslice';
+import html2canvas from 'html2canvas';
 
 
 function TshirtDesigner() {
@@ -22,12 +23,16 @@ function TshirtDesigner() {
   const [textColor, setTextColor] = useState('#000000');
   const [selectedSize, setSelectedSize] = useState('M');
   const [quantity, setQuantity] = useState(1);
-  const [frontDesignImage, setFrontDesignImage] = useState(null); // For front
-  const [frontDesignImageFile, setFrontDesignImageFile] = useState(null); // For front
-  const [backDesignImage, setBackDesignImage] = useState(null); // For back
-  const [backDesignImageFile, setBackDesignImageFile] = useState(null); // For back
+  const [frontDesignImage, setFrontDesignImage] = useState(null); // For front preview on tshirt
+  const [backDesignImage, setBackDesignImage] = useState(null); // For back preview on tshirt
+  const [frontDesignImagePreview, setFrontDesignImagePreview] = useState(null); // For front preview on other pages
+  const [backDesignImagePreview, setBackDesignImagePreview] = useState(null); // For back preview on other pages
+  const [frontDesignImageFile, setFrontDesignImageFile] = useState(null); // For front file to send to backend
+  const [backDesignImageFile, setBackDesignImageFile] = useState(null); // For back file to send to backend
   const [view, setView] = useState('front'); // Track current view (front/back)
   const navigate= useNavigate()
+  // Refs for capturing the T-shirt views
+  const previewRef = useRef(null);
 
 const {data ,loading ,error} = useSelector((state)=>state.customshirts)
 const dispatch = useDispatch();
@@ -56,43 +61,170 @@ const availableColors = [...new Set(products.map((product) => product.color))];
     setTypedText(text);
     setTextColor(color); // Update the color as well
   };
-  
+
   const handleDesignUpload = async(file) => {
     const base64String = await fileToBase64(file);
     if (view === 'front') {
       setFrontDesignImage(base64String);
-      setFrontDesignImageFile(file)
     } else {
       setBackDesignImage(base64String);
-      setBackDesignImageFile(file)
     }
   };
 
   const handleRemoveDesign = () => {
     if (view === 'front') {
       setFrontDesignImage(null);
+      setFrontDesignImageFile(null);
+      setFrontDesignImagePreview(null);
     } else {
       setBackDesignImage(null);
+      setBackDesignImageFile(null);
+      setBackDesignImagePreview(null);
     }
   };
  
-  if (loading) return <Loading/>;
-  if (error) return <p>Error: {error}</p>;
 
-  const handleCheckout = () => {
+  const captureTshirtPreview = async () => {
+    if (!previewRef.current) return null;
+
+    try {
+      // Store current view to restore later
+      const currentView = view;
+
+      // Capture front view
+      setView('front');
+      // Wait longer for the view change to complete
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      const frontCanvas = await html2canvas(previewRef.current, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: null,
+        logging: false,
+        onclone: function(clonedDoc) {
+          // Ensure all images are loaded in the cloned document
+          const images = clonedDoc.getElementsByTagName('img');
+          return Promise.all(Array.from(images).map(img => {
+            return new Promise((resolve) => {
+              if (img.complete) {
+                resolve();
+              } else {
+                img.onload = resolve;
+              }
+            });
+          }));
+        }
+      });
+      
+      const frontPreview = frontCanvas.toDataURL('image/png');
+      const frontBlob = await fetch(frontPreview).then(res => res.blob());
+      const frontFile = new File([frontBlob], 'front-preview.png', { type: 'image/png' });
+
+      // Capture back view
+      setView('back');
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      const backCanvas = await html2canvas(previewRef.current, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: null,
+        logging: false,
+        onclone: function(clonedDoc) {
+          const images = clonedDoc.getElementsByTagName('img');
+          return Promise.all(Array.from(images).map(img => {
+            return new Promise((resolve) => {
+              if (img.complete) {
+                resolve();
+              } else {
+                img.onload = resolve;
+              }
+            });
+          }));
+        }
+      });
+      
+      const backPreview = backCanvas.toDataURL('image/png');
+      const backBlob = await fetch(backPreview).then(res => res.blob());
+      const backFile = new File([backBlob], 'back-preview.png', { type: 'image/png' });
+
+      // Update all states at once
+      await Promise.all([
+        new Promise(resolve => {
+          setFrontDesignImagePreview(frontPreview);
+          setFrontDesignImageFile(frontFile);
+          resolve();
+        }),
+        new Promise(resolve => {
+          setBackDesignImagePreview(backPreview);
+          setBackDesignImageFile(backFile);
+          resolve();
+        })
+      ]);
+
+      // Restore original view
+      setView(currentView);
+
+      return {
+        frontPreview,
+        backPreview,
+        frontFile,
+        backFile
+      };
+    } catch (error) {
+      console.error('Error capturing preview:', error);
+      return null;
+    }
+  };
+
+  const handleAddToCart = async () => {
     if (!selectedCategory || !selectedSize || !selectedColor) {
-      toast.error("Please select a category, size, and color before proceeding.");
+      toast.error("Please select all required options before adding to cart.");
       return;
     }
-  
+
+    const previews = await captureTshirtPreview();
+    if (!previews) {
+      toast.error("Failed to capture t-shirt preview");
+      return;
+    }
+
+    dispatch(
+      addToCart({
+        isCustom: true,
+        size: selectedSize,
+        color: selectedColor,
+        quantity,
+        category: selectedCategory,
+        frontDesignImageFile: previews.frontFile,
+        backDesignImageFile: previews.backFile,
+        frontPreview: previews.frontPreview,
+        backPreview: previews.backPreview,
+        price: pricing,
+      })
+    );
+  };
+
+  const handleCheckout = async () => {
+    if (!selectedCategory || !selectedSize || !selectedColor) {
+      toast.error("Please select all required options before checkout.");
+      return;
+    }
+
+    const previews = await captureTshirtPreview();
+    if (!previews) {
+      toast.error("Failed to capture t-shirt preview");
+      return;
+    }
+
     const orderData = {
       items: [
         {
           category: selectedCategory,
-          front: frontDesignImageFile,
-          back: backDesignImageFile,
-          frontPreview:frontDesignImage,
-          backPreview:backDesignImage,
+          front: previews.frontFile,
+          back: previews.backFile,
+          image:previews.frontPreview ? previews.frontPreview :previews.backPreview,
           size: selectedSize,
           color: selectedColor,
           quantity: quantity,
@@ -100,15 +232,17 @@ const availableColors = [...new Set(products.map((product) => product.color))];
         },
       ],
     };
-    console.log(orderData)
+
     navigate('/artivastore/order', {
       state: {
         ...orderData,
-        from: "fromCustom",  // Pass a specific word to indicate the origin
+        from: "fromCustom",
       },
     });
   };
 
+  if (loading) return <Loading/>;
+  if (error) return <p>Error: {error}</p>;
   return (
     <div className="min-h-screen">
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -134,17 +268,19 @@ const availableColors = [...new Set(products.map((product) => product.color))];
                 selectedCategory={selectedCategory}
               />
               <div className="design-preview">
-                 <DesignPreview
-                  selectedColor={selectedColor}
-                  selectedProduct={filteredProducts[0] || null} // Show the first matching product
-                  frontDesignImage={frontDesignImage}
-                  backDesignImage={backDesignImage}
-                  view={view}
-                  setView={setView}
-                  typedText={typedText}
-                  textColor={textColor}
-                  onRemoveDesign={handleRemoveDesign}
-                />
+              <div ref={previewRef}>
+                  <DesignPreview
+                    selectedColor={selectedColor}
+                    selectedProduct={filteredProducts[0] || null}
+                    frontDesignImage={frontDesignImage}
+                    backDesignImage={backDesignImage}
+                    view={view}
+                    setView={setView}
+                    typedText={typedText}
+                    textColor={textColor}
+                    onRemoveDesign={handleRemoveDesign}
+                  />
+                </div>
               </div>
               <ColorPicker
                 selectedColor={selectedColor}
@@ -183,7 +319,7 @@ const availableColors = [...new Set(products.map((product) => product.color))];
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="w-full bg-secondary text-primary py-3 rounded-lg flex items-center justify-center gap-2"
-              onClick={()=>dispatch(addToCart({isCustom: true,size:selectedSize,color:selectedColor,quantity,category:selectedCategory,textColor,typedText,frontDesignImageFile,backDesignImageFile,backPreview:backDesignImage,frontPreview:frontDesignImage,price:pricing}))} 
+              onClick={handleAddToCart} 
             >
               Add To Cart
             </motion.button>
