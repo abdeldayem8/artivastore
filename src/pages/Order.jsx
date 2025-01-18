@@ -39,6 +39,7 @@ const Order = () => {
    const prevpage = location.state.from;
    const [cities, setCities] = useState([]); 
    const [shippingPrice, setShippingPrice] = useState(null); 
+   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(()=>{
     const getCities = async()=>{
@@ -84,7 +85,7 @@ const submitOrder = async (formDataValues) => {
     toast.error("No items in the order.");
     return;
   }
-
+  setIsLoading(true);
   try {
     const formData = new FormData();
     
@@ -182,6 +183,8 @@ const submitOrder = async (formDataValues) => {
     
   } catch (error) {
     toast.error(error.message);
+  }finally{
+    setIsLoading(false)
   }
 };
 
@@ -322,9 +325,10 @@ const compressImage = async (file) => {
   
       <button
         className="bg-secondary text-primary py-3 px-4 mt-8 w-full rounded-md font-semibold hover:bg-secondary/90 transition-colors"
-        
+        disabled={isLoading}
       >
-        {'Complete Order'}
+       {isLoading ? 'Loading...' : 'Complete Order'}
+
       </button>
     </form>
     </div> 
