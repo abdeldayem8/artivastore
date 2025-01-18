@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearCart, decreaseQuantity, increaseQuantity, removeFromCart } from '../store/slices/cartslice';
+import { clearCart, decreaseQuantity, increaseQuantity, removeFromCart } from '../store/Slices/Cartslice';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { MdAdd, MdDelete, MdRemove } from "react-icons/md";
 

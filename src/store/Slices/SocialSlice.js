@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchSocialData } from "../thunks/social";
+import { fetchSocialData } from "../Thunks/SocialThunk";
 
 const socialslice = createSlice({
     name:"social",

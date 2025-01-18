@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Loading from '../../common/Loading/Loading';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchproducts } from '../../../store/thunks/productsThunks';
-import ProductItem from '../Productitem/Productitem'
+import { fetchproducts } from '../../../store/Thunks/ProductsThunks';
+import ProductItem from '../ProductItem/ProductItem'
 import axios from 'axios';
 import API_ENDPOINTS from '../../../utils/API_ENDPOINTS';
 import dropdown from '../../../assets/dropdown.png'
-import { addToCart } from '../../../store/slices/cartslice';
+import { addToCart } from '../../../store/Slices/Cartslice';
 import { motion } from "framer-motion";
-import ProductModal from '../Model/Productmodel';
+import ProductModal from '../Model/ProductModel';
 import { Pagination, Stack } from '@mui/material';
 
 const ProductList = () => {

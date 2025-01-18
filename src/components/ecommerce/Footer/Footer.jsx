@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
 import { FaFacebook } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
 import { FaTiktok } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSocialData } from '../../../store/thunks/social';
+import { fetchSocialData } from '../../../store/Thunks/SocialThunk';
 
 const Footer = () => {
 

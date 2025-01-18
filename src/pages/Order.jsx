@@ -234,7 +234,6 @@ const compressImage = async (file) => {
     reader.readAsDataURL(file);
   });
 };
-
   
   return (
     <div className="flex gap-4 flex-col sm:flex-row max-w-4xl mx-auto p-6 text-secondary">
@@ -322,13 +321,11 @@ const compressImage = async (file) => {
           Cash on Delivery (COD)
         </label>
       </div>
-  
       <button
         className="bg-secondary text-primary py-3 px-4 mt-8 w-full rounded-md font-semibold hover:bg-secondary/90 transition-colors"
         disabled={isLoading}
       >
        {isLoading ? 'Loading...' : 'Complete Order'}
-
       </button>
     </form>
     </div> 

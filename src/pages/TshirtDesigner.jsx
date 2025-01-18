@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { color, motion } from 'framer-motion';
-import ColorPicker from '../components/ecommerce/Tshirtdesigner/ColorPicker';
-import DesignPreview from '../components/ecommerce/Tshirtdesigner/DesignPreview';
-import DesignTools from '../components/ecommerce/Tshirtdesigner/DesignTools';
-import ProductSelector from '../components/ecommerce/Tshirtdesigner/ProductSelector';
-import ProductCustomization from '../components/ecommerce/Tshirtdesigner/ProductCustomization';
+import {  motion } from 'framer-motion';
+import ColorPicker from '../components/ecommerce/TshirtDesigner/ColorPicker';
+import DesignPreview from '../components/ecommerce/TshirtDesigner/DesignPreview';
+import DesignTools from '../components/ecommerce/TshirtDesigner/DesignTools';
+import ProductSelector from '../components/ecommerce/TshirtDesigner/ProductSelector';
+import ProductCustomization from '../components/ecommerce/TshirtDesigner/ProductCustomization';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchcustomshirts } from '../store/thunks/customshirtthunk';
+import { fetchcustomshirts } from '../store/Thunks/CustomShirtThunk';
 import Loading from '../components/common/Loading/Loading' 
 import { useNavigate } from 'react-router-dom';
-import { fileToBase64 } from '../utils/imageUtils';
-import { addToCart } from '../store/slices/cartslice';
+import { fileToBase64 } from '../utils/ImageUtils';
+import { addToCart } from '../store/Slices/Cartslice';
 import html2canvas from 'html2canvas';
 
 

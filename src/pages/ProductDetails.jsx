@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchproductdetails } from '../store/thunks/productdetailsthunks';
+import { fetchproductdetails } from '../store/Thunks/ProductDetailsThunks';
 import Loading from '../components/common/Loading/Loading';
-import Moresold from '../components/ecommerce/moresold/Moresold'
-import { addToCart } from '../store/slices/cartslice';
+import MoreSold from '../components/ecommerce/MoreSold/MoreSold'
+import { addToCart } from '../store/Slices/Cartslice';
 import toast from 'react-hot-toast';
 
-const Productdetails = () => {
+const ProductDetails = () => {
     const { id } = useParams();
     const { productdetails, loading, error } = useSelector((state) => state.Productdetails);
     const dispatch = useDispatch();
@@ -170,10 +170,10 @@ const Productdetails = () => {
                     </div>
                 </div>
               </div>
-              <Moresold title="You May Also Like"/>
+              <MoreSold title="You May Also Like"/>
            </div> 
         </>
     ) : <div className='opacity-0'></div>;
 };
 
-export default Productdetails;
+export default ProductDetails;

@@ -4,10 +4,10 @@ import { lazy,Suspense } from 'react'
 import Loading from '../components/common/Loading/Loading.jsx'
 import Login from '../pages/Login.jsx'
 import Register from '../pages/Register.jsx'
-import Productdetails from '../pages/Productdetails.jsx'
+import ProductDetails from '../pages/ProductDetails.jsx'
 import Profile from '../pages/Profile.jsx'
-import Protectedroute from './Protectedroute.jsx'
-import Publicroute from './Publicroute.jsx'
+import Protectedroute from './ProtectedRoute.jsx'
+import Publicroute from './PublicRoute.jsx'
 import Cart from '../pages/Cart.jsx'
 import Order from '../pages/Order.jsx'
 import NotFound from '../pages/Not-found.jsx'
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
     },
     {
       path:"/artivastore/collection/:id",
-      element:  <Productdetails/>
+      element:  <ProductDetails/>
     },
     {
       path:"/artivastore/maketshirt",
@@ -73,8 +73,8 @@ const router = createBrowserRouter([
   }
 ])
 
-const Approuter = () => {
+const AppRouter = () => {
   return <RouterProvider router={router} />
 }
 
-export default Approuter
+export default AppRouter

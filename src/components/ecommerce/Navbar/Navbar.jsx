@@ -1,7 +1,7 @@
 import React, {  useCallback, useRef, useState } from 'react'
 import { MdClose, MdMenu } from 'react-icons/md';
 import Responsivemenu from './Responsivemenu';
-import Headerbasket from '../../common/HeaderBasket/Headerbasket';
+import HeaderBasket from '../../common/HeaderBasket/HeaderBasket';
 import i18n from '../../../i18n';
 import { useTranslation } from 'react-i18next';
 import NavMenuItems from './NavMenuItems';
@@ -66,7 +66,7 @@ const handleLanguageChange = (language) => {
               />
             </div>
             {/* cart */}
-            <Headerbasket/>
+            <HeaderBasket/>
         </div>
 
       </div>

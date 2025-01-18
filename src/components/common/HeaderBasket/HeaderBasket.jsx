@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 
-const Headerbasket = () => {
+const HeaderBasket = () => {
   const cart = useSelector((state)=>state.cart)
   return <>
    <Link to='/artivastore/cart' className='text-2xl p-2 cursor-pointer relative sm:mr-1'>
@@ -14,4 +14,4 @@ const Headerbasket = () => {
   </>
 }
 
-export default Headerbasket
+export default HeaderBasket

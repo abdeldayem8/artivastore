@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchlogin } from "../thunks/loginthunk";
+import { fetchlogin } from "../Thunks/LoginThunk";
   
   const loginslice= createSlice({
     name:"login",

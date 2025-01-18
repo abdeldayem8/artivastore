@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Titlesection = ({title}) => {
+const TitleSection = ({title}) => {
     return (
         <h2 className="text-2xl text-center font-semibold mb-6 text-secondary">
           {title}
@@ -8,4 +8,4 @@ const Titlesection = ({title}) => {
       );
 }
 
-export default Titlesection
+export default TitleSection

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchproducts } from '../../../store/thunks/productsThunks';
+import { fetchproducts } from '../../../store/Thunks/ProductsThunks';
 import Loading from '../../common/Loading/Loading';
-import ProductItem from '../Productitem/Productitem';
+import ProductItem from '../ProductItem/ProductItem';
 
-const Featuredcollection = () => {
+const FeaturedCollection = () => {
      const dispatch = useDispatch()
        const {products,loading,error} = useSelector((state)=>state.products)
         const {t} =useTranslation();
@@ -34,4 +34,4 @@ const Featuredcollection = () => {
   </>
 }
 
-export default Featuredcollection
+export default FeaturedCollection

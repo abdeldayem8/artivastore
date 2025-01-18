@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchlogin } from '../store/thunks/loginthunk'
+import { fetchlogin } from '../store/Thunks/LoginThunk'
 
 
 

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom"
 import Navbar from "./components/ecommerce/Navbar/Navbar"
 import { Provider } from "react-redux"
-import store, { persistor }  from "./store/store"
+import store, { persistor }  from "./store/Store"
 import Footer from "./components/ecommerce/Footer/Footer"
 import { Toaster } from "react-hot-toast"
 import { PersistGate } from "redux-persist/integration/react"

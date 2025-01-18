@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next';
-import Moresold from '../components/ecommerce/moresold/Moresold';
-import Featuredcollection from '../components/ecommerce/somecollection/Featuredcollection';
+import MoreSold from '../components/ecommerce/MoreSold/MoreSold';
+import FeaturedCollection from '../components/ecommerce/SomeCollection/FeaturedCollection';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSocialData } from '../store/thunks/social';
+import { fetchSocialData } from '../store/Thunks/SocialThunk';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
@@ -102,7 +102,7 @@ const Home = () => {
         variants={fadeInUp}
         transition={{ duration: 0.5 }}
       >
-        <Featuredcollection />
+        <FeaturedCollection />
       </motion.div>
 
       {/* Best Sellers Section */}
@@ -114,7 +114,7 @@ const Home = () => {
         variants={fadeInUp}
         transition={{ duration: 0.5 }}
       >
-        <Moresold title="Best Sellers" />
+        <MoreSold title="Best Sellers" />
       </motion.div>
 </>
   
