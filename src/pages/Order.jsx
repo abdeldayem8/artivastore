@@ -78,99 +78,161 @@ const Order = () => {
 };
 
 
-  const submitOrder = async (formDataValues) => {
-    // Check if items are available before proceeding
-    if (!orderdata?.items || orderdata.items.length === 0) {
-      toast.error("No items in the order.");
-      return; // Prevent form submission
+const submitOrder = async (formDataValues) => {
+  // Check if items are available before proceeding
+  if (!orderdata?.items || orderdata.items.length === 0) {
+    toast.error("No items in the order.");
+    return;
+  }
+
+  try {
+    const formData = new FormData();
+    
+    // Add form data to FormData - optimize by checking value existence first
+    for (const [key, value] of Object.entries(formDataValues)) {
+      if (value != null) { // Handles both undefined and null
+        formData.append(key, value);
+      }
     }
-  
-    try {
-      const formData = new FormData();
+
+    const { items } = orderdata;
+    
+    // Pre-process items to separate normal and custom items
+    if (prevpage === "fromCart") {
+      // Process items in parallel using separate counters
+      const normalItems = [];
+      const customItems = [];
       
-      // Add form data to FormData
-      Object.entries(formDataValues).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          formData.append(key, value);
+      items.forEach(item => {
+        if (item.isCustom) {
+          customItems.push(item);
+        } else {
+          normalItems.push(item);
         }
       });
-      if (prevpage === "fromCart") {
-        // Handle items for regular orders
-        const { items } = orderdata;
-        let normalItemIndex = 0;
-        let customItemIndex = 0;
-        items.forEach((item) => {
-          if(item.isCustom){
-            formData.append(`special_items[${customItemIndex}][name]`, item.category);
-            formData.append(`special_items[${customItemIndex}][size]`, item.size);
-            formData.append(`special_items[${customItemIndex}][color]`, item.color);
-            formData.append(`special_items[${customItemIndex}][quantity]`, item.quantity); 
-            // Assuming `item.front` and `item.back` are File objects (image files)
-          if (item.frontDesignImage) {
-            formData.append(`special_items[${customItemIndex}][image][0]`, item.frontDesignImage);
-          }
-          if (item.backdesignimage) {
-            formData.append(`special_items[${customItemIndex}][image][1]`, item.backdesignimage);
-          }
 
-          customItemIndex++;
-          }else{
-            formData.append(`items[${normalItemIndex}][product_id]`, item.id);
-            formData.append(`items[${normalItemIndex}][size]`, item.size);
-            formData.append(`items[${normalItemIndex}][color]`, item.color);
-            formData.append(`items[${normalItemIndex}][quantity]`, item.quantity);
-            normalItemIndex++;
-          }
-          
-        });
-  
-      }else if (prevpage === "fromproduct"){
-        const { items } = orderdata;
-        items.forEach((item, index) => {
-          formData.append(`items[${index}][product_id]`, item.id);
-          formData.append(`items[${index}][size]`, item.size);
-          formData.append(`items[${index}][color]`, item.color);
-          formData.append(`items[${index}][quantity]`, item.quantity);
-        });
-      } else if (prevpage === "fromCustom") {
-        // Handle items for custom orders
-        const { items } = orderdata;
-        items.forEach((item, index) => {
-          formData.append(`special_items[${index}][name]`, item.category);
-          formData.append(`special_items[${index}][size]`, item.size);
-          formData.append(`special_items[${index}][color]`, item.color);
-          formData.append(`special_items[${index}][quantity]`, item.quantity);
-  
-          // Assuming `item.front` and `item.back` are File objects (image files)
-          if (item.front) {
-            formData.append(`special_items[${index}][image][0]`, item.front);
-          }
-          if (item.back) {
-            formData.append(`special_items[${index}][image][1]`, item.back);
-          }
-        });
-      }
-      console.log("FormData Contents:");
-    for (let pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
-    }
-  
-      // Make the request
-      const response = await axios.post(API_ENDPOINTS.Order, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      // Process normal items
+      normalItems.forEach((item, index) => {
+        formData.append(`items[${index}][product_id]`, item.id);
+        formData.append(`items[${index}][size]`, item.size);
+        formData.append(`items[${index}][color]`, item.color);
+        formData.append(`items[${index}][quantity]`, item.quantity);
       });
-  
-      toast.success("Order submitted successfully!");
-      
-     
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
 
-   console.log(orderdata)
+      // Process custom items - optimize image handling
+      await Promise.all(customItems.map(async (item, index) => {
+        formData.append(`special_items[${index}][name]`, item.category);
+        formData.append(`special_items[${index}][size]`, item.size);
+        formData.append(`special_items[${index}][color]`, item.color);
+        formData.append(`special_items[${index}][quantity]`, item.quantity);
+
+        // Optimize image processing
+        if (item.frontDesignImage) {
+          // Compress image before appending
+          const compressedFront = await compressImage(item.frontDesignImage);
+          formData.append(`special_items[${index}][image][0]`, compressedFront);
+        }
+        if (item.backdesignimage) {
+          const compressedBack = await compressImage(item.backdesignimage);
+          formData.append(`special_items[${index}][image][1]`, compressedBack);
+        }
+      }));
+
+    } else if (prevpage === "fromproduct") {
+      // Process normal product items
+      items.forEach((item, index) => {
+        formData.append(`items[${index}][product_id]`, item.id);
+        formData.append(`items[${index}][size]`, item.size);
+        formData.append(`items[${index}][color]`, item.color);
+        formData.append(`items[${index}][quantity]`, item.quantity);
+      });
+
+    } else if (prevpage === "fromCustom") {
+      // Process custom items with optimized image handling
+      await Promise.all(items.map(async (item, index) => {
+        formData.append(`special_items[${index}][name]`, item.category);
+        formData.append(`special_items[${index}][size]`, item.size);
+        formData.append(`special_items[${index}][color]`, item.color);
+        formData.append(`special_items[${index}][quantity]`, item.quantity);
+
+        if (item.front) {
+          const compressedFront = await compressImage(item.front);
+          formData.append(`special_items[${index}][image][0]`, compressedFront);
+        }
+        if (item.back) {
+          const compressedBack = await compressImage(item.back);
+          formData.append(`special_items[${index}][image][1]`, compressedBack);
+        }
+      }));
+    }
+    console.time()
+    // Make the request with optimized settings
+    const response = await axios.post(API_ENDPOINTS.Order, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      // Add timeout and optimize axios settings
+      timeout: 30000, // 30 seconds timeout
+      maxContentLength: Infinity,
+      maxBodyLength: Infinity,
+    });
+    console.timeEnd()
+
+    toast.success("Order submitted successfully!");
+    
+  } catch (error) {
+    toast.error(error.message);
+  }
+};
+
+// Helper function to compress images
+const compressImage = async (file) => {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Calculate new dimensions (max 1024px width/height while maintaining aspect ratio)
+        let width = img.width;
+        let height = img.height;
+        const maxSize = 1024;
+        
+        if (width > height && width > maxSize) {
+          height = (height * maxSize) / width;
+          width = maxSize;
+        } else if (height > maxSize) {
+          width = (width * maxSize) / height;
+          height = maxSize;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        
+        // Draw and compress
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        // Convert to blob with reduced quality
+        canvas.toBlob(
+          (blob) => {
+            resolve(new File([blob], file.name, {
+              type: 'image/jpeg',
+              lastModified: Date.now(),
+            }));
+          },
+          'image/jpeg',
+          0.7 // Compression quality (0.7 = 70% quality)
+        );
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+};
+
+  
   return (
     <div className="flex gap-4 flex-col sm:flex-row max-w-4xl mx-auto p-6 text-secondary">
     {/* Delivery Section */}
@@ -260,8 +322,9 @@ const Order = () => {
   
       <button
         className="bg-secondary text-primary py-3 px-4 mt-8 w-full rounded-md font-semibold hover:bg-secondary/90 transition-colors"
+        disabled={loading}
       >
-        Place Order
+        {loading ? 'Completing Order...' : 'Complete Order'}
       </button>
     </form>
     </div> 
