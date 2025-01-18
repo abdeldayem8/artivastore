@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import API_ENDPOINTS from "../../utils/API_ENDPOINTS";
+import API_ENDPOINTS from "@utils/API_ENDPOINTS";
 
 
 export const fetchproducts = createAsyncThunk("products/fetchProducts",async (_, {rejectWithValue})=>{

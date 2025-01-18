@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchproducts } from '../../../store/Thunks/ProductsThunks';
-import Loading from '../../common/Loading/Loading';
-import ProductItem from '../ProductItem/ProductItem';
+import { fetchproducts } from '@store/Thunks/ProductsThunks';
+import Loading from '@components/common/Loading/Loading';
+import ProductItem from '@components/ecommerce/ProductItem/ProductItem';
 
 const FeaturedCollection = () => {
      const dispatch = useDispatch()

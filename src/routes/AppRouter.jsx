@@ -1,19 +1,19 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from '../App.jsx'
 import { lazy,Suspense } from 'react'
-import Loading from '../components/common/Loading/Loading.jsx'
-import Login from '../pages/Login.jsx'
-import Register from '../pages/Register.jsx'
-import ProductDetails from '../pages/ProductDetails.jsx'
-import Profile from '../pages/Profile.jsx'
-import Protectedroute from './ProtectedRoute.jsx'
-import Publicroute from './PublicRoute.jsx'
-import Cart from '../pages/Cart.jsx'
-import Order from '../pages/Order.jsx'
-import NotFound from '../pages/Not-found.jsx'
-const Collection = lazy(()=>import ('../pages/Collection.jsx'))
-const Makeyourtshirt = lazy(()=>import ('../pages/TshirtDesigner.jsx'))
-const Home = lazy(()=>import ('../pages/Home.jsx'))
+import Loading from '@components/common/Loading/Loading.jsx'
+import Login from '@pages/Login.jsx'
+import Register from '@pages/Register.jsx'
+import ProductDetails from '@pages/ProductDetails.jsx'
+import Profile from '@pages/Profile.jsx'
+import Protectedroute from '@routes/ProtectedRoute.jsx'
+import Publicroute from '@routes/PublicRoute.jsx'
+import Cart from '@pages/Cart.jsx'
+import Order from '@pages/Order.jsx'
+import NotFound from '@pages/Not-found.jsx'
+const Collection = lazy(()=>import ('@pages/Collection.jsx'))
+const Makeyourtshirt = lazy(()=>import ('@pages/TshirtDesigner.jsx'))
+const Home = lazy(()=>import ('@pages/Home.jsx'))
 
 
 

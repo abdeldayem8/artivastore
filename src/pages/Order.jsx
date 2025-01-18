@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import API_ENDPOINTS from '../utils/API_ENDPOINTS';
+import API_ENDPOINTS from '@utils/API_ENDPOINTS';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import {z} from "zod"

@@ -1,9 +1,10 @@
 import React from 'react'
-import useFetchmoresold from '../../../hooks/useFetchMoreSold'
-import API_ENDPOINTS from '../../../utils/API_ENDPOINTS'
-import Loading from '../../common/Loading/Loading';
-import TitleSection from '../../common/TitleSection/TitleSection';
-import ProductItem from '../ProductItem/ProductItem';
+import useFetchmoresold from '@hooks/useFetchMoreSold'
+import API_ENDPOINTS from '@utils/API_ENDPOINTS'
+import Loading from '@components/common/Loading/Loading';
+import TitleSection from '@components/common/TitleSection/TitleSection';
+import ProductItem from '@components/ecommerce/ProductItem/ProductItem';
+
 
 
 const MoreSold = ({title}) => {

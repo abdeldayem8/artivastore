@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navbarmenu } from "./Navbarmenuitems";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import useFetchlogout from "../../../hooks/useFetchLogout";
-import API_ENDPOINTS from "../../../utils/API_ENDPOINTS";
+import useFetchlogout from "@hooks/useFetchLogout";
+import API_ENDPOINTS from "@utils/API_ENDPOINTS";
 
 const NavMenuItems = ({ ulClassName, liClassName, linkClassName, closeMenu }) => {
   const { t } = useTranslation();

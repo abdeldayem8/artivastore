@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchproductdetails } from '../store/Thunks/ProductDetailsThunks';
-import Loading from '../components/common/Loading/Loading';
-import MoreSold from '../components/ecommerce/MoreSold/MoreSold'
-import { addToCart } from '../store/Slices/Cartslice';
+import { fetchproductdetails } from '@store/Thunks/ProductDetailsThunks';
+import Loading from '@components/common/Loading/Loading';
+import MoreSold from '@components/ecommerce/MoreSold/MoreSold'
+import { addToCart } from '@store/Slices/Cartslice';
 import toast from 'react-hot-toast';
 
 const ProductDetails = () => {

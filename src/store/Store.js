@@ -1,10 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import productsreducer from './Slices/ProductsSlice'
-import productdetailsreducer from './Slices/ProductDetailsSlice'
-import loginreducer from './Slices/LoginSlice'
-import  cartslice  from "./Slices/Cartslice";
-import customshirtreducer from './Slices/CustomShirtSlice'
-import socialreducer from './Slices/SocialSlice'
+import productsreducer from '@store/Slices/ProductsSlice'
+import productdetailsreducer from '@store/Slices/ProductDetailsSlice'
+import loginreducer from '@store/Slices/LoginSlice'
+import  cartslice  from "@store/Slices/Cartslice";
+import customshirtreducer from '@store/Slices/CustomShirtSlice'
+import socialreducer from '@store/Slices/SocialSlice'
 import storage from "redux-persist/lib/storage"; 
 import { persistStore, persistReducer } from "redux-persist";
 

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next';
-import MoreSold from '../components/ecommerce/MoreSold/MoreSold';
-import FeaturedCollection from '../components/ecommerce/SomeCollection/FeaturedCollection';
+import MoreSold from '@components/ecommerce/MoreSold/MoreSold';
+import FeaturedCollection from '@components/ecommerce/SomeCollection/FeaturedCollection';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSocialData } from '../store/Thunks/SocialThunk';
+import { fetchSocialData } from '@store/Thunks/SocialThunk';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 

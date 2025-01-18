@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchcustomshirts } from "../Thunks/CustomShirtThunk";
+import { fetchcustomshirts } from "@store/Thunks/CustomShirtThunk";
 
 
 

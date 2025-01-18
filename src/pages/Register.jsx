@@ -5,7 +5,7 @@ import {z} from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import API_ENDPOINTS from '../utils/API_ENDPOINTS';
+import API_ENDPOINTS from '@utils/API_ENDPOINTS';
 
 
 const registerSchema = z

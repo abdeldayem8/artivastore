@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import API_ENDPOINTS from "../../utils/API_ENDPOINTS";
+import API_ENDPOINTS from "@utils/API_ENDPOINTS";
 import toast from "react-hot-toast";
 
 export const fetchlogin = createAsyncThunk("login",async ({email,password,navigate},{rejectWithValue})=>{

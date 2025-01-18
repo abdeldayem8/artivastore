@@ -1,6 +1,6 @@
 import React from 'react';
 import { Plus, Minus } from 'lucide-react';
-import { SIZES } from '../Constants/Customization';
+import { SIZES } from '@components/ecommerce/Constants/Customization';
 import { motion } from 'framer-motion';
 
 function ProductCustomization({ 
