@@ -322,9 +322,9 @@ const compressImage = async (file) => {
   
       <button
         className="bg-secondary text-primary py-3 px-4 mt-8 w-full rounded-md font-semibold hover:bg-secondary/90 transition-colors"
-        disabled={loading}
+        
       >
-        {loading ? 'Completing Order...' : 'Complete Order'}
+        {'Complete Order'}
       </button>
     </form>
     </div> 
