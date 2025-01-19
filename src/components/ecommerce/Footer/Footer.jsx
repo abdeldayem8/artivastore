@@ -15,7 +15,7 @@ const Footer = () => {
   },[dispatch])
 
   return (
-    <footer className="bg-primary text-secondary p-8 text-center">
+    <footer className="bg-primary text-secondary text-center">
     <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
       {/* Quick Links Section */}
       <div>

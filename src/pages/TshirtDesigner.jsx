@@ -21,7 +21,7 @@ function TshirtDesigner() {
   const [selectedCategory, setSelectedCategory] = useState('T-Shirts'); // Default category
   const [typedText, setTypedText] = useState('');
   const [textColor, setTextColor] = useState('#000000');
-  const [selectedSize, setSelectedSize] = useState('M');
+  const [selectedSize, setSelectedSize] = useState('S');
   const [quantity, setQuantity] = useState(1);
   const [frontDesignImage, setFrontDesignImage] = useState(null); // For front preview on tshirt
   const [backDesignImage, setBackDesignImage] = useState(null); // For back preview on tshirt

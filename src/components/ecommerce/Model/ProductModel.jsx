@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { MdClose } from 'react-icons/md';
+import React, { useEffect, useState } from 'react';
+import { MdAdd, MdClose, MdRemove } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 
 const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
@@ -7,6 +7,12 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
   const [selectedSize, setSelectedSize] = useState(product?.size || '');
   const [selectedColor,setSelectedColor] = useState(product?.color || null)
   const navigate = useNavigate(); 
+
+  useEffect(()=>{
+    if(product?.size?.length > 0){
+      setSelectedSize(product.size[0])
+    }
+  },[product])
 
   const handleSizeChange = (e) => {
     setSelectedSize(e.target.value);
@@ -34,7 +40,7 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
       onClick={handleModalClick}
     >
       <div
-        className="bg-primary w-full max-w-md md:max-w-3xl max-h-screen h-auto md:h-4/5 p-6 rounded-md relative flex flex-col md:flex-row overflow-y-auto"
+        className="bg-primary w-full max-w-md md:max-w-3xl max-h-screen h-auto md:h-3/5 p-6 rounded-md relative flex flex-col md:flex-row overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -64,20 +70,19 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
 
               {/* Size Selection */}
               <div className="space-y-2">
-                <p className="text-sm text-gray-500">Sizes:</p>
-                <select
-                  value={selectedSize}
-                  onChange={handleSizeChange}
-                  className="border rounded-md text-primary py-2 px-3 w-full"
-                >
-                  <option value="">Select Size</option>
-                  {product?.size?.map((size) => (
-                    <option key={size} value={size}>
-                      {size}
-                    </option>
-                  ))}
-                </select>
-              </div>
+  <p className="text-sm text-gray-500">Sizes:</p>
+  <select
+    value={selectedSize}
+    onChange={handleSizeChange}
+    className="border rounded-md text-primary py-2 px-3 w-full"
+  >
+    {product?.size?.map((size) => (
+      <option key={size} value={size}>
+        {size}
+      </option>
+    ))}
+  </select>
+</div>
             </div>
 
             {/* Colors */}
@@ -102,27 +107,21 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
             <div className="space-y-4">
               <div>
                 <p className="text-lg text-gray-400">Quantity:</p>
-                <div className="flex items-center gap-3 mt-2">
-                  <button
-                    className="border border-gray-500 text-gray-300 rounded-md p-2 text-lg hover:bg-gray-700"
-                    onClick={() => setQuantity(Math.max(quantity - 1, 1))}
-                  >
-                    -
-                  </button>
-                  <input
-                    type="number"
-                    value={quantity}
-                    min={1}
-                    onChange={handleQuantityChange}
-                    className="border border-gray-500 bg-black text-white text-lg rounded-md py-2 px-4 w-16 text-center"
-                  />
-                  <button
-                    className="border border-gray-500 text-gray-300 rounded-md p-2 text-lg hover:bg-gray-700"
-                    onClick={() => setQuantity(quantity + 1)}
-                  >
-                    +
-                  </button>
-                </div>
+                <div className="flex items-center border rounded-md text-secondary w-fit">
+                                                <button
+                                                  className="p-2"
+                                                  onClick={() => setQuantity(Math.max(quantity - 1, 1))}
+                                                >
+                                                  <MdRemove className="w-4 h-4" />
+                                                </button>
+                                                <span className="w-12 text-center">{quantity}</span>
+                                                <button
+                                                  className="p-2"
+                                                  onClick={() => setQuantity(quantity + 1)}
+                                                >
+                                                  <MdAdd className="w-4 h-4" />
+                                                </button>
+                                              </div>
               </div>
             </div>
 

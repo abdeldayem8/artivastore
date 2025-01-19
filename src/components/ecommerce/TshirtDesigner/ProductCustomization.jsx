@@ -2,6 +2,7 @@ import React from 'react';
 import { Plus, Minus } from 'lucide-react';
 import { SIZES } from '@components/ecommerce/Constants/Customization';
 import { motion } from 'framer-motion';
+import { MdAdd, MdRemove } from 'react-icons/md';
 
 function ProductCustomization({ 
   selectedSize, 
@@ -13,57 +14,43 @@ function ProductCustomization({
 }) {
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-secondary">
       {/* Size Selection */}
       <div>
         <h3 className="text-lg font-semibold mb-3">Select Size:</h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-          {SIZES.map((size) => (
-            <motion.button
-              key={size.id}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => onSizeChange(size.id)}
-              className={`py-2 px-4 rounded-lg border${
-                selectedSize === size.id
-                  ? 'border-blue-500 bg-blue-50 text-blue-700'
-                  : 'border-gray-200 hover:border-gray-300 text-secondary'
-              }`}
-            >
-              {size.name}
-              {size.stock < 50 && (
-                <span className="ml-1 text-xs text-orange-500">
-                  (Low Stock)
-                </span>
-              )}
-            </motion.button>
-          ))}
+          <select
+      value={selectedSize}
+      onChange={(e) => onSizeChange(e.target.value)}
+      className="border rounded-md text-primary py-2 px-3 w-full"
+    >
+      {SIZES.map((size) => (
+        <option value={size.id} key={size.id} disabled={size.stock === 0}>
+          {size.name} {size.stock < 50 ? '(Low Stock)' : ''}
+        </option>
+      ))}
+    </select>
         </div>
       </div>
 
       {/* Quantity Selection */}
       <div>
         <h3 className="text-lg font-semibold mb-3">Quantity:</h3>
-        <div className="flex items-center space-x-4">
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => quantity > 1 && onQuantityChange(quantity - 1)}
-            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200"
-            disabled={quantity <= 1}
-          >
-            <Minus size={20} className={quantity <= 1 ? 'text-gray-400' : ''} />
-          </motion.button>
-          <span className="text-xl font-semibold w-12 text-secondary text-center">{quantity}</span>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => onQuantityChange(quantity + 1)}
-            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200"
-          >
-            <Plus size={20} />
-          </motion.button>
-        </div>
+        <div className="flex items-center border rounded-md text-secondary w-fit">
+                                <button
+                                  className="p-2"
+                                  onClick={() => quantity > 1 && onQuantityChange(quantity - 1)}
+                                >
+                                  <MdRemove className="w-4 h-4" />
+                                </button>
+                                <span className="w-12 text-center">{quantity}</span>
+                                <button
+                                  className="p-2"
+                                  onClick={() => onQuantityChange(quantity + 1)}
+                                >
+                                  <MdAdd className="w-4 h-4" />
+                                </button>
+                              </div>
       </div>
 
 
