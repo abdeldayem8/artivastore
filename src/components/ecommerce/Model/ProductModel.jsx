@@ -40,7 +40,7 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
       onClick={handleModalClick}
     >
       <div
-        className="bg-primary w-full max-w-md md:max-w-3xl max-h-screen h-auto md:h-3/5 p-6 rounded-md relative flex flex-col md:flex-row overflow-y-auto"
+        className="bg-primary w-full max-w-md md:max-w-3xl h-3/5 p-6 rounded-md relative flex flex-col md:flex-row overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
