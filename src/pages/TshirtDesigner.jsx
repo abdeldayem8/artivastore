@@ -25,10 +25,8 @@ function TshirtDesigner() {
   const [quantity, setQuantity] = useState(1);
   const [frontDesignImage, setFrontDesignImage] = useState(null); // For front preview on tshirt
   const [backDesignImage, setBackDesignImage] = useState(null); // For back preview on tshirt
-  const [frontDesignImagePreview, setFrontDesignImagePreview] = useState(null); // For front preview on other pages
-  const [backDesignImagePreview, setBackDesignImagePreview] = useState(null); // For back preview on other pages
-  const [frontDesignImageFile, setFrontDesignImageFile] = useState(null); // For front file to send to backend
-  const [backDesignImageFile, setBackDesignImageFile] = useState(null); // For back file to send to backend
+  const [frontImage,setFrontImage]=useState(null);
+  const [backImage,setBackImage]=useState(null)
   const [view, setView] = useState('front'); // Track current view (front/back)
   const navigate= useNavigate()
   // Refs for capturing the T-shirt views
@@ -46,7 +44,8 @@ const models = data?.data.models || {};
 const pricing = parseFloat(data?.data.pricing || '0');
 const additionalPricing = parseFloat(data?.data.additional_pricing || '0');
 
-
+const endPrice = (frontImage  && backImage) ? (pricing + additionalPricing) * quantity : pricing * quantity;
+const unitPrice = endPrice /quantity;
 // Get products for the selected category
 const products = models[selectedCategory] || [];
 
@@ -66,20 +65,20 @@ const availableColors = [...new Set(products.map((product) => product.color))];
     const base64String = await fileToBase64(file);
     if (view === 'front') {
       setFrontDesignImage(base64String);
+      setFrontImage(base64String)
     } else {
       setBackDesignImage(base64String);
+      setBackImage(base64String)
     }
   };
+
+  
 
   const handleRemoveDesign = () => {
     if (view === 'front') {
       setFrontDesignImage(null);
-      setFrontDesignImageFile(null);
-      setFrontDesignImagePreview(null);
     } else {
       setBackDesignImage(null);
-      setBackDesignImageFile(null);
-      setBackDesignImagePreview(null);
     }
   };
  
@@ -149,19 +148,7 @@ const availableColors = [...new Set(products.map((product) => product.color))];
       const backBlob = await fetch(backPreview).then(res => res.blob());
       const backFile = new File([backBlob], 'back-preview.png', { type: 'image/png' });
 
-      // Update all states at once
-      await Promise.all([
-        new Promise(resolve => {
-          setFrontDesignImagePreview(frontPreview);
-          setFrontDesignImageFile(frontFile);
-          resolve();
-        }),
-        new Promise(resolve => {
-          setBackDesignImagePreview(backPreview);
-          setBackDesignImageFile(backFile);
-          resolve();
-        })
-      ]);
+   
 
       // Restore original view
       setView(currentView);
@@ -189,7 +176,13 @@ const availableColors = [...new Set(products.map((product) => product.color))];
       toast.error("Failed to capture t-shirt preview");
       return;
     }
-
+    console.log({
+      size: selectedSize,
+      color: selectedColor,
+      quantity,
+      price: endPrice, // Log the calculated price here
+      previews,
+    });
     dispatch(
       addToCart({
         isCustom: true,
@@ -201,7 +194,7 @@ const availableColors = [...new Set(products.map((product) => product.color))];
         backDesignImageFile: previews.backFile,
         frontPreview: previews.frontPreview,
         backPreview: previews.backPreview,
-        price: pricing,
+        price: unitPrice,
       })
     );
   };
@@ -227,8 +220,8 @@ const availableColors = [...new Set(products.map((product) => product.color))];
           image:previews.frontPreview ? previews.frontPreview :previews.backPreview,
           size: selectedSize,
           color: selectedColor,
-          quantity: quantity,
-          price: pricing,
+          quantity,
+          price: unitPrice,
         },
       ],
     };
@@ -309,7 +302,7 @@ const availableColors = [...new Set(products.map((product) => product.color))];
               <ProductCustomization
                 selectedSize={selectedSize}
                 quantity={quantity}
-                basePrice={(pricing +  additionalPricing) * (quantity)}
+                basePrice={endPrice}
                 onSizeChange={setSelectedSize}
                 onQuantityChange={setQuantity}
               />

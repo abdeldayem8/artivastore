@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import NavMenuItems from './NavMenuItems';
 import Languageswitcher from './Languageswitcher';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
 const Navbar = () => {
@@ -45,7 +46,7 @@ const handleLanguageChange = (language) => {
 
         {/* menu section */}
         <div className='mx-4'>
-        <p className='text-secondary font-black text-2xl'>{data.name}</p>
+        <Link to={'/artivastore/'} className='text-secondary font-black text-2xl'>{data.name}</Link>
         </div>
         <div className='hidden lg:block'>
            <NavMenuItems

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import API_ENDPOINTS from '@utils/API_ENDPOINTS';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -40,6 +40,7 @@ const Order = () => {
    const [cities, setCities] = useState([]); 
    const [shippingPrice, setShippingPrice] = useState(null); 
    const [isLoading, setIsLoading] = useState(false);
+   const navigate =useNavigate()
 
   useEffect(()=>{
     const getCities = async()=>{
@@ -166,7 +167,7 @@ const submitOrder = async (formDataValues) => {
         }
       }));
     }
-    console.time()
+  
     // Make the request with optimized settings
     const response = await axios.post(API_ENDPOINTS.Order, formData, {
       headers: {
@@ -177,10 +178,10 @@ const submitOrder = async (formDataValues) => {
       maxContentLength: Infinity,
       maxBodyLength: Infinity,
     });
-    console.timeEnd()
+    
 
     toast.success("Order submitted successfully!");
-    
+    navigate('/artivastore/orderconfirm', { state: { orderdata,shippingPrice } });
   } catch (error) {
     toast.error(error.message);
   }finally{
@@ -234,6 +235,7 @@ const compressImage = async (file) => {
     reader.readAsDataURL(file);
   });
 };
+
   
   return (
     <div className="flex gap-4 flex-col sm:flex-row max-w-4xl mx-auto p-6 text-secondary">
@@ -352,14 +354,14 @@ const compressImage = async (file) => {
               <p className="text-sm opacity-75">Quantity: {item.quantity}</p>
             </div>
             <div className="text-right">
-              <p className="font-semibold">{item.price} EGP</p>
+              <p className="font-semibold">{item.price * item.quantity} EGP</p>
             </div>
           </div>
         ))}
         <div className="mt-4 pt-4">
           <div className="flex justify-between">
             <span>Subtotal</span>
-            <span className="font-semibold">{orderdata?.totalPrice || orderdata?.items[0].price} EGP</span>
+            <span className="font-semibold">{orderdata?.totalPrice+shippingPrice|| (orderdata?.items[0].price * orderdata.items[0].quantity)+shippingPrice} EGP</span>
           </div>
         </div>
       </div>

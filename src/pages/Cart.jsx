@@ -37,6 +37,7 @@ const Cart = () => {
       },
     });
   };
+
   return (
     <div className="container mx-auto py-8">
       {cart.length === 0 ? (
@@ -84,7 +85,6 @@ const Cart = () => {
                       alt={product.name}
                       className="absolute inset-0 w-auto h-full object-cover rounded-md"
                     />
-                    {console.log(product)}
                   </div>
 
                   {/* Product Details */}
@@ -142,10 +142,6 @@ const Cart = () => {
                     <div className="flex justify-between">
                       <span className="text-gray-500">Subtotal</span>
                       <span>{totalPrice.toFixed(2)} EGP</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-500">Shipping</span>
-                      <span>Free</span>
                     </div>
                     <div className="border-t border-gray-200 pt-4">
                       <div className="flex justify-between font-semibold text-lg">

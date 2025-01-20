@@ -11,6 +11,7 @@ import Publicroute from '@routes/PublicRoute.jsx'
 import Cart from '@pages/Cart.jsx'
 import Order from '@pages/Order.jsx'
 import NotFound from '@pages/Not-found.jsx'
+import OrderConfirm from '@/pages/OrderConfirm.jsx'
 const Collection = lazy(()=>import ('@pages/Collection.jsx'))
 const Makeyourtshirt = lazy(()=>import ('@pages/TshirtDesigner.jsx'))
 const Home = lazy(()=>import ('@pages/Home.jsx'))
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
     {
       path:"/artivastore/order",
       element: <Order/>
+    },
+    {
+      path:"/artivastore/orderconfirm",
+      element: <OrderConfirm/>
     },
     {
       path:"*",

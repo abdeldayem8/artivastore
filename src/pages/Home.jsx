@@ -81,6 +81,7 @@ const Home = () => {
           />
         </motion.div>
       </motion.div>
+      
 
       {/* Featured Collection Section */}
       <motion.div

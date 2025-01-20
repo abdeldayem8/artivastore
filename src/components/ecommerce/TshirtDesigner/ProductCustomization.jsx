@@ -1,7 +1,5 @@
 import React from 'react';
-import { Plus, Minus } from 'lucide-react';
 import { SIZES } from '@components/ecommerce/Constants/Customization';
-import { motion } from 'framer-motion';
 import { MdAdd, MdRemove } from 'react-icons/md';
 
 function ProductCustomization({ 
@@ -59,7 +57,7 @@ function ProductCustomization({
         <div className="flex justify-between items-center">
           <span className="text-lg font-semibold">Total Price:</span>
           <span className="text-2xl font-bold text-blue-600">
-            ${basePrice}
+            {basePrice} EGP
           </span>
         </div>
         <p className="text-sm text-gray-500 mt-2">
