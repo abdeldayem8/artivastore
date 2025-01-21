@@ -16,11 +16,15 @@ jobs:
 
       - name: Setup Node
         uses: actions/setup-node@v3
+        with:
+          node-version: 18  # Specify the Node.js version your app requires
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
 
       - name: Build project
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}  # Pass the secret here
         run: npm run build
 
       - name: Upload production-ready build files
