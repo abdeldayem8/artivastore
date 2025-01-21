@@ -9,6 +9,7 @@ import Loading from "@components/common/Loading/Loading"
 
 function App() {
   
+  console.log(import.meta.env.VITE_API_BASE_URL)
   return (
    <>
    <Provider store={store}>
