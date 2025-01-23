@@ -238,7 +238,7 @@ const compressImage = async (file) => {
 
   
   return (
-    <div className="flex gap-4 flex-col sm:flex-row max-w-4xl mx-auto p-6 text-secondary">
+    <div className="flex gap-4 flex-col sm:flex-row max-w-4xl mx-auto p-6">
     {/* Delivery Section */}
     <div className="flex-1 sm:pr-4">
       <h2 className="text-2xl font-semibold mb-4">Delivery Details</h2>
@@ -324,7 +324,7 @@ const compressImage = async (file) => {
         </label>
       </div>
       <button
-        className="bg-secondary text-primary py-3 px-4 mt-8 w-full rounded-md font-semibold hover:bg-secondary/90 transition-colors"
+        className="bg-primary text-secondary dark:bg-secondary dark:text-primary py-3 px-4 mt-8 w-full rounded-md font-semibold hover:bg-secondary/90 transition-colors"
         disabled={isLoading}
       >
        {isLoading ? 'Loading...' : 'Complete Order'}

@@ -40,7 +40,7 @@ const Responsivemenu = memo(({openmenu,setOpenmenu,menuButtonRef,closeMenu ,lang
    <AnimatePresence mode='wait'>
     {
         openmenu && (
-            <motion.div   initial={{opacity:0,x:-300}} animate={{opacity:1,x:0}} exit={{opacity:0,x:-300}} transition={{duration:0.3}} className='absolute bg-secondary text-primary top-24 left-0 w-full h-screen z-20'>
+            <motion.div   initial={{opacity:0,x:-300}} animate={{opacity:1,x:0}} exit={{opacity:0,x:-300}} transition={{duration:0.3}} className='absolute bg-primary text-secondary dark:bg-secondary dark:text-primary top-24 left-0 w-full h-screen z-20'>
             <div ref={menuRef} className='text-xl font-semibold uppercase p-8 h-full w-full'>
               <ul className='flex flex-col justify-center px-4 gap-6'>
               <NavMenuItems

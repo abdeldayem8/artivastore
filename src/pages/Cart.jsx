@@ -44,10 +44,10 @@ const Cart = () => {
         // Empty Cart State
         <div className="flex justify-center items-center flex-col">
           
-            <p className="text-secondary text-4xl mb-4">Your cart is empty.</p>
+            <p className=" text-4xl mb-4">Your cart is empty.</p>
             <button
               onClick={() => navigate('/artivastore/collection')}
-              className="bg-secondary text-black px-4 py-2 rounded-md hover:bg-gray-300 flex items-center justify-center gap-2"
+              className="bg-primary text-secondary dark:bg-secondary dark:text-black px-4 py-2 rounded-md hover:bg-gray-300 flex items-center justify-center gap-2"
             >
               ← Continue Shopping
             </button>
@@ -89,7 +89,7 @@ const Cart = () => {
 
                   {/* Product Details */}
                   <div className="flex-1 space-y-2">
-                    <div className="flex justify-between items-center text-secondary">
+                    <div className="flex justify-between items-center">
                       <h3 className="font-semibold text-lg"> {product.isCustom ? 'Custom Design Product' : product.name}
                         {product.typedText && (
                           <span className="block text-sm text-gray-500">
@@ -106,7 +106,7 @@ const Cart = () => {
 
                     {/* Quantity and Remove Button */}
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center border rounded-md text-secondary">
+                      <div className="flex items-center border rounded-md ">
                         <button
                           className="p-2"
                           onClick={() => dispatch(decreaseQuantity({ id: product.id,size:product.size,color:product.color }))}
@@ -135,7 +135,7 @@ const Cart = () => {
 
             {/* Order Summary */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-lg shadow-md">
+              <div className="bg-primary text-secondary dark:bg-secondary dark:text-primary rounded-lg shadow-md">
                 <div className="p-6">
                   <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
                   <div className="space-y-4">

@@ -65,7 +65,7 @@ const ProductDetails = () => {
 
     return productdetails ? (
         <>
-           <div className='border-t-2 pt-10 transition-opacity ease in duration-500 opacity-100 text-secondary'>
+           <div className='border-t-2 pt-10 transition-opacity ease in duration-500 opacity-100 '>
             {/* product data */}
               <div className='flex gap-12 sm:gap-12 flex-col sm:flex-row mb-8'>
                 {/* product image */}
@@ -89,7 +89,7 @@ const ProductDetails = () => {
                 </div>
                 {/* product information */}
                 <div className='flex-1 '>
-                    <h1 className='font-medium text-secondary text-2xl mt-2'>{productdetails.name}</h1>
+                    <h1 className='font-medium  text-2xl mt-2'>{productdetails.name}</h1>
                        {/* Calculate and display price and discount */}
     <div className='mt-5'>
         {productdetails.discount > 0 ? (
@@ -113,7 +113,7 @@ const ProductDetails = () => {
     </div>
                     <p className='my-5 text-gray-500 md:w-4/5'>{productdetails.description}</p>
                     {/* colors */}
-                    <p className='text-secondary my-4'>Available Colors</p>
+                    <p className=' my-4'>Available Colors</p>
                     <div className='flex gap-2'>
                     {productdetails?.color?.map((color) => (
         <button
@@ -148,7 +148,7 @@ const ProductDetails = () => {
                     </div>
                       {/* Quantity Selection */} 
                                         
-                      <div className='flex items-center border rounded-md text-secondary w-fit'>
+                      <div className='flex items-center border rounded-md  w-fit'>
                           <button
                                                                           className="p-2"
                                                                           onClick={() => setQuantity(Math.max(quantity - 1, 1))}
@@ -165,8 +165,8 @@ const ProductDetails = () => {
                         </div>
 
                     <div className='flex items-center gap-2 my-4'>
-                    <button className='bg-transparent border border-white-500 text-secondary  px-8 py-3 text-sm' onClick={()=>dispatch(addToCart({...productdetails,size,quantity,color:selectedcolor}))}>ADD TO CART</button>
-                    <button onClick={handleCheckout} className='bg-secondary text-primary px-8 py-3 text-sm active:bg-gray-700'>BUY IT NOW</button>
+                    <button className='bg-transparent border border-white-500   px-8 py-3 text-sm' onClick={()=>dispatch(addToCart({...productdetails,size,quantity,color:selectedcolor}))}>ADD TO CART</button>
+                    <button onClick={handleCheckout} className='bg-primary text-secondary dark:bg-secondary dark:text-primary px-8 py-3 text-sm active:bg-gray-700'>BUY IT NOW</button>
                     </div>
                     <hr className='mt-8 sm:w-4/5 w-full border-t border-black' />
                     <div className='text-sm text-gray-500 mt-5 flex flex-col gap-1'>

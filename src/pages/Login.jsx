@@ -51,7 +51,7 @@ const Login = () => {
                 <p className="text-red-500 text-sm">{errors.password.message}</p>
               )}
      <button 
-  className="w-full bg-secondary text-primary py-2 rounded-md transition duration-300" 
+  className="w-full text-secondary bg-primary dark:bg-secondary dark:text-primary py-2 rounded-md transition duration-300" 
   disabled={loading}>
   {loading ? 'Logging in...' : 'Login'}
 </button>
@@ -60,7 +60,7 @@ const Login = () => {
         Don’t have an account?{" "}
         <Link
           to={'/artivastore/register'}
-          className="text-secondary hover:text-gray-600 transition duration-300"
+          className="text-primary dark:text-secondary hover:text-gray-600 transition duration-300"
         >
           Create Account
         </Link>

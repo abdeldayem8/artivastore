@@ -15,7 +15,7 @@ const Footer = () => {
   },[dispatch])
 
   return (
-    <footer className="bg-primary text-secondary text-center">
+    <footer className="text-center">
     <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
       {/* Quick Links Section */}
       <div>
@@ -53,7 +53,7 @@ const Footer = () => {
       </div>
     </div>
   
-    <div className="mt-8 text-xs text-gray-400">
+    <div className="mt-8 text-xs text-primary dark:text-gray-400">
       <p>&copy; {new Date().getFullYear()} Artiva Store. All rights reserved.</p>
     </div>
   </footer>

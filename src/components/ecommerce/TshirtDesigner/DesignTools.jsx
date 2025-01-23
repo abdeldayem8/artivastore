@@ -53,7 +53,7 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
             <div
               {...getRootProps()}
               className={`border-2 border-dashed ${
-                isDragActive ? "border-blue-500 bg-blue-50" : "border-gray-300"
+                isDragActive ? "border-blue-500 bg-primary dark:bg-secondary dark:text-primary" : "border-gray-300"
               } rounded-lg p-8 text-center cursor-pointer transition-colors`}
             >
               <input {...getInputProps()} />
@@ -101,7 +101,7 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
         <button
           onClick={() => setActiveTab("upload")}
           className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 ${
-            activeTab === "upload" ? "bg-blue-500 text-white" : "bg-gray-100"
+            activeTab === "upload" ? "bg-primary text-secondary dark:bg-secondary dark:text-primary" : "bg-gray-100 dark:text-gray-500"
           }`}
         >
           <Upload size={20} /> Upload
@@ -109,7 +109,7 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
         <button
           onClick={() => setActiveTab("design")}
           className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 ${
-            activeTab === "design" ? "bg-blue-500 text-white" : "bg-gray-100"
+            activeTab === "design" ? "bg-primary text-secondary dark:bg-secondary dark:text-primary" : "bg-gray-100 dark:text-gray-500"
           }`}
         >
           <Palette size={20} /> Design

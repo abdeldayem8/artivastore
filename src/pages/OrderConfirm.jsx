@@ -6,7 +6,7 @@ const OrderConfirm = () => {
    const {orderdata,shippingPrice} = location.state;
    const totalItemPrice =  orderdata?.items?.reduce((total, item) => total + (item.price * item.quantity), 0);
   return (
-    <div className="order-confirmation text-secondary">
+    <div className="order-confirmation">
     <h1 className="text-center text-2xl font-semibold text-success">Order Successful!</h1>
     <p className="text-center">Thank you for your order! Your order has been successfully placed.</p>
 

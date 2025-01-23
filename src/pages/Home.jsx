@@ -7,7 +7,7 @@ import { fetchSocialData } from '@store/Thunks/SocialThunk';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
-const Home = () => {
+const Home = ({children}) => {
 
   const {t} =useTranslation();
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ const Home = () => {
   return  <>
   {/* Hero Section */}
   <motion.div
-        className="relative flex flex-col sm:flex-row items-center justify-between bg-black text-white py-10 px-6"
+        className="relative flex flex-col sm:flex-row items-center justify-between py-10 px-6"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
@@ -54,11 +54,11 @@ const Home = () => {
           variants={fadeInUp}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-secondary text-3xl md:text-4xl font-extrabold leading-tight">
+          <p className="text-3xl md:text-4xl font-extrabold leading-tight">
             {data.disc}
           </p>
           <motion.button
-            className="mt-4 border border-secondary text-white px-6 py-2 rounded hover:bg-secondary hover:text-primary transition"
+            className="mt-4 border border-primary dark:border-secondary  px-6 py-2 rounded hover:bg-primary hover:text-secondary dark:hover:bg-secondary dark:hover:text-primary transition"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={()=>navigate("/artivastore/collection")}
@@ -81,42 +81,9 @@ const Home = () => {
           />
         </motion.div>
       </motion.div>
-      
+      {/* Render Children */}
+      {children}
 
-      {/* Featured Collection Section */}
-      <motion.div
-        className="text-center my-12"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeIn}
-        transition={{ duration: 0.5 }}
-      >
-        <h2 className="text-white text-2xl md:text-3xl font-semibold">
-          Our Featured Collection
-        </h2>
-      </motion.div>
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeInUp}
-        transition={{ duration: 0.5 }}
-      >
-        <FeaturedCollection />
-      </motion.div>
-
-      {/* Best Sellers Section */}
-      <motion.div
-        className="my-12"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeInUp}
-        transition={{ duration: 0.5 }}
-      >
-        <MoreSold title="Best Sellers" />
-      </motion.div>
 </>
   
 };

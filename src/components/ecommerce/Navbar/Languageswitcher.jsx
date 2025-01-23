@@ -29,7 +29,7 @@ const Languageswitcher = ({ selectedLanguage, onLanguageChange }) => {
   return (
     <div ref={dropdownRef} className="relative">
     <button
-      className="flex items-center space-x-2  sm:text-secondary  rounded-lg px-4 py-2 focus:outline-none"
+      className="flex items-center space-x-2    rounded-lg px-4 py-2 focus:outline-none"
       onClick={toggleDropdown}
     >
       <img

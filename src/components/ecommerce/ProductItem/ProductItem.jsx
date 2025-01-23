@@ -26,8 +26,8 @@ const ProductItem = ({ product }) => {
 
       {/* Product Details */}
       <div className="pt-1">
-        <h3 className="text-sm pt-3 pb-1 text-secondary font-medium">{name}</h3>
-        <p className="text-sm font-medium text-secondary">{price} EGP</p>
+        <h3 className="text-sm pt-3 pb-1  font-medium">{name}</h3>
+        <p className="text-sm font-medium ">{price} EGP</p>
       </div>
     </Link>
   );

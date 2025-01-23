@@ -242,7 +242,7 @@ const availableColors = [...new Set(products.map((product) => product.color))];
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl font-bold text-secondary mb-8"
+          className="text-3xl font-bold  mb-8"
         >
           Design Your Custom {selectedCategory.slice(0, -1).toUpperCase()}
         </motion.h1>
@@ -311,7 +311,7 @@ const availableColors = [...new Set(products.map((product) => product.color))];
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-secondary text-primary py-3 rounded-lg flex items-center justify-center gap-2"
+              className="w-full bg-primary text-secondary dark:bg-secondary dark:text-primary py-3 rounded-lg flex items-center justify-center gap-2"
               onClick={handleAddToCart} 
             >
               Add To Cart
@@ -319,7 +319,7 @@ const availableColors = [...new Set(products.map((product) => product.color))];
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-Transparent text-secondary border border-gray-500 py-3 rounded-lg flex items-center justify-center gap-2"
+              className="w-full bg-Transparent border border-gray-500 py-3 rounded-lg flex items-center justify-center gap-2"
               onClick={handleCheckout}
             >
               Buy It Now

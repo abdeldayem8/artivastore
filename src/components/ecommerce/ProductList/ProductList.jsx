@@ -11,13 +11,14 @@ import { addToCart } from '@store/Slices/Cartslice';
 import { motion } from "framer-motion";
 import ProductModal from '@components/ecommerce/Model/ProductModel';
 import { Pagination, Stack } from '@mui/material';
+import OptionsBtn from '@/components/common/OptionsBtn/OptionsBtn';
 
 const ProductList = () => {
     
    const dispatch = useDispatch()
    const {products,loading,error} = useSelector((state)=>state.products)
    const {t} =useTranslation();
- 
+  
    const [categories,setCategories] = useState([]);
    const [selectedCategories, setSelectedCategories] = useState([]);
    const [showfilter,setShowfilter] = useState(false)
@@ -28,7 +29,7 @@ const ProductList = () => {
     from:0,
     to:pageSize,
    })
-  
+   const savedTheme = localStorage.getItem("theme");
   //  fetch catgories
     const fetchCategories = async () => {
       try {
@@ -108,7 +109,7 @@ useEffect(() => {
     >
       {/* Heading */}
       <motion.h2
-        className="text-2xl font-bold text-secondary"
+        className="text-2xl font-bold"
         variants={fadeInUp}
         transition={{ duration: 0.5 }}
       >
@@ -117,7 +118,7 @@ useEffect(() => {
 
       {/* Filter Options */}
       <motion.div
-        className="min-w-60 rounded-md text-secondary"
+        className="min-w-60 rounded-md"
         variants={fadeInUp}
         transition={{ duration: 0.5 }}
       >
@@ -175,17 +176,10 @@ useEffect(() => {
       
               <ProductItem product={product} />
               <div className="w-full">
-                <motion.button
-                  className="w-full mb-2 bg-transparent border border-white-500 text-secondary font-semibold py-2 sm:px-6 rounded transition-colors hover:bg-secondary hover:text-primary"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => {
+                <OptionsBtn onClick={() => {
                     setSelectedProduct(product);
                     setIsModalOpen(true);
-                  }}
-                >
-                  Choose Options
-                </motion.button>
+                  }}>Choose Options</OptionsBtn>
               </div>
             </motion.div>
           ))
@@ -204,18 +198,19 @@ useEffect(() => {
       <Stack spacing={2} className='flex justify-center my-4 mx-auto'>
       <Pagination onChange={handlePagination} count={Math.ceil(filteredProducts.length/pageSize)} variant="outlined" shape="rounded"  sx={{
           "& .MuiPaginationItem-root": {
-            color: "white", // Change text color
+            backgroundColor:'gray',
+            color: '#000', // Default text color for light mode
+            borderColor: '#D1D5DB',
             "&.Mui-selected": {
-              backgroundColor: "#000", // Tailwind's black
-              color: "#F3E4DD", // Your primary color
-              borderColor: "#D1D5DB",
+              backgroundColor: '#F3E4DD', // Default background color for light mode
+              color: '#000', // Default text color for light mode
+              borderColor: '#D1D5DB',
             },
             "&:hover": {
-              backgroundColor: "#374151", // Tailwind's gray-700
-              color: "#fff",
+              backgroundColor: '#D1D5DB', // Default hover background for light mode
+              color: '#000', // Default hover text color for light mode
             },
-          },
-        }}
+          }}}
       />
     </Stack>
     </motion.div>

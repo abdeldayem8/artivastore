@@ -7,6 +7,7 @@ import ProductItem from '@components/ecommerce/ProductItem/ProductItem';
 import { motion } from 'framer-motion';
 import ProductModal from '@components/ecommerce/Model/ProductModel';
 import { addToCart } from '@/store/Slices/Cartslice';
+import OptionsBtn from '@/components/common/OptionsBtn/OptionsBtn';
 
 const FeaturedCollection = () => {
   const { products, loading, error } = useSelector((state) => state.products);
@@ -49,18 +50,11 @@ const FeaturedCollection = () => {
           >
             <ProductItem product={product} />
             <div className="w-full">
-              <motion.button
-                className="w-full mb-2 bg-transparent border border-white-500 text-secondary font-semibold py-2 sm:px-6 rounded transition-colors hover:bg-secondary hover:text-primary"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  setSelectedProduct(product);
-                  setIsModalOpen(true);
-                }}
-              >
-                Choose Options
-              </motion.button>
-            </div>
+                <OptionsBtn onClick={() => {
+                    setSelectedProduct(product);
+                    setIsModalOpen(true);
+                  }}>Choose Options</OptionsBtn>
+              </div>
           </motion.div>
         ))
       ) : (

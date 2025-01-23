@@ -133,14 +133,14 @@ const Register = () => {
               {errors.phone && (
                 <p className="text-red-500 text-sm">{errors.phone.message}</p>
               )}
-              <button className="w-full bg-secondary text-primary py-2 rounded-md transition duration-300 cursor-pointer">
+              <button className="w-full text-secondary bg-primary dark:bg-secondary dark:text-primary  py-2 rounded-md transition duration-300 cursor-pointer">
                 CREATE ACCOUNT
               </button>
             </form>
             <p className="text-center text-gray-600 mt-4">
               <Link
                 to={"/artivastore/"}
-                className="text-secondary hover:text-gray-600 transition duration-300"
+                className=" hover:text-gray-600 transition duration-300"
               >
                 Return To Store
               </Link>

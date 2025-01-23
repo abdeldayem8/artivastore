@@ -40,17 +40,17 @@ const handleLanguageChange = (language) => {
      <nav>
       <div className='flex items-center justify-between mb-4 sm:gap-8'>
 
-      <div className='lg:hidden cursor-pointer text-secondary' onClick={toggleMenu} ref={menuButtonRef} >
+      <div className='lg:hidden cursor-pointer' onClick={toggleMenu} ref={menuButtonRef} >
         {openmenu ? <MdClose className='text-2xl' /> : <MdMenu className='text-2xl' />} 
       </div>
 
         {/* menu section */}
         <div className='mx-4'>
-        <Link to={'/artivastore/'} className='text-secondary font-black text-2xl'>{data.name}</Link>
+        <Link to={'/artivastore/'} className='font-black text-2xl'>{data.name}</Link>
         </div>
         <div className='hidden lg:block'>
            <NavMenuItems
-        ulClassName="flex items-center gap-4 text-secondary"
+        ulClassName="flex items-center gap-4"
         liClassName=""
         linkClassName="font-semibold"
         closeMenu={closeMenu}

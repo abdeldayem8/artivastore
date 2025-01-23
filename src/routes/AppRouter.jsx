@@ -15,17 +15,63 @@ import OrderConfirm from '@/pages/OrderConfirm.jsx'
 const Collection = lazy(()=>import ('@pages/Collection.jsx'))
 const Makeyourtshirt = lazy(()=>import ('@pages/TshirtDesigner.jsx'))
 const Home = lazy(()=>import ('@pages/Home.jsx'))
+import { motion } from 'framer-motion';
+import FeaturedCollection from '@/components/ecommerce/SomeCollection/FeaturedCollection.jsx'
+import MoreSold from '@/components/ecommerce/MoreSold/MoreSold.jsx'
 
 
 
+ const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
 
+  const fadeIn = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
 const router = createBrowserRouter([
   {path:'/artivastore/',element:<App/>,
     children:[
     {
       path:"/artivastore/",
       element: <Suspense fallback={<Loading/>}>
-        <Home/>
+        <Home>
+      {/* Featured Collection Section */}
+      <motion.div
+        className="text-center my-12"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeIn}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 className="text-2xl md:text-3xl font-semibold">
+          Our Featured Collection
+        </h2>
+      </motion.div>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+        transition={{ duration: 0.5 }}
+      >
+        <FeaturedCollection />
+      </motion.div>
+
+      {/* Best Sellers Section */}
+      <motion.div
+        className="my-12"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+        transition={{ duration: 0.5 }}
+      >
+        <MoreSold title="Best Sellers" />
+      </motion.div>
+    </Home>
       </Suspense>
     },
     {

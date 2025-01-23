@@ -12,7 +12,7 @@ function ProductCustomization({
 }) {
 
   return (
-    <div className="space-y-6 text-secondary">
+    <div className="space-y-6">
       {/* Size Selection */}
       <div>
         <h3 className="text-lg font-semibold mb-3">Select Size:</h3>
@@ -32,9 +32,9 @@ function ProductCustomization({
       </div>
 
       {/* Quantity Selection */}
-      <div>
+      <div className='text-primary dark:text-secondary'>
         <h3 className="text-lg font-semibold mb-3">Quantity:</h3>
-        <div className="flex items-center border rounded-md text-secondary w-fit">
+        <div className="flex items-center border rounded-md w-fit">
                                 <button
                                   className="p-2"
                                   onClick={() => quantity > 1 && onQuantityChange(quantity - 1)}
@@ -53,10 +53,10 @@ function ProductCustomization({
 
 
       {/* Price Summary */}
-      <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+      <div className="mt-6 p-4 bg-primary dark:bg-gray-50 rounded-lg">
         <div className="flex justify-between items-center">
-          <span className="text-lg font-semibold">Total Price:</span>
-          <span className="text-2xl font-bold text-blue-600">
+          <span className="text-lg font-semibold text-secondary dark:text-primary">Total Price:</span>
+          <span className="text-2xl font-bold text-secondary dark:text-primary">
             {basePrice} EGP
           </span>
         </div>
