@@ -18,6 +18,8 @@ const Home = lazy(()=>import ('@pages/Home.jsx'))
 import { motion } from 'framer-motion';
 import FeaturedCollection from '@/components/ecommerce/SomeCollection/FeaturedCollection.jsx'
 import MoreSold from '@/components/ecommerce/MoreSold/MoreSold.jsx'
+import ErrorBoundary from '@/components/common/ErrorBoudary/ErrorBoundary.jsx'
+
 
 
 
@@ -36,6 +38,7 @@ const router = createBrowserRouter([
     {
       path:"/artivastore/",
       element: <Suspense fallback={<Loading/>}>
+      
         <Home>
       {/* Featured Collection Section */}
       <motion.div
@@ -72,41 +75,61 @@ const router = createBrowserRouter([
         <MoreSold title="Best Sellers" />
       </motion.div>
     </Home>
+    
       </Suspense>
     },
     {
       path:"/artivastore/collection",
       element: <Suspense fallback={<Loading/>}>
+       
         <Collection/>
+        
       </Suspense>
     },
     {
       path:"/artivastore/collection/:id",
-      element:  <ProductDetails/>
+     
+      element:
+    
+      <ProductDetails/>
+      
     },
     {
       path:"/artivastore/maketshirt",
       element:<Suspense fallback={<Loading/>}>
-        <Makeyourtshirt/>
+            <Makeyourtshirt/>
       </Suspense>
     },
     {
       path:"/artivastore/cart",
       element:<Suspense fallback={<Loading/>}>
-        <Cart/>
+       <Cart/>
       </Suspense>
     },
     {
       path:"/artivastore/login",
-      element:<Publicroute><Login/></Publicroute> 
+      element:<Publicroute>
+       <ErrorBoundary>
+        <Login/>
+       </ErrorBoundary>
+        
+        </Publicroute> 
     },
     {
       path:"/artivastore/register",
-      element: <Publicroute><Register/></Publicroute> 
+      element: <Publicroute>
+       
+        <Register/>
+        
+        </Publicroute> 
     },
     {
       path:"/artivastore/profile",
-      element: <Protectedroute><Profile/></Protectedroute> 
+      element: <Protectedroute>
+       
+        <Profile/>
+        
+        </Protectedroute> 
     },
     {
       path:"/artivastore/order",
@@ -114,11 +137,14 @@ const router = createBrowserRouter([
     },
     {
       path:"/artivastore/orderconfirm",
-      element: <OrderConfirm/>
+      element:
+    
+      <OrderConfirm/>
+      
     },
     {
       path:"*",
-      element: <NotFound/>
+      element: <NotFound />   
     },
     ]
   }

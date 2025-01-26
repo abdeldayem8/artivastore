@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ReactDOM from "react-dom";
 import { MdAdd, MdClose, MdRemove } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,13 +19,6 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
     setSelectedSize(e.target.value);
   };
 
- 
-
-  // Handle quantity change
-  const handleQuantityChange = (e) => {
-    setQuantity(Math.max(e.target.value, 1)); // Ensure quantity is at least 1
-  };
-
   // Close modal if clicked outside
   const handleModalClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -33,8 +27,8 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
   };
 
   if (!isOpen) return null;
-
-  return (
+// use portal pattern for modal
+  return ReactDOM.createPortal(
 <div
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto"
       onClick={handleModalClick}
@@ -155,7 +149,7 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
           </div>
         </div>
       </div>
-    </div>
+    </div>,document.getElementById('modal-root')
   );
 };
 
