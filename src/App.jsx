@@ -43,7 +43,7 @@ function App() {
             <div className="container p-6 lg:mx-auto mb-4">
               <Navbar />
             </div>
-            </ErrorBoundary>  
+            </ErrorBoundary>
             {/* Main Content */}
             <ErrorBoundary>
               <div className="container mx-auto px-6 flex-grow">
