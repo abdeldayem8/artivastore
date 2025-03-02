@@ -1,8 +1,13 @@
 import React, { useCallback, useState } from "react";
-import { Upload, Palette} from "lucide-react";
+import { Upload, Palette } from "lucide-react";
 import { useDropzone } from "react-dropzone";
 
-function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) {
+function DesignTools({
+  activeTab,
+  setActiveTab,
+  onDesignUpload,
+  onTextChange,
+}) {
   const [text, setText] = useState("");
   const [textColor, setTextColor] = useState("#000000");
 
@@ -10,7 +15,8 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
   const onDrop = useCallback(
     (acceptedFiles) => {
       const file = acceptedFiles[0]; // Select the first file
-      if (file && file instanceof File) { // Ensure it's a valid File object
+      if (file && file instanceof File) {
+        // Ensure it's a valid File object
         // Pass the file object to onDesignUpload
         onDesignUpload(file); // Pass the file directly
       } else {
@@ -53,7 +59,9 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
             <div
               {...getRootProps()}
               className={`border-2 border-dashed ${
-                isDragActive ? "border-blue-500 bg-primary dark:bg-secondary dark:text-primary" : "border-gray-300"
+                isDragActive
+                  ? "border-blue-500 bg-primary dark:bg-secondary dark:text-primary"
+                  : "border-gray-300"
               } rounded-lg p-8 text-center cursor-pointer transition-colors`}
             >
               <input {...getInputProps()} />
@@ -70,7 +78,9 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
         return (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Enter Text:</label>
+              <label className="block text-sm font-medium mb-2">
+                Enter Text:
+              </label>
               <input
                 type="text"
                 value={text}
@@ -80,7 +90,9 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
               />
             </div>
             <div>
-              <label className="block text-sm text-secondary font-medium mb-2">Text Color:</label>
+              <label className="block text-sm text-secondary font-medium mb-2">
+                Text Color:
+              </label>
               <input
                 type="color"
                 value={textColor}
@@ -101,7 +113,9 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
         <button
           onClick={() => setActiveTab("upload")}
           className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 ${
-            activeTab === "upload" ? "bg-primary text-secondary dark:bg-secondary dark:text-primary" : "bg-gray-100 dark:text-gray-500"
+            activeTab === "upload"
+              ? "bg-primary text-secondary dark:bg-secondary dark:text-primary"
+              : "bg-gray-100 dark:text-gray-500"
           }`}
         >
           <Upload size={20} /> Upload
@@ -109,7 +123,9 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
         <button
           onClick={() => setActiveTab("design")}
           className={`flex-1 py-2 px-4 rounded-lg flex items-center justify-center gap-2 ${
-            activeTab === "design" ? "bg-primary text-secondary dark:bg-secondary dark:text-primary" : "bg-gray-100 dark:text-gray-500"
+            activeTab === "design"
+              ? "bg-primary text-secondary dark:bg-secondary dark:text-primary"
+              : "bg-gray-100 dark:text-gray-500"
           }`}
         >
           <Palette size={20} /> Design
@@ -121,4 +137,3 @@ function DesignTools({ activeTab, setActiveTab, onDesignUpload, onTextChange }) 
 }
 
 export default DesignTools;
-

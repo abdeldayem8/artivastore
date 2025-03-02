@@ -1,9 +1,9 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 
-function ProductSelector({selectedCategory, onCategorySelect, models }) {
+function ProductSelector({ selectedCategory, onCategorySelect, models }) {
   const categories = Object.keys(models);
-  
+
   return (
     <div className="mb-6">
       <h3 className="text-lg font-semibold mb-3">Choose Style:</h3>
@@ -18,7 +18,6 @@ function ProductSelector({selectedCategory, onCategorySelect, models }) {
             }}
             className="relative rounded-lg overflow-hidden aspect-square"
           >
-            
             {models[category]?.[0]?.image_forward && (
               <img
                 src={`${models[category][0].image_forward}`}
@@ -26,8 +25,10 @@ function ProductSelector({selectedCategory, onCategorySelect, models }) {
                 className="w-full h-full object-contain p-4"
               />
             )}
-             <div className="absolute bottom-0 inset-x-0 bg-black bg-opacity-40 p-2">
-              <span className="text-white text-sm font-medium">{category.slice(0,-1)}</span>
+            <div className="absolute bottom-0 inset-x-0 bg-black bg-opacity-40 p-2">
+              <span className="text-white text-sm font-medium">
+                {category.slice(0, -1)}
+              </span>
             </div>
           </motion.button>
         ))}

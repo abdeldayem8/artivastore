@@ -1,10 +1,10 @@
-import React, {  useState } from 'react';
-import { RotateCcw, RotateCw, X } from 'lucide-react';
-import { Rnd } from 'react-rnd';
+import React, { useState } from "react";
+import { RotateCcw, RotateCw, X } from "lucide-react";
+import { Rnd } from "react-rnd";
 
-const DesignPreview = ({ 
+const DesignPreview = ({
   selectedColor,
-  selectedProduct ,
+  selectedProduct,
   frontDesignImage,
   backDesignImage,
   view,
@@ -20,13 +20,13 @@ const DesignPreview = ({
   const [textPosition, setTextPosition] = useState({ x: 50, y: 50 });
 
   const getCurrentDesignImage = () => {
-    return view === 'front' ? frontDesignImage : backDesignImage;
+    return view === "front" ? frontDesignImage : backDesignImage;
   };
- 
 
   const handleDragStop = (e, d) => {
     setDesignPosition({ x: d.x, y: d.y });
-    onDesignChange && onDesignChange({ position: { x: d.x, y: d.y }, size: designSize });
+    onDesignChange &&
+      onDesignChange({ position: { x: d.x, y: d.y }, size: designSize });
   };
 
   const handleResize = (e, direction, ref, delta, position) => {
@@ -35,30 +35,36 @@ const DesignPreview = ({
       height: ref.offsetHeight,
     });
     setDesignPosition(position);
-    onDesignChange && onDesignChange({ position, size: { width: ref.offsetWidth, height: ref.offsetHeight } });
+    onDesignChange &&
+      onDesignChange({
+        position,
+        size: { width: ref.offsetWidth, height: ref.offsetHeight },
+      });
   };
 
   const handleTextDragStop = (e, d) => {
     setTextPosition({ x: d.x, y: d.y });
-    onTextChange && onTextChange({ color: textColor, position: { x: d.x, y: d.y } });
+    onTextChange &&
+      onTextChange({ color: textColor, position: { x: d.x, y: d.y } });
   };
 
   const getCurrentProductImage = () => {
     if (!selectedProduct) return null;
-    return view === 'front'
+    return view === "front"
       ? selectedProduct?.image_forward
       : selectedProduct?.image_back || selectedProduct?.image_forward; // Fallback to front image if back is unavailable
   };
 
-
   return (
     <div className="relative">
       <div className="aspect-square relative flex items-center justify-center rounded-lg overflow-hidden">
-      <div className="w-full h-full flex items-center justify-center">
+        <div className="w-full h-full flex items-center justify-center">
           {getCurrentProductImage() ? (
             <img
               src={getCurrentProductImage()}
-              alt={`${selectedProduct || 'Product'} ${view} view in ${selectedColor}`}
+              alt={`${
+                selectedProduct || "Product"
+              } ${view} view in ${selectedColor}`}
               className="w-full h-full object-contain"
             />
           ) : (
@@ -81,7 +87,7 @@ const DesignPreview = ({
                   src={getCurrentDesignImage()}
                   alt="Custom design"
                   className="w-full h-full object-contain"
-                  style={{ pointerEvents: 'none' }}
+                  style={{ pointerEvents: "none" }}
                 />
                 <button
                   onClick={onRemoveDesign}
@@ -100,10 +106,7 @@ const DesignPreview = ({
               bounds="parent"
               className="absolute"
             >
-              <div
-                className="text-xl font-bold"
-                style={{ color: textColor }}
-              >
+              <div className="text-xl font-bold" style={{ color: textColor }}>
                 {typedText}
               </div>
             </Rnd>
@@ -121,14 +124,22 @@ const DesignPreview = ({
 
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
         <button
-          onClick={() => setView('front')}
-          className={`p-2 rounded-full ${view === 'front' ? 'bg-blue-500 text-white' : 'bg-white text-gray-600'} shadow-lg`}
+          onClick={() => setView("front")}
+          className={`p-2 rounded-full ${
+            view === "front"
+              ? "bg-blue-500 text-white"
+              : "bg-white text-gray-600"
+          } shadow-lg`}
         >
           <RotateCcw size={20} />
         </button>
         <button
-          onClick={() => setView('back')}
-          className={`p-2 rounded-full ${view === 'back' ? 'bg-blue-500 text-white' : 'bg-white text-gray-600'} shadow-lg`}
+          onClick={() => setView("back")}
+          className={`p-2 rounded-full ${
+            view === "back"
+              ? "bg-blue-500 text-white"
+              : "bg-white text-gray-600"
+          } shadow-lg`}
         >
           <RotateCw size={20} />
         </button>
