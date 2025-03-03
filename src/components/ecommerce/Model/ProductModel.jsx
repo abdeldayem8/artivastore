@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { MdAdd, MdClose, MdRemove } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+import { MdAdd, MdClose, MdRemove } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
   const [quantity, setQuantity] = useState(1);
-  const [selectedSize, setSelectedSize] = useState(product?.size || '');
-  const [selectedColor,setSelectedColor] = useState(product?.color || null)
-  const navigate = useNavigate(); 
+  const [selectedSize, setSelectedSize] = useState(product?.size || "");
+  const [selectedColor, setSelectedColor] = useState(product?.color || null);
+  const navigate = useNavigate();
 
-  useEffect(()=>{
-    if(product?.size?.length > 0){
-      setSelectedSize(product.size[0])
+  useEffect(() => {
+    if (product?.size?.length > 0) {
+      setSelectedSize(product.size[0]);
     }
-  },[product])
+  }, [product]);
 
   const handleSizeChange = (e) => {
     setSelectedSize(e.target.value);
@@ -27,9 +27,9 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
   };
 
   if (!isOpen) return null;
-// use portal pattern for modal
+  // use portal pattern for modal
   return ReactDOM.createPortal(
-<div
+    <div
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto"
       onClick={handleModalClick}
     >
@@ -60,62 +60,64 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
           <div className="w-full md:w-1/2 space-y-6 text-secondary flex flex-col justify-between">
             <div>
               <h3 className="text-2xl font-bold text-white">{product?.name}</h3>
-              <p className="text-xl font-medium text-gray-300 mt-2">{product?.price} EGP</p>
+              <p className="text-xl font-medium text-gray-300 mt-2">
+                {product?.price} EGP
+              </p>
 
               {/* Size Selection */}
               <div className="space-y-2">
-  <p className="text-sm text-gray-500">Sizes:</p>
-  <select
-    value={selectedSize}
-    onChange={handleSizeChange}
-    className="border rounded-md text-primary py-2 px-3 w-full"
-  >
-    {product?.size?.map((size) => (
-      <option key={size} value={size}>
-        {size}
-      </option>
-    ))}
-  </select>
-</div>
+                <p className="text-sm text-gray-500">Sizes:</p>
+                <select
+                  value={selectedSize}
+                  onChange={handleSizeChange}
+                  className="border rounded-md text-primary py-2 px-3 w-full"
+                >
+                  {product?.size?.map((size) => (
+                    <option key={size} value={size}>
+                      {size}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             {/* Colors */}
             <div>
-            <p className="text-secondary">Available Colors</p>
-            <div className="flex items-center gap-4 my-4">
-              {product?.color?.map((color) => (
-                <button
-                  key={color}
-                  className={`w-8 h-8 rounded-full border-2 transition ${
-                    selectedColor === color
-                      ? 'border-gray-500'
-                      : 'border-orange-500'
-                  }`}
-                  style={{ backgroundColor: color }}
-                  onClick={() => setSelectedColor(color)}
-                />
-              ))}
-            </div>
+              <p className="text-secondary">Available Colors</p>
+              <div className="flex items-center gap-4 my-4">
+                {product?.color?.map((color) => (
+                  <button
+                    key={color}
+                    className={`w-8 h-8 rounded-full border-2 transition ${
+                      selectedColor === color
+                        ? "border-gray-500"
+                        : "border-orange-500"
+                    }`}
+                    style={{ backgroundColor: color }}
+                    onClick={() => setSelectedColor(color)}
+                  />
+                ))}
+              </div>
             </div>
             {/* Quantity */}
             <div className="space-y-4">
               <div>
                 <p className="text-lg text-gray-400">Quantity:</p>
                 <div className="flex items-center border rounded-md text-secondary w-fit">
-                                                <button
-                                                  className="p-2"
-                                                  onClick={() => setQuantity(Math.max(quantity - 1, 1))}
-                                                >
-                                                  <MdRemove className="w-4 h-4" />
-                                                </button>
-                                                <span className="w-12 text-center">{quantity}</span>
-                                                <button
-                                                  className="p-2"
-                                                  onClick={() => setQuantity(quantity + 1)}
-                                                >
-                                                  <MdAdd className="w-4 h-4" />
-                                                </button>
-                                              </div>
+                  <button
+                    className="p-2"
+                    onClick={() => setQuantity(Math.max(quantity - 1, 1))}
+                  >
+                    <MdRemove className="w-4 h-4" />
+                  </button>
+                  <span className="w-12 text-center">{quantity}</span>
+                  <button
+                    className="p-2"
+                    onClick={() => setQuantity(quantity + 1)}
+                  >
+                    <MdAdd className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -149,7 +151,8 @@ const ProductModal = ({ isOpen, onClose, product, onAddToCart }) => {
           </div>
         </div>
       </div>
-    </div>,document.getElementById('modal-root')
+    </div>,
+    document.getElementById("modal-root")
   );
 };
 
