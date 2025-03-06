@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {  createBrowserRouter, createHashRouter, RouterProvider } from "react-router-dom";
 import App from "../App.jsx";
 import { lazy, Suspense } from "react";
 import Loading from "@components/common/Loading/Loading.jsx";
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/artivastore/",
+        index:true,
         element: (
           <Suspense fallback={<Loading />}>
             <Home>
@@ -78,7 +78,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/artivastore/collection",
+        path: "collection",
         element: (
           <Suspense fallback={<Loading />}>
             <Collection />
@@ -86,12 +86,12 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/artivastore/collection/:id",
+        path: "collection/:id",
 
         element: <ProductDetails />,
       },
       {
-        path: "/artivastore/maketshirt",
+        path: "maketshirt",
         element: (
           <Suspense fallback={<Loading />}>
             <Makeyourtshirt />
@@ -99,7 +99,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/artivastore/cart",
+        path: "cart",
         element: (
           <Suspense fallback={<Loading />}>
             <Cart />
@@ -107,7 +107,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/artivastore/login",
+        path: "login",
         element: (
           <Publicroute>
             <ErrorBoundary>
@@ -117,7 +117,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/artivastore/register",
+        path: "register",
         element: (
           <Publicroute>
             <Register />
@@ -125,7 +125,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/artivastore/profile",
+        path: "profile",
         element: (
           <Protectedroute>
             <Profile />
@@ -133,11 +133,11 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/artivastore/order",
+        path: "order",
         element: <Order />,
       },
       {
-        path: "/artivastore/orderconfirm",
+        path: "orderconfirm",
         element: <OrderConfirm />,
       },
       {
