@@ -62,15 +62,11 @@ const FeaturedCollection = () => {
       )}
       {/* Product Modal */}
       <ProductModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        product={selectedProduct}
-        onAddToCart={(product) =>
-          dispatch(
-            addToCart({product})
-          )
-        }
-      />
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                product={selectedProduct}
+                onAddToCart={(product) => dispatch(addToCart(product))}
+              />
     </motion.div>
   );
 };

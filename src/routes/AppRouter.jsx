@@ -1,4 +1,4 @@
-import {  createBrowserRouter, createHashRouter, RouterProvider } from "react-router-dom";
+import {  createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "../App.jsx";
 import { lazy, Suspense } from "react";
 import Loading from "@components/common/Loading/Loading.jsx";
